@@ -1,0 +1,28 @@
+body {
+	font-family: 'Microsoft JhengHei', sans-serif !important;
+  }
+
+  .card-header {
+    padding: .25rem .75rem;
+    }
+  
+  .I-Body{
+	  margin-top :0px;
+	  margin-left :10px;
+	  margin-right :10px;
+  }		
+
+  .bgBlue{
+	  background-color: #337ab7;
+	  color : white;					
+  }  	
+
+  .statusIcon{				
+	  width: 20px;
+  }
+
+
+  .item-right{
+    float: right;
+    margin-left: 0.5em;
+  }
