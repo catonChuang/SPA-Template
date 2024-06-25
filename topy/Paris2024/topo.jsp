@@ -1,4 +1,11 @@
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="BIG5" %><%@ page import="java.util.*" %> <%
+
+        response.setHeader("Pragma","no-cache");
+        response.setHeader("Cache-Control","no-cache");
+        response.setDateHeader("Expires", 0);
+%><%
+String pid="174";
+%><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -9,13 +16,17 @@
 <body bgcolor=#ffffff>
 <svg width="1200" height="500"></svg>
 
-<script src="../js/Topy/d3.v4.min.js"></script>
-<script src="../js/jquery.min.js"></script>
-<link href="../bootstrapV4/css/bootstrap.min.css" rel="stylesheet" media="screen">
-<script src="../bootstrapV4/js/bootstrap.min.js"></script>
-<script src="paris_topo_data.js"></script>
-<style type="text/css">
+<script src="/Util/Topology/d3.v4.min.js"></script>
+<script src="/js/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/js/jqGrid/css/ui.jqgrid.css" />	
+<script src="/js/jqGrid/js/jquery.jqGrid.min.js" type="text/javascript"></script>
+<link href="/bootstrapV4/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<script src="/bootstrapV4/js/bootstrap.min.js"></script>
+<script src="paris_topo_data.jsp"></script>
+
+   <style type="text/css">
  
+
 mytt.tooltipAlarm {
 color:red;	
     position: absolute;			
@@ -23,7 +34,7 @@ color:red;
     width: 600px;					
     height: 150px;					
     padding: 2px;				
-    font: 15px å¾®è»Ÿæ­£é»‘é«”;		
+    font: 15px ·L³n¥¿¶ÂÅé;		
     background: #eee;	
     border: 0px;		
     border-radius: 8px;			
@@ -36,7 +47,7 @@ color:Green;
     width: 500px;					
     height: 150px;					
     padding: 2px;				
-    font: 18px å¾®è»Ÿæ­£é»‘é«”;		
+    font: 18px ·L³n¥¿¶ÂÅé;		
     background: #eee;	
     border: 0px;		
     border-radius: 8px;			
@@ -49,7 +60,7 @@ color:Navy;
     width: 500px;					
     height: 150px;					
     padding: 2px;				
-    font: 18px å¾®è»Ÿæ­£é»‘é«”;		
+    font: 18px ·L³n¥¿¶ÂÅé;		
     background: lightblue;	
     border: 0px;		
     border-radius: 8px;			
@@ -62,7 +73,7 @@ color:Navy;
     width: 500px;					
     height: 300px;					
     padding: 2px;				
-    font: 18px å¾®è»Ÿæ­£é»‘é«”;		
+    font: 18px ·L³n¥¿¶ÂÅé;		
     background: yellow;	
     border: 0px;		
     border-radius: 8px;			
@@ -75,7 +86,7 @@ color:Navy;
     width: 600px;					
     height: 300px;					
     padding: 2px;				
-    font: 15px å¾®è»Ÿæ­£é»‘é«”;		
+    font: 15px ·L³n¥¿¶ÂÅé;		
     background: orange;	
     border: 0px;		
     border-radius: 8px;			
@@ -90,7 +101,7 @@ color:Navy;
     width: 500px;					
     height: 150px;					
     padding: 2px;				
-    font: 18px å¾®è»Ÿæ­£é»‘é«”;		
+    font: 18px ·L³n¥¿¶ÂÅé;		
     background: #eee;	
     border: 0px;		
     border-radius: 8px;			
@@ -104,7 +115,7 @@ color:Navy;
     width: 500px;					
     height: 500px;					
     padding: 2px;				
-    font: 16px å¾®è»Ÿæ­£é»‘é«”;		
+    font: 16px ·L³n¥¿¶ÂÅé;		
     background: #eee;	
     border: 0px;		
     border-radius: 8px;			
@@ -116,12 +127,13 @@ mytt.tooltip {
     width: 200px;					
     height: 120px;					
     padding: 2px;				
-    font: 20px å¾®è»Ÿæ­£é»‘é«”;		
+    font: 20px ·L³n¥¿¶ÂÅé;		
     background: #aaa;	
     border: 0px;		
     border-radius: 8px;			
     pointer-events: none;			
 }
+
 
  body {
             background-image: url(paris2024seine.png);
@@ -145,6 +157,7 @@ var        width =  860,
 </script>
 <script>
 var link_status_map = {};
+var cir_status_map = {};
 var link_as_map={};
 var link_contact_map={};
 var link_remark_map={};
@@ -158,6 +171,26 @@ var link_conn_id_map={};
     .style("opacity", 0);
 
 
+
+svg.append('image')        
+.attr('x', 210)
+.attr('y',0)
+
+.attr('width', 40)
+.attr('height', 40)
+.attr('xlink:href', 'sat_up.png')
+;
+
+/*
+svg.append('image')        
+.attr('x', 425)
+.attr('y', 132)
+.attr('width',25)
+.attr('height',25)
+.attr('xlink:href', 'sat.png')
+; //SAT
+*/
+/*
 svg.append('image')        
 .attr('x', 700)
 .attr('y', 140)
@@ -166,7 +199,14 @@ svg.append('image')
 .attr('height', 164)
 .attr('xlink:href', 'CloudW2.png')
 ; //hami cloud
-
+*/
+svg.append('image')        
+.attr('x', 690)
+.attr('y', 90)
+.attr('width', 270)
+.attr('height',260)
+.attr('xlink:href', 'CloudW2C2.png')
+;
 
 
 
@@ -181,18 +221,31 @@ svg.append('image')
 
  
                
+/*
+svg.append('image')        
+.attr('x', 20)
+.attr('y', 85)
+.attr('width', 245)
+.attr('height', 245)
+.attr('xlink:href', 'CloudW2.png')
+; //ali cloud
 
-
-
-
+*/
+svg.append('image')        
+.attr('x', 20)
+.attr('y', 85)
+.attr('width', 245)
+.attr('height', 245)
+.attr('xlink:href', 'CloudW2C2.png')
+; //ali cloud
 
 
 
 
 
 svg.append('image')        
-.attr('x', 3)
-.attr('y', 10)
+.attr('x', 73)
+.attr('y', 55)
 .attr('width', 120)
 .attr('height',120)
 .attr('xlink:href', 'paris2024logo.png')
@@ -205,6 +258,16 @@ svg.append('image')
 .attr('height', 27)
 .attr('xlink:href', 'elta_tv_logo.png')
 ; 
+
+
+
+svg.append('image')        
+.attr('x', 447)
+.attr('y', -45)
+.attr('width', 270)
+.attr('height',225)
+.attr('xlink:href', 'CloudW2C2.png')
+;
 
 
 $(window).load(function () {
@@ -262,12 +325,20 @@ myRemark =link_remark_map["id_"+d.id];
                 
             mytt.html(
             '<DIV class="ROW"> <div class="card CardT"><div class="card-header CardT">'+
-'<h2 class="card-title bg-white">ï¿½Êµï¿½ï¿½]ï¿½ï¿½</h2>'+
-            "ï¿½ï¿½ï¿½Êµï¿½ï¿½]ï¿½Æ¦Wï¿½Ù¡G"+d.sysname+"<BR/>"+
-            "ï¿½ï¿½ï¿½Mï¿½uï¿½sï¿½ï¿½ï¿½G"+d.circuit+"<BR/>"+
-            link_status_map["id_"+d.id] +"ï¿½ï¿½"+myRemark+"<BR/>ï¿½ï¿½"+(myContact).replace(/\\n/g,)+"</div></div></div>")
-                .style("left",function(d){if(d3.event.pageX<510) return "520px"; else return "20px";} )	
-                .style("top", "20px");	
+'<h2 class="card-title bg-white">ºÊµø³]³Æ</h2>'+
+            "¡´ºÊµø³]³Æ¦WºÙ¡G"+d.sysname+"<BR/>"+
+            "¡´±M½u½s¸¹¡G"+d.circuit+"<BR/>"+
+            link_status_map["id_"+d.id] +"¡´"+myRemark+"<BR/>¡´"+(myContact).replace(/\\n/g,)+"</div></div></div>")
+                .style("left",function(d){
+                //console.log(d3.event.pageX+":"+d3.event.pageY);
+                if(d3.event.pageX<510) return "520px"; else return "20px";
+                } )	
+                .style("top", function(d){
+               if(d3.event.pageX>520 && d3.event.pageX <620 && d3.event.pageY>150 && d3.event.pageY <190 ) //for 4±øMOD
+               return "200px";
+		else               
+               return "20px";
+                });	
             })					
         .on("mouseout", function(d) {		
             mytt.transition()		
@@ -289,29 +360,29 @@ myRemark =link_remark_map["id_"+d.id];
 ;
 
 
-///ï¿½\ï¿½ï¿½ï¿½u
+///»\¦í½u
 svg.append('image')        
-.attr('x', 320)
-.attr('y', 160)
-.attr('width',115)
-.attr('height',115)
+.attr('x', 300)
+.attr('y', 250)
+.attr('width',105)
+.attr('height',105)
 .attr('xlink:href', 'b_bld3.png')
-; //ï¿½xï¿½_ï¿½Rï¿½ï¿½
+; //¥x¥_·R°ê
     svg.append('svg:image')
-        .attr('x', 475)
-.attr('y', 181)
-.attr('width', 200)
-    .attr('height', 105)
+        .attr('x', 480)
+.attr('y', 180)
+.attr('width', 190)
+    .attr('height', 135)
     .attr('xlink:href', 'center.png')
     .attr("id", "XX")
-    ; //ï¿½ï¿½ï¿½R
+    ; //¤¯·R
 svg.append('image')        
 .attr('x', 350)
 .attr('y', 370)
 .attr('width', 75)
 .attr('height',68)
 .attr('xlink:href', 'b_bld2.png')
-; //ï¿½~ï¿½f
+; //º~¤f
 
  svg.append('image')        
 .attr('x', 700)
@@ -319,60 +390,67 @@ svg.append('image')
 .attr('width',75 )
 .attr('height',75)
 .attr('xlink:href', 'b_bld3.png')
-; //ï¿½ï¿½ï¿½n
+; //­««n
 
 svg.append('image')        
-.attr('x', 75)
-.attr('y', 95)
-.attr('width', 220)
-.attr('height', 220)
-.attr('xlink:href', 'CloudW2.png')
-; //ali cloud
+.attr('x', 370)
+.attr('y', 65)
+.attr('width',75 )
+.attr('height',75)
+.attr('xlink:href', 'b_bld3.png')
+; //ªA°È¤j¼Ó
 svg.append('image')        
-.attr('x', 201)
-.attr('y', 150)
+.attr('x', 278)
+.attr('y', 75)
+.attr('width',55 )
+.attr('height',55)
+.attr('xlink:href', 'sat.png')
+; //¶§©ú¤s
+svg.append('image')        
+.attr('x', 211)
+.attr('y', 235)
 .attr('xO', 11)
 .attr('yO', 300)
-.attr('width', 50)
-.attr('height',70)
+.attr('width', 40)
+.attr('height',50)
 .attr('xlink:href', 'b_bld4.png')
 ; //TYO
 
 svg.append('image')        
-.attr('x', 201)
-.attr('y', 230)
+.attr('x', 171)
+.attr('y', 235)
 .attr('xO', 58)
 .attr('yO', 300)
-.attr('width', 50)
-.attr('height',70)
+.attr('width', 40)
+.attr('height',50)
 .attr('xlink:href', 'b_bld4.png')
 ; //SIN
 
 
 svg.append('image')        
-.attr('x', 95)
+.attr('x', 75)
 .attr('y', 200)
 .attr('width', 110)
 .attr('height',40)
 .attr('xlink:href', 'alicloud2.png')
-; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+; //ªü¨½¶³
 
 svg.append('image')        
-.attr('x', 107)
-.attr('y', 330)
+.attr('x', 77)
+.attr('y', 320)
 .attr('width', 90)
-.attr('height', 72)
-.attr('xlink:href', 'CloudW2.png')
+.attr('height', 80)
+.attr('xlink:href', 'skyCloud.png')
 ; //Hinet cloud
 
 svg.append('image')        
-.attr('x', 107)
-.attr('y', 265)
+.attr('x', 77)
+.attr('y', 245)
 .attr('width', 90)
-.attr('height', 72)
-.attr('xlink:href', 'CloudW2.png')
+.attr('height', 80)
+.attr('xlink:href', 'skyCloud.png')
 ; //internet cloud
-
+/*
 svg.append('image')        
 .attr('x', 460)
 .attr('y', -10)
@@ -380,6 +458,9 @@ svg.append('image')
 .attr('height', 164)
 .attr('xlink:href', 'CloudW2.png')
 ;
+*/
+
+
  svg.append('image')        
 .attr('x', 505)
 .attr('y', 55)
@@ -392,13 +473,13 @@ svg.append('image')
   svg.append("text")
             .attr("x", mytext.x)
             .attr("y", mytext.y)            
-            .style("font-family", "ï¿½Lï¿½nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")
+            .style("font-family", "·L³n¥¿¶ÂÅé")
             .style("font-size", mytext.size)
             .style('font-weight', 'bold')
-            .style("fill","#065a7f")
+            .style("fill",function(d) { if(mytext.color) return mytext.color; else return "#065a7f";})
             .text(mytext.name);
 }
-	// ï¿½b svg ï¿½ï¿½ï¿½ï¿½ï¿½J circle
+	// ¦b svg ¤¤´¡¤J circle
 
 var circleName={};
 for(i=0;i<topo.circles.length;i++){
@@ -414,6 +495,7 @@ mycircle=svg.selectAll(".circle")
         .attr('cy', function(d) { return (d.cy);}  )
         .attr('r',function(d) { return (d.r+'px');} )
         .attr('id',function(d) { return (d.id);} )
+        .attr('c_type',function(d) { return (d.c_type);} )
         .on("click",function(d) {window.open(d.url,"_NEWWIN");})
         .style('fill', '#ddd')
                        .on("mouseover", function(d) {		
@@ -422,14 +504,9 @@ mycircle=svg.selectAll(".circle")
                 .duration(200)		
                 .style("opacity", .9)
                .attr("class",link_as_map[d.id]);
-               // .attr("class","tooltipNormal");
-            mytt.html(link_status_map[d.id])
+            mytt.html(cir_status_map[d.id])
             .style("left", 0)		
-                .style("top", 0);
-                /*
-                .style("left", (d3.event.pageX) + "px")		
-                .style("top", (d3.event.pageY - 28) + "px");
-                */	
+                .style("top", 0);	
             })					
         .on("mouseout", function(d) {		
             mytt.transition()		
@@ -439,6 +516,38 @@ mycircle=svg.selectAll(".circle")
         
         
 ;
+
+
+
+///img over circle
+mycircleimg=svg.selectAll(".circleimg")
+.data(topo.circles_image)
+.enter().append("image")
+.attr('x', function(d){return d.x;})
+.attr('y',  function(d){return d.y;})
+.attr('id',  function(d){return d.id;})
+.attr('width',  function(d){return d.width;})
+.attr('height',  function(d){return d.height;})
+.attr('NormalURL',  function(d){return d.url;})
+.attr('AlarmURL',  function(d){return d.Alarm_url;})
+.attr('xlink:href',  function(d){return d.url;})
+.on("mouseover", function(d) {		
+            
+            mytt.transition()		
+                .duration(200)		
+                .style("opacity", .9)
+               .attr("class",link_as_map[d.xid]);
+            mytt.html(cir_status_map[d.xid])
+            .style("left", 0)		
+                .style("top", 0);	
+            })					
+        .on("mouseout", function(d) {		
+            mytt.transition()		
+                .duration(500)		
+                .style("opacity", 0);	
+        })
+;
+
 </script>    
 <script>
 	  function stop_pulsate(selection) {
@@ -588,7 +697,7 @@ $.ajax({
  
 function allgreen(){
 //alert(mylink);
-svg.selectAll("#UPDATEMSG").text("ï¿½ï¿½sï¿½ï¿½");
+svg.selectAll("#UPDATEMSG").text("§ó·s¤¤");
 svg.selectAll(".links")
 .style("stroke", "green")
 .attr("stroke-opacity", .9)
@@ -610,10 +719,9 @@ function MODHamiParsingData(JData2){
  var JData=JData2.data;
  var alen=JData.length;
  var s_txt;
+ cir_status_map={};
  for(i=0;i<alen;i++){
- //
 
-//alert(JData[i].name);
  if(JData[i].status==5){
  s_txt="Critical";
  //cirred("id_"+JData[i].name);
@@ -651,17 +759,34 @@ circolor("id_"+JData[i].name,3);
  pulsate(aaa,"orange");
  link_as_map["id_"+JData[i].name]="tooltipMajor";
  }
-            
- link_status_map["id_"+JData[i].name]="ï¿½ï¿½ï¿½Êµï¿½ï¿½Wï¿½Ù¡G"+circleName["id_"+JData[i].name]+"<BR/>"+
- "ï¿½ï¿½ï¿½iÄµï¿½ï¿½ï¿½ï¿½:"+s_txt+"<BR/>"+
- "ï¿½ï¿½ï¿½iÄµï¿½yï¿½zï¿½G<BR/>"+JData[i].msg+"<BR/>"; 
+ 
+  if((JData[i].msg).length>120){
+   link_as_map["id_"+JData[i].name]="tooltipLong";
+   }         
+
+
+
+ cir_status_map["id_"+JData[i].name]="¡´ºÊµø¦WºÙ¡G"+circleName["id_"+JData[i].name]+"<BR/>"+
+ "¡´§iÄµµ¥¯Å:"+s_txt+"<BR/>"+
+ "¡´§iÄµ´y­z¡G<BR/>"+JData[i].msg+"<BR/>";
+  var bbb=d3.select("#id_"+JData[i].name);
+try{
+ if(bbb.attr('c_type')=='power'){
+var ccc=d3.select("#id_"+JData[i].name+"_img");
+
+if(JData[i].status>1) {
+ccc.attr('xlink:href',ccc.attr('AlarmURL'));
+}else ccc.attr('xlink:href',ccc.attr('NormalURL'));
+ }
+}catch{}
+
  }
 }
 function ParsingData(JData2){
 
  var JData=JData2.ProjData;
- //	$( "#errorMsg" ).html("<font face=ï¿½Lï¿½nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½>ï¿½ï¿½sï¿½É¶ï¿½:"+JData.Datetime+"</font>");
-   svg.selectAll("#UPDATEMSG").text("ï¿½ï¿½sï¿½É¶ï¿½:"+JData2.Datetime+"");
+ //	$( "#errorMsg" ).html("<font face=·L³n¥¿¶ÂÅé>§ó·s®É¶¡:"+JData.Datetime+"</font>");
+   svg.selectAll("#UPDATEMSG").text("§ó·s®É¶¡:"+JData2.Datetime+"");
    
   var tagetsArr=JData.project.targets;
    var alen=tagetsArr.length;
@@ -683,7 +808,7 @@ function ParsingData(JData2){
    }}
    
    if(tagetsArr[i].alarmLevel=="Critical"){
-   link_status_map["id_"+tagetsArr[i].targetId]="ï¿½ï¿½ï¿½iÄµï¿½ï¿½ï¿½Å¡GCritical <BR/>ï¿½iÄµï¿½yï¿½zï¿½G<BR/>"+tagetsArr[i].alarmMsg+"<BR/>";
+   link_status_map["id_"+tagetsArr[i].targetId]="¡´§iÄµµ¥¯Å¡GCritical <BR/>§iÄµ´y­z¡G<BR/>"+tagetsArr[i].alarmMsg+"<BR/>";
    link_as_map["id_"+tagetsArr[i].targetId]="tooltipAlarm";
    linkRED("id_"+tagetsArr[i].targetId);
    
@@ -695,9 +820,9 @@ function ParsingData(JData2){
    for(i3=0;i3<link_conn_id_map[tagetsArr[i].targetId].length;i3++){
    var tmpTID=link_conn_id_map[tagetsArr[i].targetId][i3];
    if(link_status_map["id_"+tmpTID])
-   link_status_map["id_"+tmpTID]=link_status_map["id_"+tmpTID]+"<BR/><font color=red>ï¿½ï¿½ï¿½iÄµï¿½ï¿½ï¿½Å¡GCritical <BR/>ï¿½iÄµï¿½yï¿½zï¿½G<BR/>-"+myAlarmMsg+"</font>";
+   link_status_map["id_"+tmpTID]=link_status_map["id_"+tmpTID]+"<BR/><font color=red>¡´§iÄµµ¥¯Å¡GCritical <BR/>§iÄµ´y­z¡G<BR/>-"+myAlarmMsg+"</font><BR/>";
    else
-   link_status_map["id_"+tmpTID]="<BR/><font color=red>ï¿½ï¿½ï¿½iÄµï¿½ï¿½ï¿½Å¡GCritical <BR/>ï¿½iÄµï¿½yï¿½zï¿½G<BR/>-"+myAlarmMsg+"</font>";
+   link_status_map["id_"+tmpTID]="<BR/><font color=red>¡´§iÄµµ¥¯Å¡GCritical <BR/>§iÄµ´y­z¡G<BR/>-"+myAlarmMsg+"</font><BR/>";
    
    link_as_map["id_"+tmpTID]="tooltipAlarm";
    linkRED("id_"+tmpTID);
@@ -710,7 +835,7 @@ function ParsingData(JData2){
    
    
    }else if(tagetsArr[i].alarmLevel=="Major"){
-    link_status_map["id_"+tagetsArr[i].targetId]="ï¿½ï¿½ï¿½iÄµï¿½ï¿½ï¿½Å¡GMajor <BR/>ï¿½iÄµï¿½yï¿½zï¿½G<BR/>"+tagetsArr[i].alarmMsg+"<BR/>";
+    link_status_map["id_"+tagetsArr[i].targetId]="¡´§iÄµµ¥¯Å¡GMajor <BR/>§iÄµ´y­z¡G<BR/>"+tagetsArr[i].alarmMsg+"<BR/>";
    link_as_map["id_"+tagetsArr[i].targetId]="tooltipMajor";
    linkColor("id_"+tagetsArr[i].targetId,"orange");
    
@@ -719,24 +844,24 @@ function ParsingData(JData2){
    for(i3=0;i3<link_conn_id_map[tagetsArr[i].targetId].length;i3++){
    var tmpTID=link_conn_id_map[tagetsArr[i].targetId][i3];
    if(link_status_map["id_"+tmpTID])
-   link_status_map["id_"+tmpTID]=link_status_map["id_"+tmpTID]+"<BR/><font color=orange>ï¿½ï¿½ï¿½iÄµï¿½ï¿½ï¿½Å¡G Major <BR/>ï¿½iÄµï¿½yï¿½zï¿½G<BR/>-"+myAlarmMsg+"</font>";
+   link_status_map["id_"+tmpTID]=link_status_map["id_"+tmpTID]+"<BR/><font color=orange>¡´§iÄµµ¥¯Å¡G Major </font><BR/><font color=navy>§iÄµ´y­z¡G<BR/>-"+myAlarmMsg+"</font><BR/>";
    else
-   link_status_map["id_"+tmpTID]="<BR/><font color=orange>ï¿½ï¿½ï¿½iÄµï¿½ï¿½ï¿½Å¡G Major <BR/>ï¿½iÄµï¿½yï¿½zï¿½G<BR/>-"+myAlarmMsg+"</font>";
+   link_status_map["id_"+tmpTID]="<BR/><font color=orange style='backgroud-color=white;'>¡´§iÄµµ¥¯Å¡G Major </font><BR/><font color=navy>§iÄµ´y­z¡G<BR/>-"+myAlarmMsg+"</font><BR/>";
    
    link_as_map["id_"+tmpTID]="tooltipMajor";
-   linkMajor("id_"+tmpTID);
-   
+   //linkMajor("id_"+tmpTID);
+   linkColor("id_"+tmpTID,"orange");
                                                                     }
                                                  }
    ///
    
    
    }else if(tagetsArr[i].alarmLevel=="Minor"){
-      link_status_map["id_"+tagetsArr[i].targetId]="ï¿½ï¿½ï¿½iÄµï¿½ï¿½ï¿½Å¡GMinor <BR/>ï¿½iÄµï¿½yï¿½zï¿½G<BR/>"+tagetsArr[i].alarmMsg+"<BR/>";
+      link_status_map["id_"+tagetsArr[i].targetId]="¡´§iÄµµ¥¯Å¡GMinor <BR/>§iÄµ´y­z¡G<BR/>"+tagetsArr[i].alarmMsg+"<BR/>";
    link_as_map["id_"+tagetsArr[i].targetId]="tooltipMinor";
-   linkColor("id_"+tagetsArr[i].targetId,"yellow");
+   linkColor("id_"+tagetsArr[i].targetId,"#D9D000");
    }else if(tagetsArr[i].alarmLevel=="Warning"){
-      link_status_map["id_"+tagetsArr[i].targetId]="ï¿½ï¿½ï¿½iÄµï¿½ï¿½ï¿½Å¡GWarning <BR/>ï¿½iÄµï¿½yï¿½zï¿½G<BR/>"+tagetsArr[i].alarmMsg+"<BR/>";
+      link_status_map["id_"+tagetsArr[i].targetId]="¡´§iÄµµ¥¯Å¡GWarning <BR/>§iÄµ´y­z¡G<BR/>"+tagetsArr[i].alarmMsg+"<BR/>";
    link_as_map["id_"+tagetsArr[i].targetId]="tooltipWarning";
    linkColor("id_"+tagetsArr[i].targetId,"blue");
    ///
@@ -744,13 +869,13 @@ function ParsingData(JData2){
    for(i3=0;i3<link_conn_id_map[tagetsArr[i].targetId].length;i3++){
    var tmpTID=link_conn_id_map[tagetsArr[i].targetId][i3];
    if(link_status_map["id_"+tmpTID])
-   link_status_map["id_"+tmpTID]=link_status_map["id_"+tmpTID]+"<BR/><font color=#555>ï¿½ï¿½ï¿½iÄµï¿½ï¿½ï¿½Å¡G Minor <BR/>ï¿½iÄµï¿½yï¿½zï¿½G<BR/>-"+myAlarmMsg+"</font>";
+   link_status_map["id_"+tmpTID]=link_status_map["id_"+tmpTID]+"<BR/><font color=#555>¡´§iÄµµ¥¯Å¡G Minor <BR/>§iÄµ´y­z¡G<BR/>-"+myAlarmMsg+"</font>";
    else
-   link_status_map["id_"+tmpTID]="<BR/><font color=#555>ï¿½ï¿½ï¿½iÄµï¿½ï¿½ï¿½Å¡G Minor <BR/>ï¿½iÄµï¿½yï¿½zï¿½G<BR/>-"+myAlarmMsg+"</font>";
+   link_status_map["id_"+tmpTID]="<BR/><font color=#555>¡´§iÄµµ¥¯Å¡G Minor <BR/>§iÄµ´y­z¡G<BR/>-"+myAlarmMsg+"</font>";
    
    link_as_map["id_"+tmpTID]="tooltipMinor";
-   linkMinor("id_"+tmpTID);
    
+    linkColor("id_"+tmpTID,"#D9D000");
                                                                     }
                                               } 
     ////                                         
@@ -758,7 +883,7 @@ function ParsingData(JData2){
    
    }else{
   
-    link_status_map["id_"+tagetsArr[i].targetId]="ï¿½ï¿½ï¿½iÄµï¿½ï¿½ï¿½Å¡GNormal <BR/>";
+    link_status_map["id_"+tagetsArr[i].targetId]="¡´§iÄµµ¥¯Å¡GNormal <BR/>";
     link_as_map["id_"+tagetsArr[i].targetId]="tooltipNormal";
     linkGREEN("id_"+tagetsArr[i].targetId);
    ///
@@ -766,9 +891,9 @@ function ParsingData(JData2){
    for(i3=0;i3<link_conn_id_map[tagetsArr[i].targetId].length;i3++){
    var tmpTID=link_conn_id_map[tagetsArr[i].targetId][i3];
    if(link_status_map["id_"+tmpTID])
-   link_status_map["id_"+tmpTID]=link_status_map["id_"+tmpTID]+"<BR/>ï¿½ï¿½ï¿½iÄµï¿½ï¿½ï¿½Å¡GNormal <BR/>";
+   link_status_map["id_"+tmpTID]=link_status_map["id_"+tmpTID]+"<BR/>¡´§iÄµµ¥¯Å¡GNormal <BR/>";
    else
-   link_status_map["id_"+tmpTID]="<BR/>ï¿½ï¿½ï¿½iÄµï¿½ï¿½ï¿½Å¡GNormal <BR/>";
+   link_status_map["id_"+tmpTID]="<BR/>¡´§iÄµµ¥¯Å¡GNormal <BR/>";
    
   link_as_map["id_"+tmpTID]="tooltipNormal";
 
@@ -788,8 +913,8 @@ function ParsingData(JData2){
 function circular(){
 clearInterval(myIV);
 //allgreen();
-//getData();
-//MODHamiGetData();
+getData();
+MODHamiGetData();
 myIV=setTimeout(circular, 15000);
 }
   let circle = d3.select(node).select('circle');
