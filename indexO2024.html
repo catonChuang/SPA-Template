@@ -34,7 +34,7 @@
 		<div class="row">
 			<div class="col-sm-12">	
 				<div class="card">
-					<iframe id="iframeTK" src="/topy/Paris2024/topo.html" frameborder="0" height="403px" width="100%" scrolling="no"></iframe>
+					<iframe id="iframeTK" src="topy/Paris2024/topo.html" frameborder="0" height="403px" width="100%" scrolling="no"></iframe>
 				</div>	
 				<div class="card">	
 					<div class="card-header bgBlue">
@@ -139,7 +139,7 @@
 				//設定多久要更新token. 預設使用token到期時間 (token到期時間單位為秒，javascript setTimeout單位為毫秒)
 				refresh_token_time = parseInt(apim_token_expire)*1000;
 				//設定最久24小時後更新一次
-				=Math.min(86400000, refresh_token_time);
+				refresh_token_time=Math.min(86400000, refresh_token_time);
 				setTimeout(function(){getToken()}, refresh_token_time);
 			}
 		});
