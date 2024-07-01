@@ -84,7 +84,7 @@
 				<table>
 					<tr align="center" style="vertical-align: middle; height:60px " class="kindTitle">
 							<td>
-							<h3 style="padding-top: 8px;"><a href="#" class="badge badge-secondary" style="background: #4070B1;" onclick="openNext('2')">收視<br>指標</a></h3>
+							<h3 style="padding-top: 8px;"><a href="#" class="badge badge-secondary" style="background: #4070B1;" onclick="goHome()">收視<br>指標</a></h3>
 							</td>
 					</tr>
 				</table>
@@ -93,7 +93,7 @@
 				<table>
 					<tr align="center" style="vertical-align: middle; height:60px " class="kindTitle">
 							<td>
-							<h3 style="padding-top: 8px;"><a href="#" class="badge badge-secondary" style="background: #4070B1;" onclick="openNext('3')">ISP<br>互連<br></a></h3>
+							<h3 style="padding-top: 8px;"><a href="#" class="badge badge-secondary" style="background: #4070B1;" onclick="getRestNew()">ISP<br>互連<br></a></h3>
 							</td>
 					</tr>
 				</table>
@@ -190,7 +190,7 @@
 	// 初始呼叫
 	//==============================
 	$(document).ready(function() {
-		getToken();
+		//getToken();
 		
 		refreshTime = 1;	// 設1預設才會run
 		changeRefreshTime();
@@ -244,10 +244,19 @@
 		}
 	
 		function getRestNew(){
-			//var myObj = { "cmd": "rest", "value":{"id": "rest1", "restConfig": {"name":"Duty","relativePath":'/EmpID/831765/GetHomeInfoByEmp',"method":"GET", "body":{"test":"aaa","a":"bb"}}}};
+		
+		//xhr.open("GET", "https://apis-qa.b2e.cht.com.tw/argus-api/argusProject/getMetric.jsp?"+data);
+		//xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		//xhr.setRequestHeader("x-api-key", "rQM3IXZkM62lA7E05LMiohRDbCkhiGV4GUvQRpvGIA72J1sw");
+		//xhr.setRequestHeader("Authorization", "Bearer "+apim_token);
+		//xhr.send();
+		//xhr.send(data);
+		
+			var myObj = { "cmd": "rest", "value":{"id": "rest1", "restConfig": {"name":"getMetric","relativePath":'/argus-api/argusProject/getMetric.jsp',"method":"GET", "body":{"projectId":"55","category":"pm_declaration"}}}};
 			//var myObj = { "cmd": "rest", "value":{"id": "rest1", "restConfig": {"name":"apis.spa.qa.ex","method":"GET"}}};
-			var myObj = { "cmd": "rest", "value":{"id": "rest1", "restConfig": {"name":"photo","relativePath":'/831765',"method":"GET"}}};
+			//var myObj = { "cmd": "rest", "value":{"id": "rest1", "restConfig": {"name":"photo","relativePath":'/831765',"method":"GET"}}};
 			var str = callAppCmd(JSON.stringify(myObj));
+			alert(str);
 
 		}
 		function callAppCmd (params) {			
@@ -261,12 +270,22 @@
 			  }
 		 }
 
-		
+		function goHome(){
+			window.callAppCmd(type.goPortal);
+		}
 	
 		function getWebView(){
 	//		location.href = 'https://spa-template.azurewebsites.net/#/CHTAppCmdDemo';
 			//window.JavaScriptInterface.callAppCmd('webView','https://www.google.com.tw',null);
 			//window.JavaScriptInterface.callAppCmd('webView','http://spa-template.azurewebsites.net/#/CHTAppCmdDemo', null, null);
 		}
+		
+		function getUserInfo(){
+			var str = window.JavaScriptInterface.callAppCmd('userInfo','myPayloadUser', 'getRestRes', null);
+			alert(str);
+		}
+		
+		
+		
 
 	</script>
