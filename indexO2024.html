@@ -65,7 +65,7 @@
 				<table>
 					<tr align="center" style="vertical-align: middle; height:60px " class="kindTitle">
 					<td>
-						<h3 style="padding-top: 8px;"><a href="#" class="badge badge-secondary" style="background: #4070B1;" onclick="openNext('0')">網路<br>拓樸</a></h3>
+						<h3 style="padding-top: 8px;"><a href="#" class="badge badge-secondary" style="background: #4070B1;" onclick="test1()">網路<br>拓樸</a></h3>
 					</td>
 					</tr>
 				</table>
@@ -74,7 +74,7 @@
 				<table>
 					<tr align="center" style="vertical-align: middle; height:60px " class="kindTitle">
 					<td>
-						<h3 style="padding-top: 8px;"><a href="#" class="badge badge-secondary" style="background: #4070B1;" onclick="openNext('1')">服務<br>狀態
+						<h3 style="padding-top: 8px;"><a href="#" class="badge badge-secondary" style="background: #4070B1;" onclick="test2()">服務<br>狀態
 						</a></h3>
 					</td>
 					</tr>
@@ -233,14 +233,14 @@
 
 		function appGetAuth(){
             var myObj = { "cmd": "getMetric", "value":{"projectId": "333","category":"pm_declaration"}};
-            callAppCmd(JSON.stringify(myObj));
+           alert( callAppCmd(JSON.stringify(myObj)));
         }
 		
 
 		
 		function openUrl(){
 			var myObj = { "cmd": "openCamera", "value":{"type": "openUrl"}};
-			callAppCmd(JSON.stringify(myObj));
+			alert(callAppCmd(JSON.stringify(myObj)));
 		}
 	
 		function getRestNew(){
@@ -285,7 +285,13 @@
 			alert(str);
 		}
 		
+		function test1(){
+			location.href = 'spaTest.html';
+		}
 		
+		function test2(){
+			location.href = 'speechTest.html';
+		}
 		
 
 	</script>
