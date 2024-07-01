@@ -255,8 +255,8 @@
 			//var myObj = { "cmd": "rest", "value":{"id": "rest1", "restConfig": {"name":"getMetric","relativePath":'/argus-api/argusProject/getMetric.jsp',"method":"GET", "body":{"projectId":"55","category":"pm_declaration"}}}};
 			
 			
-			var myObj = { "cmd": "rest","value":{"id": "rest1","restConfig":{"name":"getMetric","queryParams":{"projectId":"55","category":"pm_declaration"},
-			"relativePath":"/argus-api/argusProject/getMetric.jsp","method":"get"}}};
+			var myObj = { "cmd": "rest","value":{"id": "restT1","restConfig":{"name":"getMetric","queryParams":{"projectId":"55","category":"pm_declaration"},
+			"relativePath":"argusProject/getMetric.jsp","method":"get"}}};
 			
 			
 			//var myObj = { "cmd": "rest", "value":{"id": "rest1", "restConfig": {"name":"apis.spa.qa.ex","method":"GET"}}};
@@ -275,6 +275,27 @@
 				window.android.callAppCmd(params);
 			  }
 		 }
+		 
+		 function appCmdCallback(str){
+			alert("appCmdCallback: " + str);
+			var obj = JSON.parse(str);
+			if (obj.cmd!='pickFile') {
+				alert(obj.value.data);
+				document.getElementById('img').src=obj.value.data;
+			} else {
+			//alert(obj.value.apis[0].url);
+			//alert(obj(obj.value.data));
+			//document.getElementById('img').src="data:image/jpeg;base64," + btoa(obj.value.data);
+			//document.getElementById('img').src=obj.value.data;
+				for(var i=1;i<=obj.value.length;i++) {
+					//alert(obj.value[i-1].name);
+					document.getElementById('img'+i).src=obj.value[i-1].data;
+				}
+			}
+			//alert("aaa");
+			//alert(obj.value.photo);
+			//document.getElementById('img').src=obj.value.photo;
+		}
 
 		function goHome(){
 			var myObj = { "cmd": "goPortal", "value": null};
@@ -304,6 +325,22 @@
 		function getAuthNew(){
 			var myObj = { "cmd": "postAuth", "value": null};
 			var str = callAppCmd(JSON.stringify(myObj));
+		}
+		
+		
+		function getRestNewX(){
+			
+			var myObj = {
+				"cmd": "rest",
+				"value":{"id": "restT1",
+						"restConfig":{"name":"getMetric",
+									  "queryParams":{"projectId":"55","category":"pm_declaration"},
+									  "relativePath":"argusProject/getMetric.jsp","method":"get"}
+									 }
+						};			
+			
+			var str = callAppCmd(JSON.stringify(myObj));
+			alert(str);
 		}
 
 	</script>
