@@ -52,7 +52,7 @@
 								<td ><a href="#" onclick="getResult('DDOS_HAMI')"><img id="imgDDOS_HAMI" src="img/light2/01.png" class="statusIcon" ></a></td>
 								<td ><a href="#" onclick="appGetAuth()"><img id="imgDDOS_ELTA" src="img/light2/01.png" class="statusIcon" ></a></td>
 								<td ><a href="#" onclick="getUserInfo()"><img id="imgDDOS_HAMI_DNS" src="img/light2/01.png" class="statusIcon" ></a></td>
-								<td ><a href="#" onclick="getResult('DDOS_CLOUD_TPS2')"><img id="imgDDOS_CLOUD_TPS2" src="img/light2/01.png" class="statusIcon" ></a></td>
+								<td ><a href="#" onclick="goHome()"><img id="imgDDOS_CLOUD_TPS2" src="img/light2/01.png" class="statusIcon" ></a></td>
 							</tr>
 						</tbody></table>	
 					</div>	
@@ -84,7 +84,7 @@
 				<table>
 					<tr align="center" style="vertical-align: middle; height:60px " class="kindTitle">
 							<td>
-							<h3 style="padding-top: 8px;"><a href="#" class="badge badge-secondary" style="background: #4070B1;" onclick="goHome()">收視<br>指標</a></h3>
+							<h3 style="padding-top: 8px;"><a href="#" class="badge badge-secondary" style="background: #4070B1;" onclick="getAuthNew()">收視<br>指標</a></h3>
 							</td>
 					</tr>
 				</table>
@@ -252,7 +252,13 @@
 		//xhr.send();
 		//xhr.send(data);
 		
-			var myObj = { "cmd": "rest", "value":{"id": "rest1", "restConfig": {"name":"getMetric","relativePath":'/argus-api/argusProject/getMetric.jsp',"method":"GET", "body":{"projectId":"55","category":"pm_declaration"}}}};
+			//var myObj = { "cmd": "rest", "value":{"id": "rest1", "restConfig": {"name":"getMetric","relativePath":'/argus-api/argusProject/getMetric.jsp',"method":"GET", "body":{"projectId":"55","category":"pm_declaration"}}}};
+			
+			
+			var myObj = { "cmd": "rest","value":{"id": "rest1","restConfig":{"name":"getMetric","queryParams":{"projectId":"55","category":"pm_declaration"},
+			"relativePath":"/argus-api/argusProject/getMetric.jsp","method":"get"}}};
+			
+			
 			//var myObj = { "cmd": "rest", "value":{"id": "rest1", "restConfig": {"name":"apis.spa.qa.ex","method":"GET"}}};
 			//var myObj = { "cmd": "rest", "value":{"id": "rest1", "restConfig": {"name":"photo","relativePath":'/831765',"method":"GET"}}};
 			var str = callAppCmd(JSON.stringify(myObj));
@@ -271,7 +277,8 @@
 		 }
 
 		function goHome(){
-			window.callAppCmd(type.goPortal);
+			var myObj = { "cmd": "goPortal", "value": null};
+			var str = callAppCmd(JSON.stringify(myObj));
 		}
 	
 		function getWebView(){
@@ -293,5 +300,10 @@
 			location.href = 'speechTest.html';
 		}
 		
+		
+		function getAuthNew(){
+			var myObj = { "cmd": "postAuth", "value": null};
+			var str = callAppCmd(JSON.stringify(myObj));
+		}
 
 	</script>
