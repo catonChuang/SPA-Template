@@ -639,7 +639,7 @@ function getData(){
 $.ajax({
            type: "POST",
             contentType: "application/json; charset=utf-8",
-            url: 'proj_alarms_data.jsp',
+            url: 'proj_alarms_data.json',
             dataType: 'json',
             async: true,
             data: "{'pid':'376'}",
@@ -902,8 +902,8 @@ function ParsingData(JData2){
 function circular(){
 clearInterval(myIV);
 //allgreen();
-getData();
-MODHamiGetData();
+//getData();
+//MODHamiGetData();
 myIV=setTimeout(circular, 15000);
 }
   let circle = d3.select(node).select('circle');
