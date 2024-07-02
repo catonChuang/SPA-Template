@@ -63,4 +63,27 @@
 				 return num; 
 		}
 	}
+	
+	
+	function changeImgColor(data){
+		if(data.length>0){									
+			for(var i = 0 ; i < data.length; i ++){							
+				var ajaxName = xssFilters.inHTMLData(data[i].name);			
+				var ajaxStatus = xssFilters.inHTMLData(data[i].status);		
+				var _imgName = "00.png";	  // gray 
+				if(ajaxStatus=="1"){
+					_imgName = "01.png";
+				}else if(ajaxStatus=="2"){
+					_imgName = "02.png";
+				}else if(ajaxStatus=="3"){
+					_imgName = "03.png";
+				}else if(ajaxStatus=="4"){
+					_imgName = "04.png";
+				}else if(ajaxStatus=="5"){
+					_imgName = "05.png";
+				}
+			$("#img"+ajaxName ).attr("src","img/light2/"+_imgName);	
+			}									
+		}						
+	}		
 		
