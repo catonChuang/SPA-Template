@@ -206,7 +206,8 @@
 			alert("appCmdCallback: " + str);
 			var obj = JSON.parse(str);
 			if (obj.cmd!='pickFile') {
-			
+				alert("cmd: "+obj.cmd +" <br>" + 
+						"value :" + obj.value);
 				if(obj.cmd=='getInitInfo'){
 					_empID =obj.value.userInfo.empID;
 				}			
