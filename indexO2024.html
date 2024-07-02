@@ -21,21 +21,19 @@
 </head>
 <body>
 	<div class="I-Body">
-		<div class="row" style="padding-right: 10px;padding-left: 10px;" >
-			<div class="col-sm-12">
-				<div class="card-header bgBlue">
-					<div onclick="goPortal()"><i class="bi bi-chevron-left"></i> <b style="font-size: 20px;">巴黎奧運網路監視</b></div>
-				</div>	
-			</div>
-			<table class="item-right">
-			<tr><td>
-				<div id="qrytime" style = "padding-top:5px"><b>呈現時間:</b>&nbsp;<span id="refreshTime">讀取中...</span></div>		
-			</td></tr>
-			</table>	
-		</div>
-		
 		<div class="row">
 			<div class="col-sm-12">	
+				<div class="card">
+					<div class="card-header bgBlue">
+						<div onclick="goPortal()"><i class="bi bi-chevron-left"></i> <b style="font-size: 20px;">巴黎奧運網路監視</b></div>
+					</div>	
+				</div>
+				<table class="item-right">
+				<tr><td>
+					<div id="qrytime" style = "padding-top:5px"><b>呈現時間:</b>&nbsp;<span id="refreshTime">讀取中...</span></div>		
+				</td></tr>
+				</table>
+				<br><br>				
 				<div class="card">
 					<iframe id="iframeTK" src="topy/Paris2024/topo.html" frameborder="0" height="500px" width="100%" scrolling="no"></iframe>
 				</div>	
