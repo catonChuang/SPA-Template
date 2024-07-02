@@ -159,79 +159,6 @@ var link_conn_id_map={};
     				
     .style("opacity", 0);
 
-
-
-svg.append('image')        
-.attr('x', 210)
-.attr('y',0)
-
-.attr('width', 40)
-.attr('height', 40)
-.attr('xlink:href', 'sat_up.png')
-;
-
-/*
-svg.append('image')        
-.attr('x', 425)
-.attr('y', 132)
-.attr('width',25)
-.attr('height',25)
-.attr('xlink:href', 'sat.png')
-; //SAT
-*/
-/*
-svg.append('image')        
-.attr('x', 700)
-.attr('y', 140)
-
-.attr('width', 270)
-.attr('height', 164)
-.attr('xlink:href', 'CloudW2.png')
-; //hami cloud
-*/
-svg.append('image')        
-.attr('x', 690)
-.attr('y', 90)
-.attr('width', 270)
-.attr('height',260)
-.attr('xlink:href', 'CloudW2C2.png')
-;
-
-
-
-
-svg.append('image')        
-.attr('x', 770)
-.attr('y', 200)
-.attr('width', 122)
-.attr('height', 53)
-.attr('xlink:href', 'HamiVideo2W.png')
-; 
-
- 
-               
-/*
-svg.append('image')        
-.attr('x', 20)
-.attr('y', 85)
-.attr('width', 245)
-.attr('height', 245)
-.attr('xlink:href', 'CloudW2.png')
-; //ali cloud
-
-*/
-svg.append('image')        
-.attr('x', 20)
-.attr('y', 85)
-.attr('width', 245)
-.attr('height', 245)
-.attr('xlink:href', 'CloudW2C2.png')
-; //ali cloud
-
-
-
-
-
 svg.append('image')        
 .attr('x', 73)
 .attr('y', 55)
@@ -240,31 +167,13 @@ svg.append('image')
 .attr('xlink:href', 'paris2024logo.png')
 ; //HZ
 
-svg.append('image')        
-.attr('x', 255)
-.attr('y', 440)
-.attr('width', 68)
-.attr('height', 27)
-.attr('xlink:href', 'elta_tv_logo.png')
-; 
-
-
-
-svg.append('image')        
-.attr('x', 447)
-.attr('y', -45)
-.attr('width', 270)
-.attr('height',225)
-.attr('xlink:href', 'CloudW2C2.png')
-;
-
 
 $(window).load(function () {
-conn_id_Mapping(topo.links);
+//conn_id_Mapping(topo.links);
 //myIV=setTimeout(circular, 500);
-circular();
-linkGREEN("id_AliIntLink");
-linkGREEN("id_ParisAliLink");
+//circular();
+//linkGREEN("id_AliIntLink");
+//linkGREEN("id_ParisAliLink");
 });
 
 
@@ -348,115 +257,6 @@ myRemark =link_remark_map["id_"+d.id];
 .style("stroke-dasharray",("3,5"))
 ;
 
-
-///蓋住線
-svg.append('image')        
-.attr('x', 300)
-.attr('y', 250)
-.attr('width',105)
-.attr('height',105)
-.attr('xlink:href', 'b_bld3.png')
-; //台北愛國
-    svg.append('svg:image')
-        .attr('x', 480)
-.attr('y', 180)
-.attr('width', 190)
-    .attr('height', 135)
-    .attr('xlink:href', 'center.png')
-    .attr("id", "XX")
-    ; //仁愛
-svg.append('image')        
-.attr('x', 350)
-.attr('y', 370)
-.attr('width', 75)
-.attr('height',68)
-.attr('xlink:href', 'b_bld2.png')
-; //漢口
-
- svg.append('image')        
-.attr('x', 700)
-.attr('y', 370)
-.attr('width',75 )
-.attr('height',75)
-.attr('xlink:href', 'b_bld3.png')
-; //重南
-
-svg.append('image')        
-.attr('x', 370)
-.attr('y', 65)
-.attr('width',75 )
-.attr('height',75)
-.attr('xlink:href', 'b_bld3.png')
-; //服務大樓
-svg.append('image')        
-.attr('x', 278)
-.attr('y', 75)
-.attr('width',55 )
-.attr('height',55)
-.attr('xlink:href', 'sat.png')
-; //陽明山
-svg.append('image')        
-.attr('x', 211)
-.attr('y', 235)
-.attr('xO', 11)
-.attr('yO', 300)
-.attr('width', 40)
-.attr('height',50)
-.attr('xlink:href', 'b_bld4.png')
-; //TYO
-
-svg.append('image')        
-.attr('x', 171)
-.attr('y', 235)
-.attr('xO', 58)
-.attr('yO', 300)
-.attr('width', 40)
-.attr('height',50)
-.attr('xlink:href', 'b_bld4.png')
-; //SIN
-
-
-svg.append('image')        
-.attr('x', 75)
-.attr('y', 200)
-.attr('width', 110)
-.attr('height',40)
-.attr('xlink:href', 'alicloud2.png')
-; //阿里雲
-
-svg.append('image')        
-.attr('x', 77)
-.attr('y', 320)
-.attr('width', 90)
-.attr('height', 80)
-.attr('xlink:href', 'skyCloud.png')
-; //Hinet cloud
-
-svg.append('image')        
-.attr('x', 77)
-.attr('y', 245)
-.attr('width', 90)
-.attr('height', 80)
-.attr('xlink:href', 'skyCloud.png')
-; //internet cloud
-/*
-svg.append('image')        
-.attr('x', 460)
-.attr('y', -10)
-.attr('width', 270)
-.attr('height', 164)
-.attr('xlink:href', 'CloudW2.png')
-;
-*/
-
-
- svg.append('image')        
-.attr('x', 505)
-.attr('y', 55)
-.attr('width', 153)
-.attr('height', 52)
-.attr('xlink:href', 'ModW.png')
-; 
   for(i=0;i<topo.CapText.length;i++){
   var mytext=topo.CapText[i];
   svg.append("text")
@@ -900,11 +700,11 @@ function ParsingData(JData2){
  }
 
 function circular(){
-clearInterval(myIV);
+	//clearInterval(myIV);
 //allgreen();
 //getData();
 //MODHamiGetData();
-myIV=setTimeout(circular, 15000);
+	//myIV=setTimeout(circular, 15000);
 }
   let circle = d3.select(node).select('circle');
   
