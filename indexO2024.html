@@ -36,7 +36,7 @@
 		<div class="row">
 			<div class="col-sm-12">	
 				<div class="card">
-					<iframe id="iframeTK" src="topy/Paris2024/topo.html" frameborder="0" height="403px" width="100%" scrolling="no"></iframe>
+					<iframe id="iframeTK" src="topy/Paris2024/topo.html" frameborder="0" height="500px" width="100%" scrolling="no"></iframe>
 				</div>	
 				<div class="card">	
 					<div class="card-header bgBlue">
@@ -46,15 +46,15 @@
 						<table class="table-striped" style="margin-bottom:1px; width:100% "><tbody>		
 							<tr align="center">								
 								<td >Hami網站</td>
-								<td >ELTA網站</td>
 								<td >Hami DNS服務</td>
+								<td >CDN網路</td>
 								<td >外雲(南二)</td>
 							</tr>	
 							<tr align="center">
-								<td ><a href="#" onclick="getResult('DDOS_HAMI')"><img id="imgDDOS_HAMI" src="img/light2/01.png" class="statusIcon" ></a></td>
-								<td ><a href="#" onclick="appGetAuth()"><img id="imgDDOS_ELTA" src="img/light2/01.png" class="statusIcon" ></a></td>
-								<td ><a href="#" onclick="getUserInfo()"><img id="imgDDOS_HAMI_DNS" src="img/light2/01.png" class="statusIcon" ></a></td>
-								<td ><a href="#" onclick="getUserInfo()"><img id="imgDDOS_CLOUD_TPS2" src="img/light2/01.png" class="statusIcon" ></a></td>
+								<td ><a href="#" onclick="goPortal()"><img id="imgDDOS_HAMI" src="img/light2/01.png" class="statusIcon" ></a></td>
+								<td ><a href="#" onclick="goPortal()"><img id="imgDDOS_HAMI_DNS" src="img/light2/01.png" class="statusIcon" ></a></td>
+								<td ><a href="#" onclick="goPortal()"><img id="imgDDOS_CDN" src="img/light2/01.png" class="statusIcon" ></a></td>
+								<td ><a href="#" onclick="goPortal()"><img id="imgDDOS_CLOUD_TPS2" src="img/light2/01.png" class="statusIcon" ></a></td>
 							</tr>
 						</tbody></table>	
 					</div>	
@@ -67,7 +67,7 @@
 				<table>
 					<tr align="center" style="vertical-align: middle; height:60px " class="kindTitle">
 					<td>
-						<h3 style="padding-top: 8px;"><a href="#" class="badge badge-secondary" style="background: #4070B1;" onclick="test1()">網路<br>拓樸</a></h3>
+						<h3 style="padding-top: 8px;"><a href="#" class="badge badge-secondary" style="background: #4070B1;" onclick="goPortal()">網路<br>拓樸</a></h3>
 					</td>
 					</tr>
 				</table>
@@ -76,7 +76,7 @@
 				<table>
 					<tr align="center" style="vertical-align: middle; height:60px " class="kindTitle">
 					<td>
-						<h3 style="padding-top: 8px;"><a href="#" class="badge badge-secondary" style="background: #4070B1;" onclick="test2()">服務<br>狀態
+						<h3 style="padding-top: 8px;"><a href="#" class="badge badge-secondary" style="background: #4070B1;" onclick="goPortal()">服務<br>狀態
 						</a></h3>
 					</td>
 					</tr>
@@ -86,7 +86,7 @@
 				<table>
 					<tr align="center" style="vertical-align: middle; height:60px " class="kindTitle">
 							<td>
-							<h3 style="padding-top: 8px;"><a href="#" class="badge badge-secondary" style="background: #4070B1;" onclick="getInitInfo()">收視<br>指標</a></h3>
+							<h3 style="padding-top: 8px;"><a href="#" class="badge badge-secondary" style="background: #4070B1;" onclick="goPortal()">收視<br>指標</a></h3>
 							</td>
 					</tr>
 				</table>
@@ -95,7 +95,7 @@
 				<table>
 					<tr align="center" style="vertical-align: middle; height:60px " class="kindTitle">
 							<td>
-							<h3 style="padding-top: 8px;"><a href="#" class="badge badge-secondary" style="background: #4070B1;" onclick="getRestNew()">ISP<br>互連<br></a></h3>
+							<h3 style="padding-top: 8px;"><a href="#" class="badge badge-secondary" style="background: #4070B1;" onclick="goPortal()">ISP<br>互連<br></a></h3>
 							</td>
 					</tr>
 				</table>
@@ -112,6 +112,8 @@
 	var isReLoad = false;
 	
 	var _empID="";
+	var _haveAuth = false;
+	
 
 	//==============================
 	// 初始呼叫
@@ -136,11 +138,7 @@
 		refreshTime -= 1;	
 		if (refreshTime==0){
 				refreshContent();
-				//_PictureQualityCount++;
-				//if(_PictureQualityCount%2==0)
-				//	loadPictureQuality();
-				//if(_PictureQualityCount>10000)
-				//	_PictureQualityCount =0;
+			
 		}else{			
 		}
 		cleartime = setTimeout("pageRefresh()",1000);
@@ -164,10 +162,7 @@
 		
 
 		
-		function openUrl(){
-			var myObj = { "cmd": "openCamera", "value":{"type": "openUrl"}};
-			alert(callAppCmd(JSON.stringify(myObj)));
-		}
+		//SPA API 教學 https://dev.azure.com/cht-tl-poc/_git/SPA-Template?path=%2Fdocs%2Fos-level-comm-spec.md&_a=preview
 	
 		function getRestNew(){
 		
@@ -205,27 +200,22 @@
 		 function appCmdCallback(str){
 			alert("appCmdCallback: " + str);
 			var obj = JSON.parse(str);
-			if (obj.cmd!='pickFile') {
-				alert("cmd: "+obj.cmd +" <br>" + 
-						"value :" + obj.value);
-				if(obj.cmd=='getInitInfo'){
-					_empID =obj.value.userInfo.empID;
-				}			
-				alert("_empID: "+_empID);
-				document.getElementById('img').src=obj.value.data;
-			} else {
-			//alert(obj.value.apis[0].url);
-			//alert(obj(obj.value.data));
-			//document.getElementById('img').src="data:image/jpeg;base64," + btoa(obj.value.data);
-			//document.getElementById('img').src=obj.value.data;
-				for(var i=1;i<=obj.value.length;i++) {
-					//alert(obj.value[i-1].name);
-					document.getElementById('img'+i).src=obj.value[i-1].data;
+			
+			var _theValue = obj.value;
+			
+			if(obj.cmd=='getInitInfo'){
+				_empID =_theValue.userInfo.empID;
+				checkAuth();
+			}else if(obj.cmd=='rest'){
+				if(_theValue.id=='restCheckAuth'){
+				
+					var _result = _theValue.data;
+					_haveAuth =  _result.items[0].value;
+					alert("_haveAuth"  + _haveAuth +"   " + _result);
 				}
-			}
-			//alert("aaa");
-			//alert(obj.value.photo);
-			//document.getElementById('img').src=obj.value.photo;
+			}else{
+			
+			}		
 		}
 
 		function goPortal(){
@@ -234,32 +224,17 @@
 		}
 	
 		
-		function getUserInfo(){
-			var str = window.JavaScriptInterface.callAppCmd('userInfo','myPayloadUser', 'getRestRes', null);
-			alert(str);
-		}
-		
 		function test1(){
 			location.href = 'spaTest.html';
 		}
 		
-		function test2(){
-			location.href = 'speechTest.html';
-		}
 		
 		
-		function getInitInfo(){
-		
-		//	import storageInstance, { storageKeys } from "path/to/browserStorage/index";
-		//	var appInitInfo = storageInstance.getItem(storageKeys.appInitInfo);
-		//	appInitInfo.userInfo   // 使用者資訊
-		//	appInitInfo.credential // 驗證資訊
-		//				alert("userInfo"+appInitInfo.userInfo + " ," + appInitInfo.credential);
-
-			var myObj = { "cmd": "getInitInfo", "value": null};
-			alert("getInitInfo"	+_empID);
+		function checkAuth(){
+			var _authCheckStr = "auth_"+_empID;
+			var myObj = { "cmd": "rest","value":{"id": "restCheckAuth","restConfig":{"name":"getMetric","queryParams":{"projectId":"0","category":_authCheckStr},"relativePath":"argusProject/getMetric.jsp","method":"get"}}};
 			var str = callAppCmd(JSON.stringify(myObj));
-			
+		
 		}
 		
 		
