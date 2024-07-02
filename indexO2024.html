@@ -22,7 +22,7 @@
 	<div class="I-Body">
 		<div class="row" style="padding-right: 10px;padding-left: 10px;" >
 			<div class="col-sm-8">
-				<div><i class="bi bi-chevron-left" onclick="goPortal()" ></i> <b style="font-size: 20px;">巴黎奧運網路監視</b>&nbsp;</div>
+				<div onclick="goPortal()"><i class="bi bi-chevron-left"></i> <b style="font-size: 20px;">巴黎奧運網路監視</b></div>
 			</div>
 			<div class="col-sm-4">
 				<table class="item-right">
@@ -85,7 +85,7 @@
 				<table>
 					<tr align="center" style="vertical-align: middle; height:60px " class="kindTitle">
 							<td>
-							<h3 style="padding-top: 8px;"><a href="#" class="badge badge-secondary" style="background: #4070B1;" onclick="getAuthNew()">收視<br>指標</a></h3>
+							<h3 style="padding-top: 8px;"><a href="#" class="badge badge-secondary" style="background: #4070B1;" onclick="getInitInfo()">收視<br>指標</a></h3>
 							</td>
 					</tr>
 				</table>
@@ -204,26 +204,22 @@
 		 function appCmdCallback(str){
 			alert("appCmdCallback: " + str);
 			var obj = JSON.parse(str);
-			if (obj.cmd=='getInitInfo') {
-				
-				obj.value.userInfo.empID;
-				alert(_empID);
-
-			}else if (obj.cmd!='pickFile') {
-				//alert(obj.value.data);
-				//document.getElementById('img').src=obj.value.data;
+			if (obj.cmd!='pickFile') {
+				alert(obj.value.data);
+				document.getElementById('img').src=obj.value.data;
 			} else {
 			//alert(obj.value.apis[0].url);
 			//alert(obj(obj.value.data));
 			//document.getElementById('img').src="data:image/jpeg;base64," + btoa(obj.value.data);
 			//document.getElementById('img').src=obj.value.data;
-				//for(var i=1;i<=obj.value.length;i++) {
+				for(var i=1;i<=obj.value.length;i++) {
 					//alert(obj.value[i-1].name);
-				//	document.getElementById('img'+i).src=obj.value[i-1].data;
-				//}
-				alert("ELSE appCmdCallback" + str);
+					document.getElementById('img'+i).src=obj.value[i-1].data;
+				}
 			}
-		
+			//alert("aaa");
+			//alert(obj.value.photo);
+			//document.getElementById('img').src=obj.value.photo;
 		}
 
 		function goPortal(){
@@ -246,8 +242,8 @@
 		}
 		
 		
-		function getAuthNew(){
-			var myObj = { "cmd": "postAuth", "value": null};
+		function getInitInfo(){
+			var myObj = { "cmd": "getInitInfo", "value": null};
 			var str = callAppCmd(JSON.stringify(myObj));
 		}
 		
