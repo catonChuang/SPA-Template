@@ -166,6 +166,7 @@ svg.append('image')
 .attr('height',120)
 .attr('xlink:href', 'paris2024logo.png')
 ; //HZ
+; //HZ
 
 
 $(window).load(function () {
@@ -194,80 +195,8 @@ if(links[j].conn_id){
  var line = d3.line();
 
 
- path = svg.selectAll(".path")
-.data(topo.links)
-.enter().append("path")
-.attr("d", function(d) { return line(d.linedata);})
-   .attr("stroke", "#ddd")
-    .attr("stroke-width",function(d) { return (d.width);} )
-    .attr("id",function(d) { return ("id_"+d.id);} )   
-    .attr("class","links allobj") 
-    .attr("fill", "none")
-                .on("mouseover", function(d) {		
-      var myContact="";
-              if(d.contact)
-            myContact=d.contact;          
- if(link_contact_map["id_"+d.id])
-myContact =link_contact_map["id_"+d.id];   
- 
-myContact=myContact.replaceAll("\\","<BR/>");         
-var myRemark="NA";
-if(d.remark) myRemark=d.remark; 
 
- if(link_remark_map["id_"+d.id])
-myRemark =link_remark_map["id_"+d.id];                     
-            mytt.transition()		
-                .duration(200)		
-                .style("opacity", .9)
-                .attr("class",link_as_map["id_"+d.id]);
-                
-            mytt.html(
-            '<DIV class="ROW"> <div class="card CardT"><div class="card-header CardT">'+
-'<h2 class="card-title bg-white">監視設備</h2>'+
-            "●監視設備名稱："+d.sysname+"<BR/>"+
-            "●專線編號："+d.circuit+"<BR/>"+
-            link_status_map["id_"+d.id] +"●"+myRemark+"<BR/>●"+(myContact).replace(/\\n/g,)+"</div></div></div>")
-                .style("left",function(d){
-                //console.log(d3.event.pageX+":"+d3.event.pageY);
-                if(d3.event.pageX<510) return "520px"; else return "20px";
-                } )	
-                .style("top", function(d){
-               if(d3.event.pageX>520 && d3.event.pageX <620 && d3.event.pageY>150 && d3.event.pageY <190 ) //for 4條MOD
-               return "200px";
-		else               
-               return "20px";
-                });	
-            })					
-        .on("mouseout", function(d) {		
-            mytt.transition()		
-                .duration(500)		
-                .style("opacity", 0);	
-        })
-;
 
- path = svg.selectAll(".path")
-.data(topo.links_dash)
-.enter().append("path")
-.attr("d", function(d) { return line(d.linedata);})
-   .attr("stroke", "#3198FF")
-    .attr("stroke-width",function(d) { return (d.width);} )
-    .attr("id",function(d) { return ("id_"+d.id);} )   
-    .attr("class","links allobj") 
-    .attr("fill", "none")
-.style("stroke-dasharray",("3,5"))
-;
-
-  for(i=0;i<topo.CapText.length;i++){
-  var mytext=topo.CapText[i];
-  svg.append("text")
-            .attr("x", mytext.x)
-            .attr("y", mytext.y)            
-            .style("font-family", "微軟正黑體")
-            .style("font-size", mytext.size)
-            .style('font-weight', 'bold')
-            .style("fill",function(d) { if(mytext.color) return mytext.color; else return "#065a7f";})
-            .text(mytext.name);
-}
 	// 在 svg 中插入 circle
 
 var circleName={};
@@ -276,66 +205,7 @@ var myCircle=topo.circles[i];
 circleName[myCircle.id]=myCircle.name;
 }
 
-var mycircle;
-mycircle=svg.selectAll(".circle")
-.data(topo.circles)
-.enter().append("circle")
-        .attr('cx',function(d) { return (d.cx);}  )
-        .attr('cy', function(d) { return (d.cy);}  )
-        .attr('r',function(d) { return (d.r+'px');} )
-        .attr('id',function(d) { return (d.id);} )
-        .attr('c_type',function(d) { return (d.c_type);} )
-        .on("click",function(d) {window.open(d.url,"_NEWWIN");})
-        .style('fill', '#ddd')
-                       .on("mouseover", function(d) {		
-            
-            mytt.transition()		
-                .duration(200)		
-                .style("opacity", .9)
-               .attr("class",link_as_map[d.id]);
-            mytt.html(cir_status_map[d.id])
-            .style("left", 0)		
-                .style("top", 0);	
-            })					
-        .on("mouseout", function(d) {		
-            mytt.transition()		
-                .duration(500)		
-                .style("opacity", 0);	
-        })
-        
-        
-;
 
-
-
-///img over circle
-mycircleimg=svg.selectAll(".circleimg")
-.data(topo.circles_image)
-.enter().append("image")
-.attr('x', function(d){return d.x;})
-.attr('y',  function(d){return d.y;})
-.attr('id',  function(d){return d.id;})
-.attr('width',  function(d){return d.width;})
-.attr('height',  function(d){return d.height;})
-.attr('NormalURL',  function(d){return d.url;})
-.attr('AlarmURL',  function(d){return d.Alarm_url;})
-.attr('xlink:href',  function(d){return d.url;})
-.on("mouseover", function(d) {		
-            
-            mytt.transition()		
-                .duration(200)		
-                .style("opacity", .9)
-               .attr("class",link_as_map[d.xid]);
-            mytt.html(cir_status_map[d.xid])
-            .style("left", 0)		
-                .style("top", 0);	
-            })					
-        .on("mouseout", function(d) {		
-            mytt.transition()		
-                .duration(500)		
-                .style("opacity", 0);	
-        })
-;
 
 </script>    
 <script>
