@@ -14,6 +14,7 @@
 	<link rel="stylesheet" href="css/bootstrap-icons/bootstrap-icons.css">	
 	<link href="argusApp.css" rel="stylesheet">  
 	<script src="js/argus.app.js"></script>
+	<script src="scripts/utilities/browserStorage/index.js"></script>	
   <style type="text/css">
 		
   </style>
@@ -187,7 +188,7 @@
 			//var myObj = { "cmd": "rest", "value":{"id": "rest1", "restConfig": {"name":"apis.spa.qa.ex","method":"GET"}}};
 			//var myObj = { "cmd": "rest", "value":{"id": "rest1", "restConfig": {"name":"photo","relativePath":'/831765',"method":"GET"}}};
 			var str = callAppCmd(JSON.stringify(myObj));
-			alert(str);
+			//alert(str);
 
 		}
 		function callAppCmd (params) {			
@@ -243,8 +244,17 @@
 		
 		
 		function getInitInfo(){
+		
+			import storageInstance, { storageKeys } from "path/to/browserStorage/index";
+			var appInitInfo = storageInstance.getItem(storageKeys.appInitInfo);
+			appInitInfo.userInfo   // 使用者資訊
+			appInitInfo.credential // 驗證資訊
+						alert("userInfo"+appInitInfo.userInfo + " ," + appInitInfo.credential);
+
 			var myObj = { "cmd": "getInitInfo", "value": null};
+			alert("getInitInfo");
 			var str = callAppCmd(JSON.stringify(myObj));
+			
 		}
 		
 		
