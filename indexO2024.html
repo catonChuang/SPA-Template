@@ -202,7 +202,9 @@
 						$('#messageModel').modal('show');		
 					}
 				//	alert("_haveAuth"  + _haveAuth +"   " + _result);
-				}else if(_theValue.id=='restpm_ddos'){						
+				}else if(_theValue.id=='restpm_ddos'){	
+						alert("restpm_ddos " );
+				
 					changeImgColor(_result.items);
 				}else{
 				
@@ -262,6 +264,29 @@
 			}
 		}
 		
+		function changeImgColor(data){
+			alert("data.length: " + data.length);
+
+			if(data.length>0){									
+				for(var i = 0 ; i < data.length; i ++){							
+					var ajaxName = xssFilters.inHTMLData(data[i].name);			
+					var ajaxStatus = xssFilters.inHTMLData(data[i].value);		
+					var _imgName = "00.png";	  // gray 
+					if(ajaxStatus=="1"){
+						_imgName = "01.png";
+					}else if(ajaxStatus=="2"){
+						_imgName = "02.png";
+					}else if(ajaxStatus=="3"){
+						_imgName = "03.png";
+					}else if(ajaxStatus=="4"){
+						_imgName = "04.png";
+					}else if(ajaxStatus=="5"){
+						_imgName = "05.png";
+					}
+				$("#img"+ajaxName ).attr("src","img/light2/"+_imgName);	
+				}									
+			}						
+	}		
 		
 
 	</script>
