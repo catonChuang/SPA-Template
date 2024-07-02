@@ -71,7 +71,7 @@
 			if(data.length>0){									
 				for(var i = 0 ; i < data.length; i ++){							
 					var ajaxName = xssFilters.inHTMLData(data[i].name);			
-					var ajaxStatus = xssFilters.inHTMLData(data[i].status);		
+					var ajaxStatus = xssFilters.inHTMLData(data[i].value);		
 					var _imgName = "00.png";	  // gray 
 					if(ajaxStatus=="1"){
 						_imgName = "01.png";
