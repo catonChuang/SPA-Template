@@ -196,12 +196,14 @@
 				if(_theValue.id=='restCheckAuth'){				
 					_haveAuth =  _result.items[0].value;
 					
-					if(_haveAuth=="false"){
+					if(_haveAuth=="true"){
+						refreshContent();
+					}else{
 						$('#messageModel').modal('show');		
 					}
 				//	alert("_haveAuth"  + _haveAuth +"   " + _result);
 				}else if(_theValue.id=='restpm_ddos'){						
-					changeImgColor(_theValue.items);
+					changeImgColor(_result.items);
 				}else{
 				
 				}
