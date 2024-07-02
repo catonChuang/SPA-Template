@@ -11,6 +11,7 @@
   	<script src="js/jquery.min.js"></script>
 	<script src="bootstrapV4/js/bootstrap.min.js"></script>	
 	<link href="bootstrapV4/css/bootstrap.min.css" rel="stylesheet">  
+	<link rel="stylesheet" href="css/bootstrap-icons/bootstrap-icons.css">	
 	<link href="argusApp.css" rel="stylesheet">  
 	<script src="js/argus.app.js"></script>
   <style type="text/css">
@@ -21,7 +22,7 @@
 	<div class="I-Body">
 		<div class="row" style="padding-right: 10px;padding-left: 10px;" >
 			<div class="col-sm-8">
-				<div><b style="font-size: 24px;">巴黎奧運網路監視</b>&nbsp;<a href="#" onclick="showRule()"><span class="glyphicon glyphicon-info-sign titleicon" style="font-size: 20px;"  ></span></a></div>
+				<div><i class="bi bi-chevron-left" onclick="goPortal()" ></i> <b style="font-size: 20px;">巴黎奧運網路監視</b>&nbsp;</div>
 			</div>
 			<div class="col-sm-4">
 				<table class="item-right">
@@ -52,7 +53,7 @@
 								<td ><a href="#" onclick="getResult('DDOS_HAMI')"><img id="imgDDOS_HAMI" src="img/light2/01.png" class="statusIcon" ></a></td>
 								<td ><a href="#" onclick="appGetAuth()"><img id="imgDDOS_ELTA" src="img/light2/01.png" class="statusIcon" ></a></td>
 								<td ><a href="#" onclick="getUserInfo()"><img id="imgDDOS_HAMI_DNS" src="img/light2/01.png" class="statusIcon" ></a></td>
-								<td ><a href="#" onclick="goHome()"><img id="imgDDOS_CLOUD_TPS2" src="img/light2/01.png" class="statusIcon" ></a></td>
+								<td ><a href="#" onclick="getUserInfo()"><img id="imgDDOS_CLOUD_TPS2" src="img/light2/01.png" class="statusIcon" ></a></td>
 							</tr>
 						</tbody></table>	
 					</div>	
@@ -201,9 +202,9 @@
 		 }
 		 
 		 function appCmdCallback(str){
-			//alert("appCmdCallback: " + str);
+			alert("appCmdCallback: " + str);
 			var obj = JSON.parse(str);
-			if (obj.cmd!='getInitInfo') {
+			if (obj.cmd=='getInitInfo') {
 				
 				obj.value.userInfo.empID;
 				alert(_empID);
@@ -225,16 +226,11 @@
 		
 		}
 
-		function goHome(){
+		function goPortal(){
 			var myObj = { "cmd": "goPortal", "value": null};
 			var str = callAppCmd(JSON.stringify(myObj));
 		}
 	
-		function getWebView(){
-	//		location.href = 'https://spa-template.azurewebsites.net/#/CHTAppCmdDemo';
-			//window.JavaScriptInterface.callAppCmd('webView','https://www.google.com.tw',null);
-			//window.JavaScriptInterface.callAppCmd('webView','http://spa-template.azurewebsites.net/#/CHTAppCmdDemo', null, null);
-		}
 		
 		function getUserInfo(){
 			var str = window.JavaScriptInterface.callAppCmd('userInfo','myPayloadUser', 'getRestRes', null);
