@@ -206,7 +206,11 @@
 			alert("appCmdCallback: " + str);
 			var obj = JSON.parse(str);
 			if (obj.cmd!='pickFile') {
-				alert(obj.value.data);
+			
+				if(obj.cmd=='getInitInfo'){
+					_empID =obj.value.userInfo.empID;
+				}			
+				alert("_empID: "+_empID);
 				document.getElementById('img').src=obj.value.data;
 			} else {
 			//alert(obj.value.apis[0].url);
@@ -252,7 +256,7 @@
 		//				alert("userInfo"+appInitInfo.userInfo + " ," + appInitInfo.credential);
 
 			var myObj = { "cmd": "getInitInfo", "value": null};
-			alert("getInitInfo");
+			alert("getInitInfo"	+_empID);
 			var str = callAppCmd(JSON.stringify(myObj));
 			
 		}
