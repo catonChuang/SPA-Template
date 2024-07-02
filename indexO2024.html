@@ -112,7 +112,7 @@
 	var isReLoad = false;
 	
 	var _empID="";
-	var _haveAuth = false;
+	var _haveAuth = "false";
 	
 
 	//==============================
@@ -211,7 +211,11 @@
 				
 					var _result = _theValue.data;
 					_haveAuth =  _result.items[0].value;
-					alert("_haveAuth"  + _haveAuth +"   " + _result);
+					
+					if(_haveAuth=="false"){
+							$('#messageModel').modal('show');		
+					}
+				//	alert("_haveAuth"  + _haveAuth +"   " + _result);
 				}
 			}else{
 			
@@ -241,3 +245,17 @@
 		
 
 	</script>
+	
+	
+ <div class="modal fade" id="messageModel" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">    	     
+        <div class="modal-body">
+			很抱歉您沒有權限，請於電子表單申請帳號-IS32進行權限申請， 系統請選Argus->申請ARGUS帳號
+        </div> 
+		<div class="modal-footer">
+           <button type="button" class="btn btn-success" onclick="goPortal()">確定</button>
+        </div>		
+      </div>
+    </div>
+  </div>
