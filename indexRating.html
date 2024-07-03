@@ -411,28 +411,27 @@
 			if(_obj.length>0){									
 				for(var i = 0 ; i < _obj.length; i ++){							
 					var ajaxName = xssFilters.inHTMLData(_obj[i].name);			
-					var ajaxValue = xssFilters.inHTMLData(_obj[i].value);	
 
 					if(ajaxName=="mod"){
-						$("#onlineMOD").html( "<span class=\"broadmessage\">"+ commafy(ajaxValue)  + "</span>");
+						var ajaxValue = xssFilters.inHTMLData(_obj[i].value);	
+						$("#onlineMOD").html( "<span class=\"broadmessage\">"+ commafy(xssFilters.inHTMLData(_obj[i].value))  + "</span>");
 					}else if(ajaxName=="hami"){
-						$("#onlineChtVideo").html( "<span class=\"broadmessage\">"+ commafy(ajaxValue)  + "</span>");
+						$("#onlineChtVideo").html( "<span class=\"broadmessage\">"+ commafy(xssFilters.inHTMLData(_obj[i].value))  + "</span>");
 					}else if(ajaxName=="maxToday"){
-						var _maxRecord = eval('(' + ajaxValue + ')');
+						var _maxRecord = eval('(' + _obj[i].value + ')');
 						_todayMax = _maxRecord[3][0];
 						$("#todayMaxMOD").html( "<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_maxRecord[0][0]))+"</span><br><span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_maxRecord[0][1]).replace("2024-", "")  + ")</span>");
 						$("#todayMaxChtVideo").html("<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_maxRecord[3][0]))+"</span><br><span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_maxRecord[3][1]).replace("2024-", "")  + ")</span>");
 					}else if(ajaxName=="max24"){
-						alert(ajaxValue);
-						var _MOD = ajaxValue.MOD;
-						var _CHT_VIDEO= ajaxValue.chtVideo;  
+						var _MOD = _obj[i].value.MOD;
+						var _CHT_VIDEO= _obj[i].value.chtVideo;  
 						alert("_MOD: "+_MOD);
 
 						$("#max24MOD").html( "<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_MOD[0]))+"</span><br><span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_MOD[1]).replace("2024-", "")  + ")</span>");
 						$("#max24ChtVideo").html( "<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_CHT_VIDEO[0]))+"</span><br><span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_CHT_VIDEO[1]).replace("2024-", "")  + ")</span>");
 					}else if(ajaxName=="_max"){
-						var _MOD = ajaxValue.MOD;
-						var _CHT_VIDEO= ajaxValue.chtVideo; 
+						var _MOD = _obj[i].value.MOD;
+						var _CHT_VIDEO= _obj[i].value.chtVideo; 
 
 						$("#maxMOD").html( "<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_MOD[0]))+"</span><br><span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_MOD[1]).replace("2024-", "")  + ")</span>");
 						$("#maxChtVideo").html( "<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_CHT_VIDEO[0]))+"</span><br><span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_CHT_VIDEO[1]).replace("2024-", "")  + ")</span>");		
