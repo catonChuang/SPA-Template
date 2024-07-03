@@ -15,7 +15,6 @@
 	<script src="xss-filters.min.js"></script>
 	<link href="argusApp.css" rel="stylesheet">  
 	<script src="js/argus.app.js"></script>
-	<script src="scripts/utilities/browserStorage/index.js"></script>	
   <style type="text/css">
 		.circleLabelG {
 		  width:80px;
@@ -104,7 +103,7 @@
 								<td class="tableRightLine" width="50%" align="center" valign="center"><div class="circleLabelG"> <span id="MOD4" class="declared" onClick="openNext('MOD_Declaration','MOD4')" >N</span>/<span id="HAMI4" class="declared" onClick="openNext('Hami_Declaration','HAMI4')" >N</span> </div>
 								</td>
 								<td width="50%" align="center" valign="center" ><div class="circleLabelG" id="MOD5C">			
-								<span id="MOD5" class="declared" onClick="openNext('MOD_Declaration','MOD5')">0</span>/<span id="HAMI5" class="declared" onClick="openNext('Hami_Declaration','HAMI5')">0</span>		</div></td>
+								<span id="MOD5" class="declared" onClick="openNext('MOD_Declaration','MOD5')">N</span>/<span id="HAMI5" class="declared" onClick="openNext('Hami_Declaration','HAMI5')">N</span>		</div></td>
 							</tr>				
 							</table>	
 					</div>	
@@ -246,7 +245,7 @@
 		//appCmdCallback 呼叫API
 		//=======================================	
 		 function appCmdCallback(str){
-		//	alert("appCmdCallback: " + str);
+			alert("appCmdCallback: " + str);
 			var obj = JSON.parse(str);
 			
 			var _theValue = obj.value;
