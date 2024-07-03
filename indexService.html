@@ -213,6 +213,7 @@
 			getRest("pm_cdn"); 
 			getRest("pm_qoe"); 
 			getRest("pm_declaration"); 
+			getRest("fm_eram"); 
 		}
 		
 	}
@@ -273,7 +274,11 @@
 				}else if(_theValue.id=='restpm_qoe'){	
 					changeImgColor(_result.items);
 				}else if(_theValue.id=='restpm_declaration'){	
+					alert("appCmdCallback: " + str);
 					settingpm_declaration(_result.items);
+				}else if(_theValue.id=='restfm_eram'){	
+					alert("eram appCmdCallback: " + str);
+					settingEram(_result.items[0].value);
 				}else{
 				
 				}
@@ -481,6 +486,42 @@
 			}			
 					
 		}
+		
+		
+		//=======================================
+		// 障礙改接申告
+		//=======================================
+		function settingEram(_theDatas){
+			var eramDiv ="";
+			if(_theDatas.length>0){
+							for(var i=0; i < _theDatas.length; i++){
+								var _tempObj = _theDatas[i];
+								var alarmDescription = _tempObj.alarmDescription.replace("MOD局端設備維運障礙","");	
+								alarmDescription =xssFilters.inHTMLData(alarmDescription);
+								var alarmDescriptions = alarmDescription.split("應變措施");		
+								
+								var sn = xssFilters.inHTMLData(_tempObj.sn);
+								sn = sn.replace("F", "");
+								if(sn==""){
+									eramDiv = eramDiv + "●" + alarmDescription + "<br>";	
+								}else{
+									var indexALL = alarmDescription.indexOf("全區障礙");
+									var indexRegion = alarmDescription.indexOf("區域障礙");					
+									if(indexALL<0 && indexRegion<0){	
+										eramDiv = eramDiv + "●" + alarmDescriptions[0]  + "</a><br>";	
+									}else{
+										var _rMessage  = alarmDescriptions[0].replace("全區障礙推論,原因:","");
+										_rMessage  = _rMessage.replace("區域障礙推論,原因:","");
+										var _realTimeMessage = _realTimeMessage + "●" + _rMessage+ "</span>";		
+									}					
+								}
+							}
+						}else{
+							 eramDiv="無障礙改接公告";
+						}
+						 $('#eRAMList').html(eramDiv);
+	}
+		
 	</script>
 	
  <div class="modal hide fade" data-keyboard="false" data-backdrop="static" id="messageModel" role="dialog">
