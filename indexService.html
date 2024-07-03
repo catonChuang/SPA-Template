@@ -82,9 +82,9 @@
 								<td >Hami DNS服務</td>
 							</tr>						
 							<tr align="center">
-								<td ><a href="#" onclick="searchHisortyOTT('QOE_HamiVideo')"><img id="imgHami_WEB" src="img/light2/01.png" class="statusIcon" ></a></td>
-								<td ><a href="#" onclick="searchHisortyOTT('QOE_ELTA')"><img id="imgELTA_WEB" src="img/light2/01.png" class="statusIcon" ></a></td>
-								<td ><a href="#" onclick="searchHisortyOTT('QOE_HamiDNS')"><img id="imgHami_DNS" src="img/light2/01.png" class="statusIcon" ></a></td>
+								<td ><a href="#" onclick="openNext('Qoe','QOE_HamiVideo')"><img id="imgHami_WEB" src="img/light2/00.png" class="statusIcon" ></a></td>
+								<td ><a href="#" onclick="openNext('Qoe','QOE_ELTA')"><img id="imgELTA_WEB" src="img/light2/00.png" class="statusIcon" ></a></td>
+								<td ><a href="#" onclick="openNext('Qoe','QOE_HamiDNS')"><img id="imgHami_DNS" src="img/light2/00.png" class="statusIcon" ></a></td>
 							</tr>
 							</tbody></table>
 					</div>	
@@ -101,10 +101,10 @@
 								<td width="50%" align="center" valign="center" style="padding-bottom: 10px;"><b>用戶大量申告事件</b></td>
 							</tr>
 							<tr>	
-								<td class="tableRightLine" width="50%" align="center" valign="center"><div class="circleLabelG"> <span id="MOD4" class="declared" onClick="openurl('../LargeAlarmShow/show10minMODDeclaration.jsp','mod4')" >N</span>/<span id="HAMI4" class="declared" onClick="openurl('../LargeAlarmShow/show10minHamiVideoDeclaration.jsp','hami4')" >N</span> </div>
+								<td class="tableRightLine" width="50%" align="center" valign="center"><div class="circleLabelG"> <span id="MOD4" class="declared" onClick="openNext('MOD_Declaration','MOD4')" >N</span>/<span id="HAMI4" class="declared" onClick="openNext('Hami_Declaration','hami4')" >N</span> </div>
 								</td>
 								<td width="50%" align="center" valign="center" ><div class="circleLabelG" id="MOD5C">			
-								<span id="MOD5" class="declared" onClick="openurl('../LargeAlarmShow/showLargeAlarm.jsp?type=MOD_Declaration','mod5')">0</span>/<span id="HAMI5" class="declared" onClick="openurl('../LargeAlarmShow/showLargeAlarm.jsp?type=HAMI_VIDEO_Declaration','hami5') ">0</span>		</div></td>
+								<span id="MOD5" class="declared" onClick="openNext('MOD_Declaration','MOD5')">0</span>/<span id="HAMI5" class="declared" onClick="openNext('Hami_Declaration','hami5')">0</span>		</div></td>
 							</tr>				
 							</table>	
 					</div>	
@@ -211,6 +211,7 @@
 		
 		if(_haveAuth=="true"){
 			getRest("pm_cdn"); 
+			getRest("pm_qoe"); 
 		}
 		
 	}
@@ -243,7 +244,7 @@
 		//appCmdCallback 呼叫API
 		//=======================================	
 		 function appCmdCallback(str){
-			alert("appCmdCallback: " + str);
+		//	alert("appCmdCallback: " + str);
 			var obj = JSON.parse(str);
 			
 			var _theValue = obj.value;
@@ -266,8 +267,10 @@
 				//	alert("_haveAuth"  + _haveAuth +"   " + _result);
 				}else if(_theValue.id=='restpm_cdn'){	
 					var _objCdn = _result.items[0].value;
-					alert("data: " + _objCdn);
+				//	alert("data: " + _objCdn);
 					settingpm_cdn(_objCdn);
+				}else if(_theValue.id=='restpm_qoe'){	
+					changeImgColor(_result.items);
 				}else{
 				
 				}
@@ -402,6 +405,13 @@
 			return num+unit; 
 		}
 	}
+	
+		//=======================================
+		//
+		//=======================================
+		function openNext(type,target){
+			//location.href = 'indexService.html';
+		}
 	
 	
 		//=======================================
