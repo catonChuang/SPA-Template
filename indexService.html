@@ -245,7 +245,7 @@
 		//appCmdCallback 呼叫API
 		//=======================================	
 		 function appCmdCallback(str){
-			alert("appCmdCallback: " + str);
+			//alert("appCmdCallback: " + str);
 			var obj = JSON.parse(str);
 			
 			var _theValue = obj.value;
@@ -273,10 +273,10 @@
 				}else if(_theValue.id=='restpm_qoe'){	
 					changeImgColor(_result.items);
 				}else if(_theValue.id=='restpm_declaration'){	
-					alert("appCmdCallback: " + str);
+					//alert("restpm_declaration: " + str);
 					settingpm_declaration(_result.items);
 				}else if(_theValue.id=='restfm_eram'){	
-					alert("eram appCmdCallback: " + str);
+					//alert("eram appCmdCallback: " + str);
 					settingEram(_result.items[0].value);
 				}else{
 				
