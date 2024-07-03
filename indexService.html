@@ -101,10 +101,10 @@
 								<td width="50%" align="center" valign="center" style="padding-bottom: 10px;"><b>用戶大量申告事件</b></td>
 							</tr>
 							<tr>	
-								<td class="tableRightLine" width="50%" align="center" valign="center"><div class="circleLabelG"> <span id="MOD4" class="declared" onClick="openNext('MOD_Declaration','MOD4')" >N</span>/<span id="HAMI4" class="declared" onClick="openNext('Hami_Declaration','hami4')" >N</span> </div>
+								<td class="tableRightLine" width="50%" align="center" valign="center"><div class="circleLabelG"> <span id="MOD4" class="declared" onClick="openNext('MOD_Declaration','MOD4')" >N</span>/<span id="HAMI4" class="declared" onClick="openNext('Hami_Declaration','HAMI4')" >N</span> </div>
 								</td>
 								<td width="50%" align="center" valign="center" ><div class="circleLabelG" id="MOD5C">			
-								<span id="MOD5" class="declared" onClick="openNext('MOD_Declaration','MOD5')">0</span>/<span id="HAMI5" class="declared" onClick="openNext('Hami_Declaration','hami5')">0</span>		</div></td>
+								<span id="MOD5" class="declared" onClick="openNext('MOD_Declaration','MOD5')">0</span>/<span id="HAMI5" class="declared" onClick="openNext('Hami_Declaration','HAMI5')">0</span>		</div></td>
 							</tr>				
 							</table>	
 					</div>	
@@ -212,6 +212,7 @@
 		if(_haveAuth=="true"){
 			getRest("pm_cdn"); 
 			getRest("pm_qoe"); 
+			getRest("pm_declaration"); 
 		}
 		
 	}
@@ -271,6 +272,8 @@
 					settingpm_cdn(_objCdn);
 				}else if(_theValue.id=='restpm_qoe'){	
 					changeImgColor(_result.items);
+				}else if(_theValue.id=='restpm_declaration'){	
+					settingpm_declaration(_result.items);
 				}else{
 				
 				}
@@ -415,7 +418,7 @@
 	
 	
 		//=======================================
-		// CDN 畫質設定
+		// CDN 指標
 		//=======================================
 		function settingpm_cdn(_objCdn){
 			//_objCdn.connect;
@@ -464,8 +467,20 @@
 					}					
 		}
 	
-		
-
+	
+		//=======================================
+		// 客訴 指標
+		//=======================================	
+		function settingpm_declaration(data){
+			if(data.length>0){									
+				for(var i = 0 ; i < data.length; i ++){							
+					var _Name = xssFilters.inHTMLData(data[i].name);			
+					var _Value = xssFilters.inHTMLData(data[i].value);		
+					$("#"+_Name).html(_Value);
+				}									
+			}			
+					
+		}
 	</script>
 	
  <div class="modal hide fade" data-keyboard="false" data-backdrop="static" id="messageModel" role="dialog">
