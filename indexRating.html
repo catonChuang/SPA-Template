@@ -75,7 +75,7 @@
 							<td align="right"><span id="todayMaxChtVideo">--</span></td>
 						</tr>
 						<tr>
-							<td><div class="conTitle" >24小時內線上最高*:</div></td>
+							<td><div class="conTitle" >24小時內線上最高:</div></td>
 							<td align="right"><span id="max24ChtVideo">--</span></td>
 						</tr>
 						<tr>
@@ -91,6 +91,41 @@
 						<b>MOD頻道資訊</b>
 					</div>		
 					<div class="card-body" style="padding: 5px;">
+						<table id="curTable" class="table table-striped" style="margin-bottom: 2px;">
+							 <thead>
+								<tr>
+									<td><b>頻道</b>  </td>
+									 <td><b>名稱</b> </td>
+									 <td><b>收視數</b></td>
+									 <td><b>狀態</b></td>
+								 </tr>
+							 </thead>
+							  <tbody>
+							  
+								<tr>
+									<td><b>ch200</b>  </td>
+									<td><b>愛爾達體育1台</b>  </td>
+									 <td align="right"><b id="channel1num">--</b></td>
+									 <td align="center"><b><img id="statusch200" src="img/light2/01.png" class="statusIcon" onclick="openNext('channel','channel')"></b></td>
+								</tr>
+							
+								<tr>
+									<td><b>ch201</b>  </td>
+									<td><b>愛爾達體育2台</b>  </td>
+									 <td align="right"><b id="channel2num">--</b></td>
+									 <td align="center"><b><img id="statusch201" src="img/light2/01.png" class="statusIcon" onclick="openNext('channel','channel')"></b></td>
+								</tr>
+							
+								<tr>
+									<td><b>ch202</b>  </td>
+									<td><b>愛爾達體育3台</b>  </td>
+									 <td align="right"><b id="channel3num">--</b></td>
+									 <td align="center"><b><img id="statusch202" src="img/light2/01.png" class="statusIcon" onclick="openNext('channel','channel')"></b></td>
+								</tr>
+								
+							  </tbody>
+							</table>
+						
 						
 					</div>	
 				</div>	
@@ -194,7 +229,7 @@
 		
 		if(_haveAuth=="true"){
 			getRest("pm_ratings"); 
-			
+			getRest("pm_mod_channel_ratings");
 		}
 		
 	}
@@ -250,6 +285,9 @@
 				//	alert("_haveAuth"  + _haveAuth +"   " + _result);
 				}else if(_theValue.id=='restpm_ratings'){	
 					settingpm_ratings(_result.items);
+				}else if(_theValue.id=='restpm_mod_channel_ratings'){	
+						//alert("restpm_ddos " );
+					settingpm_mod_channel_ratings(_result.items[0].value);
 				}else{
 				
 				}
@@ -402,6 +440,19 @@
 				}									
 			}		
 							
+		}
+		
+		//=======================================
+		//MOD 頻道收視
+		//=======================================
+		function settingpm_mod_channel_ratings(_obj){
+			var _subObj1 = _obj.channel1;
+			var _subObj2 = _obj.channel2;
+			var _subObj3 = _obj.channel3;
+			
+			$("#channel1num").html( "<span class=\"broadmessage\">"+ commafy(_subObj1.data[1])  + "</span>");
+			$("#channel2num").html( "<span class=\"broadmessage\">"+ commafy(_subObj2.data[1])  + "</span>");
+			$("#channel3num").html( "<span class=\"broadmessage\">"+ commafy(_subObj3.data[1])  + "</span>");
 		}
 	
 	
