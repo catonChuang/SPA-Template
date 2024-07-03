@@ -82,7 +82,7 @@
 					<div class="card-header bgBlue">
 						<b>MOD頻道資訊</b>
 					</div>		
-					<div class="card-body" style="padding: 5px;">
+					<div class="card-body" style="padding: 3px;">
 						<table id="curTable" class="table table-striped" style="margin-bottom: 2px;">
 							 <thead>
 								<tr>
@@ -440,11 +440,11 @@
 			var _subObj1 = _obj.channel1;
 			var _subObj2 = _obj.channel2;
 			var _subObj3 = _obj.channel3;
-			alert("_subObj1_data: "+_subObj1.data);
+			//alert("_subObj1_data: "+_subObj1.data);
 
-			$("#channel1num").html( "<span class=\"broadmessage\">"+ commafy(xssFilters.inHTMLData(_subObj1.data[1]))  + "</span>");
-			$("#channel2num").html( "<span class=\"broadmessage\">"+ commafy(xssFilters.inHTMLData(_subObj2.data[1]))  + "</span>");
-			$("#channel3num").html( "<span class=\"broadmessage\">"+ commafy(xssFilters.inHTMLData(_subObj3.data[1]))  + "</span>");
+			$("#channel1num").html( "<span class=\"broadmessage\">"+ commafy(xssFilters.inHTMLData(_subObj1.data[1])  + "</span>");
+			$("#channel2num").html( "<span class=\"broadmessage\">"+ commafy(xssFilters.inHTMLData(_subObj2.data[1])  + "</span>");
+			$("#channel3num").html( "<span class=\"broadmessage\">"+ commafy(xssFilters.inHTMLData(_subObj3.data[1])  + "</span>");
 		}
 	
 	
