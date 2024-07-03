@@ -24,17 +24,9 @@
 	<div class="I-Body">
 		<div class="row">
 			<div class="col-sm-12">	
-				<div class="card">
-					<div class="card-header bgBlue">
-						<div onclick="goPortal()"><i class="bi bi-chevron-left"></i> <b style="font-size: 20px;">巴黎奧運網路監視</b></div>
-					</div>	
-				</div>
-				<table class="item-right">
-				<tr><td>
-					<div id="qrytime" style = "padding-top:5px"><b>呈現時間:</b>&nbsp;<span id="refreshTime">讀取中...</span></div>		
-				</td></tr>
-				</table>
-				<br><br>				
+				<div onclick="goPortal()" style="font-size: 24px;"><i class="bi bi-chevron-left"></i> <b >巴黎奧運網路監視</b></div>
+					<div id="qrytime" class="item-right"><b>呈現時間:</b>&nbsp;<span id="refreshTime">讀取中...</span></div>
+				<br>				
 				<div class="card">
 					<iframe id="iframeTK" src="topy/Paris2024/topo.html" frameborder="0" height="500px" width="100%" scrolling="no"></iframe>
 				</div>	
@@ -180,7 +172,7 @@
 		//appCmdCallback 呼叫API
 		//=======================================	
 		 function appCmdCallback(str){
-			alert("appCmdCallback: " + str);
+		//	alert("appCmdCallback: " + str);
 			var obj = JSON.parse(str);
 			
 			var _theValue = obj.value;
@@ -195,7 +187,6 @@
 				//=====================
 				if(_theValue.id=='restCheckAuth'){				
 					_haveAuth =  _result.items[0].value;
-					
 					if(_haveAuth=="true"){
 						refreshContent();
 					}else{
@@ -203,8 +194,7 @@
 					}
 				//	alert("_haveAuth"  + _haveAuth +"   " + _result);
 				}else if(_theValue.id=='restpm_ddos'){	
-						alert("restpm_ddos " );
-				
+						//alert("restpm_ddos " );
 					changeImgColor(_result.items);
 				}else{
 				
@@ -247,11 +237,7 @@
 			var str = callAppCmd(JSON.stringify(myObj));
 			//alert(str);
 		}
-		
-		
-		//https://argus.qa.cht.com.tw/argus_project_api/V1/argusProject/?projectId=55&category=pm_declaration
-		
-		
+				
 		function goPage(pIdx){
 			if(pIdx=="1"){
 				location.href = 'indexO2024.html';
@@ -265,7 +251,7 @@
 		}
 		
 		function changeImgColor(data){
-			alert("data.length: " + data.length);
+		//	alert("data.length: " + data.length);
 
 			if(data.length>0){									
 				for(var i = 0 ; i < data.length; i ++){							

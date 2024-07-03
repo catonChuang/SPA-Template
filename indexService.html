@@ -12,38 +12,112 @@
 	<script src="bootstrapV4/js/bootstrap.min.js"></script>	
 	<link href="bootstrapV4/css/bootstrap.min.css" rel="stylesheet">  
 	<link rel="stylesheet" href="css/bootstrap-icons/bootstrap-icons.css">	
+	<script src="xss-filters.min.js"></script>
 	<link href="argusApp.css" rel="stylesheet">  
 	<script src="js/argus.app.js"></script>
 	<script src="scripts/utilities/browserStorage/index.js"></script>	
   <style type="text/css">
-		
+		.circleLabelG {
+		  width:80px;
+		  height:80px; 
+		  border-radius:80px;
+		  border:solid 10px #5CB85C;		  
+		  padding-top: 12px;
+		  font-size: 24px;
+		  font-weight:bold;
+		}
   </style>
 </head>
 <body>
 	<div class="I-Body">
-		<div class="row" style="padding-right: 10px;padding-left: 10px;" >
-			<div class="col-sm-8">
-				<div onclick="goPortal()"><i class="bi bi-chevron-left"></i> <b style="font-size: 20px;">巴黎奧運網路監視</b></div>
-			</div>
-			<div class="col-sm-4">
-				<table class="item-right">
-							<tr><td>
-							<div id="qrytime" style = "padding-top:5px"><b>呈現時間:</b>&nbsp;<span id="refreshTime">讀取中...</span></div>		
-							</td></tr>
-					</table>	
-			</div>	
-		</div>
 		<div class="row">
 			<div class="col-sm-12">	
+				<div onclick="goPortal()" style="font-size: 24px;"><i class="bi bi-chevron-left"></i> <b >巴黎奧運網路監視</b></div>
+					<div id="qrytime" class="item-right"><b>呈現時間:</b>&nbsp;<span id="refreshTime">讀取中...</span></div>
+				<br>				
+				<div class="card">	
+					<div class="card-header bgBlue">
+						<b>中華電信CDN流量-LIVE</b>
+					</div>		
+					<div class="card-body" style="padding: 5px;">
+						<table class="table-striped" style=" height:128px; margin: 0 auto; width:100%  ">
+							<thead><tr>
+								<td><div ></div></td>
+								<td align="right"><b >狀態</b></td>
+								<td align="right" ><b >頻寬資訊</b></td>
+							</tr></thead>	
+							<tbody>
+							<tr>
+								<td><div class="conTitle" >線上</div></td>
+								<td align="center" >
+								
+								<img id="cdn_status" src="img/light2/01.png" class="statusIcon" >
+								</td>
+								<td align="right"><div id="cdn_bandwidth">--</div> </td>
+								
+							</tr>
+							<tr>
+								<td><div class="conTitle" >24小時內線上最高</div></td>
+								<td></td>
+								<td align="right"><div id="cdn_bandwidth_24max">--</div></td>
+							</tr>
+									<tr>
+								<td><div class="conTitle" >目前畫質</div></td>
+								<td colspan=2><span id="curResolution"></span></td>
+							</tr>							
+							</tbody>
+						</table>
+					</div>	
+				</div>	
 				
 				<div class="card">	
 					<div class="card-header bgBlue">
-						<b>服務</b>
+						<b>QoE監測</b>
 					</div>		
 					<div class="card-body" style="padding: 5px;">
-						
+					<table class="table-striped" style="margin-bottom:1px; width:100% "><tbody>		
+							<tr align="center">								
+								<td >Hami網站</td>
+								<td >ELTA網站</td>
+								<td >Hami DNS服務</td>
+							</tr>						
+							<tr align="center">
+								<td ><a href="#" onclick="searchHisortyOTT('QOE_HamiVideo')"><img id="imgHami_WEB" src="img/light2/01.png" class="statusIcon" ></a></td>
+								<td ><a href="#" onclick="searchHisortyOTT('QOE_ELTA')"><img id="imgELTA_WEB" src="img/light2/01.png" class="statusIcon" ></a></td>
+								<td ><a href="#" onclick="searchHisortyOTT('QOE_HamiDNS')"><img id="imgHami_DNS" src="img/light2/01.png" class="statusIcon" ></a></td>
+							</tr>
+							</tbody></table>
 					</div>	
 				</div>	
+
+				<div class="card">	
+					<div class="card-header bgBlue">
+						<b>客 服 申 告 狀 況 (MOD/Hami Video)</b>
+					</div>		
+					<div class="card-body" style="padding: 5px;">
+						<table width="100%" >
+							<tr>	
+								<td class="tableRightLine" width="50%" align="center" valign="center" style="padding-bottom: 10px;" ><b>累計30分鐘用戶申告數</b></td>
+								<td width="50%" align="center" valign="center" style="padding-bottom: 10px;"><b>用戶大量申告事件</b></td>
+							</tr>
+							<tr>	
+								<td class="tableRightLine" width="50%" align="center" valign="center"><div class="circleLabelG"> <span id="MOD4" class="declared" onClick="openurl('../LargeAlarmShow/show10minMODDeclaration.jsp','mod4')" >N</span>/<span id="HAMI4" class="declared" onClick="openurl('../LargeAlarmShow/show10minHamiVideoDeclaration.jsp','hami4')" >N</span> </div>
+								</td>
+								<td width="50%" align="center" valign="center" ><div class="circleLabelG" id="MOD5C">			
+								<span id="MOD5" class="declared" onClick="openurl('../LargeAlarmShow/showLargeAlarm.jsp?type=MOD_Declaration','mod5')">0</span>/<span id="HAMI5" class="declared" onClick="openurl('../LargeAlarmShow/showLargeAlarm.jsp?type=HAMI_VIDEO_Declaration','hami5') ">0</span>		</div></td>
+							</tr>				
+							</table>	
+					</div>	
+				</div>	
+				
+				<div class="card">	
+					<div class="card-header bgBlue">
+						<b>障礙/改接公告</b>
+					</div>		
+					<div class="card-body" style="padding: 5px;height: 140px; margin: 0 auto; overflow:auto;">
+							<div id="eRAMList" ></div>
+					</div>						
+				</div> 	
 			</div>	
 		</div>
 
@@ -98,6 +172,7 @@
 	
 	var _empID="";
 	var _haveAuth = "false";
+	var _projectId = "303";				// 奧運收視數專案編號
 	
 
 	//==============================
@@ -122,8 +197,7 @@
 	function pageRefresh(){
 		refreshTime -= 1;	
 		if (refreshTime==0){
-				refreshContent();
-			
+			refreshContent();			
 		}else{			
 		}
 		cleartime = setTimeout("pageRefresh()",1000);
@@ -134,43 +208,26 @@
 	//==============================
 	function refreshContent(){
 		changeRefreshTime();
-		// TODO 
+		
+		if(_haveAuth=="true"){
+			getRest("pm_cdn"); 
+		}
 		
 	}
 	
-	//		//argus-api/argusProject/getMetric.jsp?projectId=X&category=pm_declaration
-
-		function appGetAuth(){
-            var myObj = { "cmd": "getMetric", "value":{"projectId": "333","category":"pm_declaration"}};
-           alert( callAppCmd(JSON.stringify(myObj)));
-        }
-		
-
-		
-		//SPA API 教學 https://dev.azure.com/cht-tl-poc/_git/SPA-Template?path=%2Fdocs%2Fos-level-comm-spec.md&_a=preview
 	
-		function getRestNew(){
+	
+	
+	
+		//=======================================
+		//SPA API 教學
+		//=======================================		
+		//https://dev.azure.com/cht-tl-poc/_git/SPA-Template?path=%2Fdocs%2Fos-level-comm-spec.md&_a=preview
+	
 		
-		//xhr.open("GET", "https://apis-qa.b2e.cht.com.tw/argus-api/argusProject/getMetric.jsp?"+data);
-		//xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-		//xhr.setRequestHeader("x-api-key", "rQM3IXZkM62lA7E05LMiohRDbCkhiGV4GUvQRpvGIA72J1sw");
-		//xhr.setRequestHeader("Authorization", "Bearer "+apim_token);
-		//xhr.send();
-		//xhr.send(data);
-		
-			//var myObj = { "cmd": "rest", "value":{"id": "rest1", "restConfig": {"name":"getMetric","relativePath":'/argus-api/argusProject/getMetric.jsp',"method":"GET", "body":{"projectId":"55","category":"pm_declaration"}}}};
-			
-			
-			var myObj = { "cmd": "rest","value":{"id": "restT1","restConfig":{"name":"getMetric","queryParams":{"projectId":"55","category":"pm_declaration"},
-			"relativePath":"argusProject/getMetric.jsp","method":"get"}}};
-			
-			
-			//var myObj = { "cmd": "rest", "value":{"id": "rest1", "restConfig": {"name":"apis.spa.qa.ex","method":"GET"}}};
-			//var myObj = { "cmd": "rest", "value":{"id": "rest1", "restConfig": {"name":"photo","relativePath":'/831765',"method":"GET"}}};
-			var str = callAppCmd(JSON.stringify(myObj));
-			//alert(str);
-
-		}
+		//=======================================
+		//callAppCmd 呼叫API
+		//=======================================	
 		function callAppCmd (params) {			
 			if (window.webkit != undefined) {
 				// for iOS
@@ -182,6 +239,9 @@
 			  }
 		 }
 		 
+		//=======================================
+		//appCmdCallback 呼叫API
+		//=======================================	
 		 function appCmdCallback(str){
 			alert("appCmdCallback: " + str);
 			var obj = JSON.parse(str);
@@ -192,39 +252,67 @@
 				_empID =_theValue.userInfo.empID;
 				checkAuth();
 			}else if(obj.cmd=='rest'){
-				if(_theValue.id=='restCheckAuth'){
-				
-					var _result = _theValue.data;
+				var _result = _theValue.data;
+				//=====================
+				// 權限判斷
+				//=====================
+				if(_theValue.id=='restCheckAuth'){				
 					_haveAuth =  _result.items[0].value;
-					
-					if(_haveAuth=="false"){
-							$('#messageModel').modal('show');		
+					if(_haveAuth=="true"){
+						refreshContent();
+					}else{
+						$('#messageModel').modal('show');		
 					}
 				//	alert("_haveAuth"  + _haveAuth +"   " + _result);
+				}else if(_theValue.id=='pm_cdn'){	
+					var _objCdn = _result.items[0].value;
+					settingpm_cdn(_objCdn);
+				}else{
+				
 				}
 			}else{
 			
 			}		
 		}
+		
+		
+		
+		
+		
 
+		//=======================================
+		//回首頁
+		//=======================================
 		function goPortal(){
 			var myObj = { "cmd": "goPortal", "value": null};
 			var str = callAppCmd(JSON.stringify(myObj));
 		}
 	
-		
-		function test1(){
-			location.href = 'spaTest.html';
-		}
-		
-		
-		
+	
+		//=======================================
+		//argus api-檢查權限
+		//=======================================
 		function checkAuth(){
 			var _authCheckStr = "auth_"+_empID;
+			//https://argus.qa.cht.com.tw/argus_project_api/V1/argusProject/?projectId=0&category=auth_
 			var myObj = { "cmd": "rest","value":{"id": "restCheckAuth","restConfig":{"name":"getMetric","queryParams":{"projectId":"0","category":_authCheckStr},"relativePath":"argusProject/getMetric.jsp","method":"get"}}};
 			var str = callAppCmd(JSON.stringify(myObj));
-		
 		}
+		
+		//=======================================
+		//argus api PM 參數
+		//=======================================
+		function getRest(_category){
+			var _id = "rest"+_category;
+			var myObj = { "cmd": "rest","value":{"id": _id,"restConfig":{"name":"getMetric","queryParams":{"projectId":_projectId,"category":_category},
+			"relativePath":"argusProject/getMetric.jsp","method":"get"}}};
+			
+			var str = callAppCmd(JSON.stringify(myObj));
+			//alert(str);
+		}
+		
+		
+		//https://argus.qa.cht.com.tw/argus_project_api/V1/argusProject/?projectId=55&category=pm_declaration
 		
 		
 		function goPage(pIdx){
@@ -239,6 +327,132 @@
 			}
 		}
 		
+		function changeImgColor(data){
+		//	alert("data.length: " + data.length);
+
+			if(data.length>0){									
+				for(var i = 0 ; i < data.length; i ++){							
+					var ajaxName = xssFilters.inHTMLData(data[i].name);			
+					var ajaxStatus = xssFilters.inHTMLData(data[i].value);		
+					var _imgName = "00.png";	  // gray 
+					if(ajaxStatus=="1"){
+						_imgName = "01.png";
+					}else if(ajaxStatus=="2"){
+						_imgName = "02.png";
+					}else if(ajaxStatus=="3"){
+						_imgName = "03.png";
+					}else if(ajaxStatus=="4"){
+						_imgName = "04.png";
+					}else if(ajaxStatus=="5"){
+						_imgName = "05.png";
+					}
+				$("#img"+ajaxName ).attr("src","img/light2/"+_imgName);	
+				}									
+			}						
+	}		
+	
+	
+	//==============================
+	// CDN 比例, 總容量4 T 後續用程式調	 
+	//==============================
+	var _bwRate= 0;  
+	var _bwRate24= 0; 
+	function commafyCDN(num, theT){ 
+		if(num < 1){ 
+			if(num ==0 )
+				return 0;
+			else{
+				var _num = num.toFixed(1);
+				return _num;
+			}
+		}
+		else{		
+			// 換算 CDN 規則 轉換   / 1000 /1000 /1000  =>  /1000
+		
+			// 換算G
+			var unit ="Gbps";
+			num = num/1000  ;
+			
+			if(num>1000){
+				num = num/1000  ;
+				unit="Tbps";
+			}
+			var _num = new Number(num);
+			_num = _num.toFixed(2);
+			num = _num+""; 
+			var re=/(-?\d+)(\d{3})/ ;
+			while(re.test(num)){ 
+				num=num.replace(re,"$1,$2") ;
+			} 
+
+			if(theT=="max"){				
+				if(unit=="Tbps"){
+					_bwRate =  (num/3.5)*100;
+				}else if(unit=="Gbps"){
+					_bwRate =  (num/3500)*100;
+				}
+			}else if(theT=="max24"){
+				if(unit=="Tbps"){
+					_bwRate24 =  (num/3.5)*100;
+				}else if(unit=="Gbps"){
+					_bwRate24 =  (num/3500)*100;
+				}				
+			}
+			return num+unit; 
+		}
+	}
+	
+	
+		//=======================================
+		// CDN 畫質設定
+		//=======================================
+		function settingpm_cdn(_objCdn){
+			//_objCdn.connect;
+					//_objCdn.status;
+					//_objCdn.bandwidth;
+					//_objCdn.description;
+					//_objCdn.mode;
+					//_objCdn.connect24max; // array
+					//_objCdn.bandwidth24max; // array
+ 					
+					var _bandwidth= xssFilters.inHTMLData(_objCdn.bandwidth);  
+					var _bandwidth24Max = _objCdn.bandwidth24max;	
+					var _status = xssFilters.inHTMLData(_objCdn.status);		
+					
+					var _bandwidthStr =commafyCDN(_bandwidth,'max');
+					var _bandwidth24Str =commafyCDN(xssFilters.inHTMLData(_bandwidth24Max[0]),'max24');
+
+					$("#cdn_bandwidth").html( "<div class=\"broadmessage\">"+_bandwidthStr+"("+_bwRate.toFixed(2)+"%)"+"</div>");
+					$("#cdn_bandwidth_24max").html( "<div class=\"broadmessage\">"+_bandwidth24Str+"("+_bwRate24.toFixed(2)+"%)"+"</div><div class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_bandwidth24Max[1].replace("2024-", ""))  + ")</div>");
+					$('#cdn_status').attr("src", "img/light2/0"+_status+".png"); 	
+
+					var _mode =_objCdn.mode;
+
+					if(_mode=="q5"  ){
+						$("#curResolution").html(_mode+"(預設值-進階低延遲)");	
+					}else if(_mode=="q6" ){
+						$("#curResolution").html(_mode+"(此設定建議用於CDN流量:>70%-進階低延遲)");									
+					}else if(_mode=="q7" ){
+						$("#curResolution").html(_mode+"(此設定建議用於CDN流量:>80%-進階低延遲)");										
+					}else if(_mode=="q8"  ){
+						$("#curResolution").html(_mode+"(預設值-低延遲)");	
+					}else if(_mode=="q9" ){
+						$("#curResolution").html(_mode+"(此設定建議用於CDN流量:>70%-低延遲)");									
+					}else if(_mode=="q10" ){
+						$("#curResolution").html(_mode+"(此設定建議用於CDN流量:>80%-低延遲)");										
+					}else if(_mode=="q11"  ){
+						$("#curResolution").html(_mode+"(預設值- 一般)");	
+					}else if(_mode=="q12" ){
+						$("#curResolution").html(_mode+"(此設定建議用於CDN流量:>70%- 一般)");									
+					}else if(_mode=="q13" ){
+						$("#curResolution").html(_mode+"(此設定建議用於CDN流量:>80%- 一般)");										
+					}else if(_mode=="q0" ){
+						$("#curResolution").html(_mode+"(預設值- 一般)");										
+					}else{
+						$("#curResolution").html(_mode);										
+					}					
+		}
+	
 		
 
 	</script>
