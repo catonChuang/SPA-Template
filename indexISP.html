@@ -14,6 +14,10 @@
 	<link rel="stylesheet" href="css/bootstrap-icons/bootstrap-icons.css">	
 	<link href="argusApp.css" rel="stylesheet">  
 	<script src="js/argus.app.js"></script>
+	<script src="xss-filters.min.js"></script>
+	<script src="js/d3.v3.min.js" charset="utf-8"></script>
+	<script src="js/liquidFillGauge.js" language="JavaScript"></script>
+
   <style type="text/css">
 		
   </style>
@@ -40,7 +44,7 @@
 						<b>ISP</b>
 					</div>		
 					<div class="card-body" style="padding: 5px;">
-						
+						<div class="row" id="mainContent" style="font-size: 14px;" > </div >		
 					</div>	
 				</div>	
 			</div>	
@@ -91,6 +95,8 @@
 
 <script>
 
+	var _jsonSource = "{\"items\":[{\"name\": \"isp\",\"value\": {\"ISP\":[{\"idx\":\"1\",\"cName\":\"新世紀資通(遠傳)\",\"code\":\"hinet-ncic\",\"flow\":\"61527.445\",\"bandwidth\":\"320100\",\"rate\":\"19.22\",\"status\":\"1\"},{\"idx\":\"2\",\"cName\":\"台灣固網(台灣大哥大)\",\"code\":\"hinet-tfn\",\"flow\":\"67307.64\",\"bandwidth\":\"490000\",\"rate\":\"13.74\",\"status\":\"1\"},{\"idx\":\"3\",\"cName\":\"是方電訊\",\"code\":\"hinet-chief\",\"flow\":\"46087.43\",\"bandwidth\":\"600100\",\"rate\":\"7.68\",\"status\":\"1\"},{\"idx\":\"4\",\"cName\":\"台灣智慧光網\",\"code\":\"hinet-taifo\",\"flow\":\"4524.956\",\"bandwidth\":\"21000\",\"rate\":\"21.55\",\"status\":\"1\"},{\"idx\":\"5\",\"cName\":\"中嘉和網\",\"code\":\"hinet-kbt\",\"flow\":\"2544.645\",\"bandwidth\":\"5100\",\"rate\":\"49.9\",\"status\":\"1\"}]},\"sub_tag\": \"curflow\",\"time\": \"2024-07-03 18:25\"}]}" ;
+
 	var refreshSecond = 30;						// 30 秒
 	var refreshTime = refreshSecond;			
 	var isReLoad = false;
@@ -98,12 +104,69 @@
 	var _empID="";
 	var _haveAuth = "false";
 	
+	var _OBJ = JSON.parse(_jsonSource); 
+	
 
 	//==============================
 	// 初始呼叫
 	//==============================
 	$(document).ready(function() {
-		
+//				alert(_OBJ.items[0].value.ISP.length);
+				
+		var _ischange = false; 
+		var _theData =_OBJ.items[0].value.ISP;	
+								$("#mainContent").html("");	
+								_ischange = true;
+								if(_theData.length>0){	
+									for(var i=0; i <_theData.length ; i++ ){										
+										if(i>0){
+											if(i%1==0)
+												$("#mainContent").append("<br>"); 
+										}									
+																			
+										var _tempHtml = "";
+										_tempHtml ="<div class=\"col-sm-6 col-md-4 col-xl-3\">";
+										
+										var _code = xssFilters.inHTMLData(_theData[i].code);
+										var _cName = xssFilters.inHTMLData(_theData[i].cName);
+										var _idx = xssFilters.inHTMLData(_theData[i].idx);
+										var _flow = xssFilters.inHTMLData(_theData[i].flow);
+										var _bandwidth = new Number(xssFilters.inHTMLData(_theData[i].bandwidth));
+
+										_tempHtml +="<table class=\"table table-bordered\" ><tr align=\"center\" ><th class=\"cardTitle\" colspan=\"2\">"+ 
+													"<a onclick=\"showInfo('"+_code+"')\">"+_cName+"<i class=\"bi bi-info-circle\"></i></a></th></tr>";  
+
+										_tempHtml +="<tr align=\"center\" ><td colspan=\"2\"><svg id=\"fillgauge"+_idx +"\"  height=\"80px\" width=\"80px\"></svg></td></tr>";									
+										var unit ="Mbps";
+										var _cur = new Number(_flow);
+
+										if(_cur>1000){
+											_cur = _cur/1000
+											unit ="Gbps";					
+										}
+										_cur = _cur.toFixed(3);		
+										
+										_tempHtml +="<tr align=\"center\"><td width=\"50%\">"+
+											"<span class= \"tdLarge\">"+_cur+"<br>"+unit+"</span><br>目前流量"+
+											"</td>"+	
+											"<td>"+
+											"<span class= \"tdLarge\">"+(_bandwidth/1000)+"<br>Gbps</span><br>最高容量"+													
+											"</td>"+
+											"</tr>";										
+																					
+										_tempHtml +="</table>";
+										_tempHtml +="</div>" ;
+									
+													
+										$("#mainContent").append(_tempHtml);	
+									}
+									
+									drawRate(_theData);
+
+								}
+											
+				
+
 		refreshTime = 1;	// 設1預設才會run
 		changeRefreshTime();
 		pageRefresh();
@@ -238,6 +301,39 @@
 			}
 		}
 		
+		
+		function drawRate(_theData){
+			for(var i=0 ; i <_theData.length;i++){
+					var theRate = _theData[i].rate;
+					var config = liquidFillGaugeDefaultSettings();
+					config.circleThickness = 0.15;
+					var _status = _theData[i].status;
+
+					if(_status!="1"){
+						config.circleColor = "red";
+						//config.textColor = "#000000";
+						config.waveTextColor = "#FFFFFF";
+						config.waveColor = "red";
+					}else{
+						config.circleColor = "#5CB85C";
+						//config.textColor = "#000000";
+						config.waveTextColor = "#FFFFFF";
+						config.waveColor = "#5CB85C";
+					}
+
+					config.textVertPosition = 0.55;
+					config.waveAnimateTime = 1000;
+					config.waveHeight = 0.05;
+					config.waveAnimate = true;
+					config.waveRise = false;
+					config.waveHeightScaling = false;
+					config.waveOffset = 0.25;
+					config.textSize = 0.9;
+					config.waveCount = 3;
+		
+				loadLiquidFillGauge("fillgauge"+_theData[i].idx, theRate,config);
+			}
+	}
 		
 
 	</script>
