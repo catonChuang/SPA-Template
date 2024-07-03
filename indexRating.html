@@ -385,16 +385,21 @@
 						$("#todayMaxMOD").html( "<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_maxRecord[0][0]))+"</span><br><span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_maxRecord[0][1]).replace("2024-", "")  + ")</span>");
 						$("#todayMaxChtVideo").html("<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_maxRecord[3][0]))+"</span><br><span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_maxRecord[3][1]).replace("2024-", "")  + ")</span>");
 					}else if(ajaxName=="max24"){
+						alert(ajaxValue);
+						alert("_MOD: "+_MOD);
 						var _MOD = ajaxValue.MOD;
 						var _CHT_VIDEO= ajaxValue.chtVideo;  
 						
 						$("#max24MOD").html( "<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_MOD[0]))+"</span><br><span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_MOD[1]).replace("2024-", "")  + ")</span>");
 						$("#max24ChtVideo").html( "<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_CHT_VIDEO[0]))+"</span><br><span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_CHT_VIDEO[1]).replace("2024-", "")  + ")</span>");
 					}else if(ajaxName=="_max"){
-						var _maxRecord = eval('(' + ajaxValue + ')');
+						var _MOD = ajaxValue.MOD;
+						var _CHT_VIDEO= ajaxValue.chtVideo; 
+
+						$("#maxMOD").html( "<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_MOD[0]))+"</span><br><span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_MOD[1]).replace("2024-", "")  + ")</span>");
+						$("#maxChtVideo").html( "<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_CHT_VIDEO[0]))+"</span><br><span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_CHT_VIDEO[1]).replace("2024-", "")  + ")</span>");						
 				
-						$("#maxMOD").html(   "<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_maxRecord[0][0]))+"</span><br> <span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_maxRecord[0][1]).replace("2024-", "")  + ")</span>");
-						$("#maxChtVideo").html("<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_maxRecord[3][0]))+"</span><br><span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_maxRecord[3][1]).replace("2024-", "")  + ")</span>");	
+						
 					}
 				}									
 			}		
