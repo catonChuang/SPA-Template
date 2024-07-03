@@ -264,8 +264,9 @@
 						$('#messageModel').modal('show');		
 					}
 				//	alert("_haveAuth"  + _haveAuth +"   " + _result);
-				}else if(_theValue.id=='pm_cdn'){	
+				}else if(_theValue.id=='restpm_cdn'){	
 					var _objCdn = _result.items[0].value;
+					alert("data: " + _objCdn);
 					settingpm_cdn(_objCdn);
 				}else{
 				
