@@ -153,6 +153,11 @@
 	var _projectId = "303";				// 奧運收視數專案編號
 	
 
+	var _MODCur = 0;		// MOD加總紀錄，會有時間差 個頻道會不一樣
+	var _isEst = false;		// 是否推估
+	var _todayMax = 0;		// 本日最高，推估模式小於本日最高時啟用
+	var _estValue = 0;
+	
 	//==============================
 	// 初始呼叫
 	//==============================
@@ -374,6 +379,22 @@
 						$("#onlineMOD").html( "<span class=\"broadmessage\">"+ commafy(ajaxValue)  + "</span>");
 					}else if(ajaxName=="hami"){
 						$("#onlineChtVideo").html( "<span class=\"broadmessage\">"+ commafy(ajaxValue)  + "</span>");
+					}else if(ajaxName=="maxToday"){
+						var _maxRecord = eval('(' + ajaxValue + ')');
+						_todayMax = _maxRecord[3][0];
+						$("#todayMaxMOD").html( "<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_maxRecord[0][0]))+"</span><br><span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_maxRecord[0][1]).replace("2024-", "")  + ")</span>");
+						$("#todayMaxChtVideo").html("<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_maxRecord[3][0]))+"</span><br><span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_maxRecord[3][1]).replace("2024-", "")  + ")</span>");
+					}else if(ajaxName=="max24"){
+						var _MOD = ajaxValue.MOD;
+						var _CHT_VIDEO= ajaxValue.chtVideo;  
+						
+						$("#max24MOD").html( "<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_MOD[0]))+"</span><br><span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_MOD[1]).replace("2024-", "")  + ")</span>");
+						$("#max24ChtVideo").html( "<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_CHT_VIDEO[0]))+"</span><br><span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_CHT_VIDEO[1]).replace("2024-", "")  + ")</span>");
+					}else if(ajaxName=="_max"){
+						var _maxRecord = eval('(' + ajaxValue + ')');
+				
+						$("#maxMOD").html(   "<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_maxRecord[0][0]))+"</span><br> <span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_maxRecord[0][1]).replace("2024-", "")  + ")</span>");
+						$("#maxChtVideo").html("<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_maxRecord[3][0]))+"</span><br><span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_maxRecord[3][1]).replace("2024-", "")  + ")</span>");	
 					}
 				}									
 			}		
