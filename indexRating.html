@@ -31,11 +31,7 @@
 						<b>MOD 收視數資訊</b>
 					</div>		
 					<div class="card-body" style="padding: 5px;">
-						<table class="table-striped" style="margin-bottom:1px; width:100% "><tbody>
-							<tr>
-								<td></td>
-								<td align="right">LIVE</td>
-							</tr>	
+						<table class="table-striped" style="margin-bottom:1px; width:100% "><tbody>							
 							<tr>
 								<td><div>線上:</div></td>
 								<td align="right"><span id="onlineMOD">--</span> </td>
@@ -61,11 +57,7 @@
 						<b>HamiVideo&nbsp;收視數資訊</b>
 					</div>		
 					<div class="card-body" style="padding: 5px;">
-					<table class="table-striped" style="margin-bottom:1px; width:100% "><tbody>		
-						<tr>
-							<td></td>
-							<td align="right">LIVE</td>
-						</tr>						
+					<table class="table-striped" style="margin-bottom:1px; width:100% "><tbody>	
 						<tr>
 							<td><div class="conTitle" >線上:</div></td>
 							<td align="right"><span id="onlineChtVideo">--</span></td>
@@ -425,7 +417,7 @@
 					}else if(ajaxName=="max24"){
 						var _MOD = _obj[i].value.MOD;
 						var _CHT_VIDEO= _obj[i].value.chtVideo;  
-						alert("_MOD: "+_MOD);
+						//alert("_MOD: "+_MOD);
 
 						$("#max24MOD").html( "<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_MOD[0]))+"</span><br><span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_MOD[1]).replace("2024-", "")  + ")</span>");
 						$("#max24ChtVideo").html( "<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_CHT_VIDEO[0]))+"</span><br><span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_CHT_VIDEO[1]).replace("2024-", "")  + ")</span>");
@@ -448,7 +440,8 @@
 			var _subObj1 = _obj.channel1;
 			var _subObj2 = _obj.channel2;
 			var _subObj3 = _obj.channel3;
-			
+						alert("_subObj1: "+_subObj1);
+
 			$("#channel1num").html( "<span class=\"broadmessage\">"+ commafy(_subObj1.data[1])  + "</span>");
 			$("#channel2num").html( "<span class=\"broadmessage\">"+ commafy(_subObj2.data[1])  + "</span>");
 			$("#channel3num").html( "<span class=\"broadmessage\">"+ commafy(_subObj3.data[1])  + "</span>");
