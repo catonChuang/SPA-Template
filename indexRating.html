@@ -12,38 +12,90 @@
 	<script src="bootstrapV4/js/bootstrap.min.js"></script>	
 	<link href="bootstrapV4/css/bootstrap.min.css" rel="stylesheet">  
 	<link rel="stylesheet" href="css/bootstrap-icons/bootstrap-icons.css">	
+	<script src="xss-filters.min.js"></script>
 	<link href="argusApp.css" rel="stylesheet">  
 	<script src="js/argus.app.js"></script>
-	<script src="scripts/utilities/browserStorage/index.js"></script>	
   <style type="text/css">
 		
   </style>
 </head>
 <body>
 	<div class="I-Body">
-		<div class="row" style="padding-right: 10px;padding-left: 10px;" >
-			<div class="col-sm-8">
-				<div onclick="goPortal()"><i class="bi bi-chevron-left"></i> <b style="font-size: 20px;">巴黎奧運網路監視</b></div>
-			</div>
-			<div class="col-sm-4">
-				<table class="item-right">
-							<tr><td>
-							<div id="qrytime" style = "padding-top:5px"><b>呈現時間:</b>&nbsp;<span id="refreshTime">讀取中...</span></div>		
-							</td></tr>
-					</table>	
-			</div>	
-		</div>
 		<div class="row">
 			<div class="col-sm-12">	
+				<div onclick="goPortal()" style="font-size: 24px;"><i class="bi bi-chevron-left"></i> <b >巴黎奧運網路監視</b></div>
+					<div id="qrytime" class="item-right"><b>呈現時間:</b>&nbsp;<span id="refreshTime">讀取中...</span></div>
+				<br>				
+				<div class="card">	
+					<div class="card-header bgBlue">
+						<b>MOD 收視數資訊</b>
+					</div>		
+					<div class="card-body" style="padding: 5px;">
+						<table class="table-striped" style="margin-bottom:1px; width:100% "><tbody>
+							<tr>
+								<td></td>
+								<td align="right">LIVE</td>
+							</tr>	
+							<tr>
+								<td><div>線上:</div></td>
+								<td align="right"><span id="onlineMOD">--</span> </td>
+							</tr>
+							<tr>
+								<td><div class="conTitle" >本日線上最高:</div></td>
+								<td align="right"><span id="todayMaxMOD">--</span></td>
+							</tr>
+							<tr>
+								<td><div class="conTitle" >24小時內線上最高:</div></td>
+								<td align="right"><span id="max24MOD">--</span></td>
+							</tr>
+							<tr>
+								<td><div class="conTitle" >監視期間最高:</div></td>
+								<td align="right"><span id="maxMOD">--</span></td>
+							</tr>
+						</tbody></table>	
+					</div>	
+				</div>	
 				
 				<div class="card">	
 					<div class="card-header bgBlue">
-						<b>收視指標</b>
+						<b>HamiVideo&nbsp;收視數資訊</b>
+					</div>		
+					<div class="card-body" style="padding: 5px;">
+					<table class="table-striped" style="margin-bottom:1px; width:100% "><tbody>		
+						<tr>
+							<td></td>
+							<td align="right">LIVE</td>
+						</tr>						
+						<tr>
+							<td><div class="conTitle" >線上:</div></td>
+							<td align="right"><span id="onlineChtVideo">--</span></td>
+						</tr>
+						<tr>
+							<td><div class="conTitle" >本日線上最高:</div></td>
+							<td align="right"><span id="todayMaxChtVideo">--</span></td>
+						</tr>
+						<tr>
+							<td><div class="conTitle" >24小時內線上最高:</div></td>
+							<td align="right"><span id="max24ChtVideo">--</span></td>
+						</tr>
+						<tr>
+							<td><div class="conTitle" >監視期間最高:</div></td>
+							<td align="right"><span id="maxChtVideo">--</span></td>
+						</tr>
+						</tbody></table>	
+					</div>	
+				</div>	
+
+				<div class="card">	
+					<div class="card-header bgBlue">
+						<b>MOD頻道資訊</b>
 					</div>		
 					<div class="card-body" style="padding: 5px;">
 						
 					</div>	
 				</div>	
+				
+				
 			</div>	
 		</div>
 
@@ -98,6 +150,7 @@
 	
 	var _empID="";
 	var _haveAuth = "false";
+	var _projectId = "303";				// 奧運收視數專案編號
 	
 
 	//==============================
@@ -122,8 +175,7 @@
 	function pageRefresh(){
 		refreshTime -= 1;	
 		if (refreshTime==0){
-				refreshContent();
-			
+			refreshContent();			
 		}else{			
 		}
 		cleartime = setTimeout("pageRefresh()",1000);
@@ -134,43 +186,27 @@
 	//==============================
 	function refreshContent(){
 		changeRefreshTime();
-		// TODO 
+		
+		if(_haveAuth=="true"){
+			getRest("pm_ratings"); 
+			
+		}
 		
 	}
 	
-	//		//argus-api/argusProject/getMetric.jsp?projectId=X&category=pm_declaration
-
-		function appGetAuth(){
-            var myObj = { "cmd": "getMetric", "value":{"projectId": "333","category":"pm_declaration"}};
-           alert( callAppCmd(JSON.stringify(myObj)));
-        }
-		
-
-		
-		//SPA API 教學 https://dev.azure.com/cht-tl-poc/_git/SPA-Template?path=%2Fdocs%2Fos-level-comm-spec.md&_a=preview
 	
-		function getRestNew(){
+	
+	
+	
+		//=======================================
+		//SPA API 教學
+		//=======================================		
+		//https://dev.azure.com/cht-tl-poc/_git/SPA-Template?path=%2Fdocs%2Fos-level-comm-spec.md&_a=preview
+	
 		
-		//xhr.open("GET", "https://apis-qa.b2e.cht.com.tw/argus-api/argusProject/getMetric.jsp?"+data);
-		//xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-		//xhr.setRequestHeader("x-api-key", "rQM3IXZkM62lA7E05LMiohRDbCkhiGV4GUvQRpvGIA72J1sw");
-		//xhr.setRequestHeader("Authorization", "Bearer "+apim_token);
-		//xhr.send();
-		//xhr.send(data);
-		
-			//var myObj = { "cmd": "rest", "value":{"id": "rest1", "restConfig": {"name":"getMetric","relativePath":'/argus-api/argusProject/getMetric.jsp',"method":"GET", "body":{"projectId":"55","category":"pm_declaration"}}}};
-			
-			
-			var myObj = { "cmd": "rest","value":{"id": "restT1","restConfig":{"name":"getMetric","queryParams":{"projectId":"55","category":"pm_declaration"},
-			"relativePath":"argusProject/getMetric.jsp","method":"get"}}};
-			
-			
-			//var myObj = { "cmd": "rest", "value":{"id": "rest1", "restConfig": {"name":"apis.spa.qa.ex","method":"GET"}}};
-			//var myObj = { "cmd": "rest", "value":{"id": "rest1", "restConfig": {"name":"photo","relativePath":'/831765',"method":"GET"}}};
-			var str = callAppCmd(JSON.stringify(myObj));
-			//alert(str);
-
-		}
+		//=======================================
+		//callAppCmd 呼叫API
+		//=======================================	
 		function callAppCmd (params) {			
 			if (window.webkit != undefined) {
 				// for iOS
@@ -182,8 +218,11 @@
 			  }
 		 }
 		 
+		//=======================================
+		//appCmdCallback 呼叫API
+		//=======================================	
 		 function appCmdCallback(str){
-			alert("appCmdCallback: " + str);
+			//alert("appCmdCallback: " + str);
 			var obj = JSON.parse(str);
 			
 			var _theValue = obj.value;
@@ -192,39 +231,66 @@
 				_empID =_theValue.userInfo.empID;
 				checkAuth();
 			}else if(obj.cmd=='rest'){
-				if(_theValue.id=='restCheckAuth'){
-				
-					var _result = _theValue.data;
+				var _result = _theValue.data;
+				//=====================
+				// 權限判斷
+				//=====================
+				if(_theValue.id=='restCheckAuth'){				
 					_haveAuth =  _result.items[0].value;
-					
-					if(_haveAuth=="false"){
-							$('#messageModel').modal('show');		
+					if(_haveAuth=="true"){
+						refreshContent();
+					}else{
+						$('#messageModel').modal('show');		
 					}
 				//	alert("_haveAuth"  + _haveAuth +"   " + _result);
+				}else if(_theValue.id=='restpm_ratings'){	
+					settingpm_ratings(_result.items);
+				}else{
+				
 				}
 			}else{
 			
 			}		
 		}
+		
+		
+		
+		
+		
 
+		//=======================================
+		//回首頁
+		//=======================================
 		function goPortal(){
 			var myObj = { "cmd": "goPortal", "value": null};
 			var str = callAppCmd(JSON.stringify(myObj));
 		}
 	
-		
-		function test1(){
-			location.href = 'spaTest.html';
-		}
-		
-		
-		
+	
+		//=======================================
+		//argus api-檢查權限
+		//=======================================
 		function checkAuth(){
 			var _authCheckStr = "auth_"+_empID;
+			//https://argus.qa.cht.com.tw/argus_project_api/V1/argusProject/?projectId=0&category=auth_
 			var myObj = { "cmd": "rest","value":{"id": "restCheckAuth","restConfig":{"name":"getMetric","queryParams":{"projectId":"0","category":_authCheckStr},"relativePath":"argusProject/getMetric.jsp","method":"get"}}};
 			var str = callAppCmd(JSON.stringify(myObj));
-		
 		}
+		
+		//=======================================
+		//argus api PM 參數
+		//=======================================
+		function getRest(_category){
+			var _id = "rest"+_category;
+			var myObj = { "cmd": "rest","value":{"id": _id,"restConfig":{"name":"getMetric","queryParams":{"projectId":_projectId,"category":_category},
+			"relativePath":"argusProject/getMetric.jsp","method":"get"}}};
+			
+			var str = callAppCmd(JSON.stringify(myObj));
+			//alert(str);
+		}
+		
+		
+		//https://argus.qa.cht.com.tw/argus_project_api/V1/argusProject/?projectId=55&category=pm_declaration
 		
 		
 		function goPage(pIdx){
@@ -239,8 +305,83 @@
 			}
 		}
 		
-		
+		function changeImgColor(data){
+		//	alert("data.length: " + data.length);
 
+			if(data.length>0){									
+				for(var i = 0 ; i < data.length; i ++){							
+					var ajaxName = xssFilters.inHTMLData(data[i].name);			
+					var ajaxStatus = xssFilters.inHTMLData(data[i].value);		
+					var _imgName = "00.png";	  // gray 
+					if(ajaxStatus=="1"){
+						_imgName = "01.png";
+					}else if(ajaxStatus=="2"){
+						_imgName = "02.png";
+					}else if(ajaxStatus=="3"){
+						_imgName = "03.png";
+					}else if(ajaxStatus=="4"){
+						_imgName = "04.png";
+					}else if(ajaxStatus=="5"){
+						_imgName = "05.png";
+					}
+				$("#img"+ajaxName ).attr("src","img/light2/"+_imgName);	
+				}									
+			}						
+	}		
+	
+	
+	//==============================
+	// 數字格式化
+	//==============================
+	function commafy(num){ 
+		if(num < 1){ 
+			if(num ==0 )
+				return 0;
+			else{
+				var _num = num.toFixed(1);
+				return _num;
+			}
+		}
+		else{		
+				num = num+""; 
+				var re=/(-?\d+)(\d{3})/ ;
+				while(re.test(num)){ 
+					num=num.replace(re,"$1,$2") ;
+				} 
+				return num; 
+		}
+	}
+	
+		//=======================================
+		//
+		//=======================================
+		function openNext(type,target){
+			//location.href = 'indexService.html';
+		}
+	
+	
+		//=======================================
+		// CDN 指標
+		//=======================================
+		function settingpm_ratings(_obj){
+			
+			if(_obj.length>0){									
+				for(var i = 0 ; i < _obj.length; i ++){							
+					var ajaxName = xssFilters.inHTMLData(_obj[i].name);			
+					var ajaxValue = xssFilters.inHTMLData(_obj[i].value);	
+
+					if(ajaxName=="mod"){
+						$("#onlineMOD").html( "<span class=\"broadmessage\">"+ commafy(ajaxValue)  + "</span>");
+					}else if(ajaxName=="hami"){
+						$("#onlineChtVideo").html( "<span class=\"broadmessage\">"+ commafy(ajaxValue)  + "</span>");
+					}
+				}									
+			}		
+							
+		}
+	
+	
+		
 	</script>
 	
  <div class="modal hide fade" data-keyboard="false" data-backdrop="static" id="messageModel" role="dialog">
