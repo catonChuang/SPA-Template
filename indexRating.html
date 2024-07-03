@@ -75,7 +75,7 @@
 							<td align="right"><span id="todayMaxChtVideo">--</span></td>
 						</tr>
 						<tr>
-							<td><div class="conTitle" >24小時內線上最高:</div></td>
+							<td><div class="conTitle" >24小時內線上最高*:</div></td>
 							<td align="right"><span id="max24ChtVideo">--</span></td>
 						</tr>
 						<tr>
@@ -386,10 +386,10 @@
 						$("#todayMaxChtVideo").html("<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_maxRecord[3][0]))+"</span><br><span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_maxRecord[3][1]).replace("2024-", "")  + ")</span>");
 					}else if(ajaxName=="max24"){
 						alert(ajaxValue);
-						alert("_MOD: "+_MOD);
 						var _MOD = ajaxValue.MOD;
 						var _CHT_VIDEO= ajaxValue.chtVideo;  
-						
+						alert("_MOD: "+_MOD);
+
 						$("#max24MOD").html( "<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_MOD[0]))+"</span><br><span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_MOD[1]).replace("2024-", "")  + ")</span>");
 						$("#max24ChtVideo").html( "<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_CHT_VIDEO[0]))+"</span><br><span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_CHT_VIDEO[1]).replace("2024-", "")  + ")</span>");
 					}else if(ajaxName=="_max"){
@@ -397,9 +397,7 @@
 						var _CHT_VIDEO= ajaxValue.chtVideo; 
 
 						$("#maxMOD").html( "<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_MOD[0]))+"</span><br><span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_MOD[1]).replace("2024-", "")  + ")</span>");
-						$("#maxChtVideo").html( "<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_CHT_VIDEO[0]))+"</span><br><span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_CHT_VIDEO[1]).replace("2024-", "")  + ")</span>");						
-				
-						
+						$("#maxChtVideo").html( "<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_CHT_VIDEO[0]))+"</span><br><span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_CHT_VIDEO[1]).replace("2024-", "")  + ")</span>");		
 					}
 				}									
 			}		
