@@ -412,8 +412,8 @@
 					}else if(ajaxName=="maxToday"){
 						var _maxRecord = eval('(' + _obj[i].value + ')');
 						_todayMax = _maxRecord[3][0];
-						$("#todayMaxMOD").html( "<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_maxRecord[0][0]))+"</span>);
-						$("#todayMaxChtVideo").html("<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_maxRecord[3][0]))+"</span>);
+						$("#todayMaxMOD").html( "<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_maxRecord[0][0]))+"</span>");
+						$("#todayMaxChtVideo").html("<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_maxRecord[3][0]))+"</span>");
 												
 						$("#timetodayMaxMOD").html( "<span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_maxRecord[0][1]).replace("2024-", "")  + ")</span>");
 						$("#timetodayMaxChtVideo").html("<span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_maxRecord[3][1]).replace("2024-", "")  + ")</span>");
