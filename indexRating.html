@@ -33,19 +33,19 @@
 					<div class="card-body" style="padding: 5px;">
 						<table class="table-striped" style="margin-bottom:1px; width:100% "><tbody>							
 							<tr>
-								<td><div>線上:</div></td>
+								<td><div>線上</div></td>
 								<td align="right"><span id="onlineMOD">--</span> </td>
 							</tr>
 							<tr>
-								<td><div class="conTitle" >本日線上最高:</div></td>
+								<td><div class="conTitle" >本日線上最高<span id="timetodayMaxMOD"></span></div></td>
 								<td align="right"><span id="todayMaxMOD">--</span></td>
 							</tr>
 							<tr>
-								<td><div class="conTitle" >24小時內線上最高:</div></td>
+								<td><div class="conTitle" >24小時內線上最高<span id="timemax24MOD"></span></div></td>
 								<td align="right"><span id="max24MOD">--</span></td>
 							</tr>
 							<tr>
-								<td><div class="conTitle" >監視期間最高:</div></td>
+								<td><div class="conTitle" >監視期間最高<span id="timemaxMOD"></span></div></td>
 								<td align="right"><span id="maxMOD">--</span></td>
 							</tr>
 						</tbody></table>	
@@ -59,19 +59,19 @@
 					<div class="card-body" style="padding: 5px;">
 					<table class="table-striped" style="margin-bottom:1px; width:100% "><tbody>	
 						<tr>
-							<td><div class="conTitle" >線上:</div></td>
+							<td><div class="conTitle" >線上</div></td>
 							<td align="right"><span id="onlineChtVideo">--</span></td>
 						</tr>
 						<tr>
-							<td><div class="conTitle" >本日線上最高:</div></td>
+							<td><div class="conTitle" >本日線上最高<span id="timetodayMaxChtVideo"></span></div></td>
 							<td align="right"><span id="todayMaxChtVideo">--</span></td>
 						</tr>
 						<tr>
-							<td><div class="conTitle" >24小時內線上最高:</div></td>
+							<td><div class="conTitle" >24小時內線上最高<span id="timemax24ChtVideo"></span></div></td>
 							<td align="right"><span id="max24ChtVideo">--</span></td>
 						</tr>
 						<tr>
-							<td><div class="conTitle" >監視期間最高:</div></td>
+							<td><div class="conTitle" >監視期間最高<span id="timemaxChtVideo"></span></div></td>
 							<td align="right"><span id="maxChtVideo">--</span></td>
 						</tr>
 						</tbody></table>	
@@ -412,21 +412,31 @@
 					}else if(ajaxName=="maxToday"){
 						var _maxRecord = eval('(' + _obj[i].value + ')');
 						_todayMax = _maxRecord[3][0];
-						$("#todayMaxMOD").html( "<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_maxRecord[0][0]))+"</span><br><span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_maxRecord[0][1]).replace("2024-", "")  + ")</span>");
-						$("#todayMaxChtVideo").html("<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_maxRecord[3][0]))+"</span><br><span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_maxRecord[3][1]).replace("2024-", "")  + ")</span>");
+						$("#todayMaxMOD").html( "<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_maxRecord[0][0]))+"</span>);
+						$("#todayMaxChtVideo").html("<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_maxRecord[3][0]))+"</span>);
+												
+						$("#timetodayMaxMOD").html( "<span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_maxRecord[0][1]).replace("2024-", "")  + ")</span>");
+						$("#timetodayMaxChtVideo").html("<span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_maxRecord[3][1]).replace("2024-", "")  + ")</span>");
 					}else if(ajaxName=="max24"){
 						var _MOD = _obj[i].value.MOD;
 						var _CHT_VIDEO= _obj[i].value.chtVideo;  
 						//alert("_MOD: "+_MOD);
 
-						$("#max24MOD").html( "<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_MOD[0]))+"</span><br><span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_MOD[1]).replace("2024-", "")  + ")</span>");
-						$("#max24ChtVideo").html( "<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_CHT_VIDEO[0]))+"</span><br><span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_CHT_VIDEO[1]).replace("2024-", "")  + ")</span>");
+						$("#max24MOD").html( "<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_MOD[0]))+"</span>");
+						$("#max24ChtVideo").html( "<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_CHT_VIDEO[0]))+"</span>");						
+						
+						$("#timemax24MOD").html( "<span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_MOD[1]).replace("2024-", "")  + ")</span>");
+						$("#timemax24ChtVideo").html( "<span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_CHT_VIDEO[1]).replace("2024-", "")  + ")</span>");
+						
 					}else if(ajaxName=="_max"){
 						var _MOD = _obj[i].value.MOD;
 						var _CHT_VIDEO= _obj[i].value.chtVideo; 
 
-						$("#maxMOD").html( "<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_MOD[0]))+"</span><br><span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_MOD[1]).replace("2024-", "")  + ")</span>");
-						$("#maxChtVideo").html( "<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_CHT_VIDEO[0]))+"</span><br><span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_CHT_VIDEO[1]).replace("2024-", "")  + ")</span>");		
+						$("#maxMOD").html( "<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_MOD[0]))+"</span>");
+						$("#maxChtVideo").html( "<span class=\"broadmessage\">"+commafy(xssFilters.inHTMLData(_CHT_VIDEO[0]))+"</span>");	
+
+						$("#timemaxMOD").html( "<span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_MOD[1]).replace("2024-", "")  + ")</span>");
+						$("#timemaxChtVideo").html( "<span class=\"broadsubmessage\">("+ xssFilters.inHTMLData(_CHT_VIDEO[1]).replace("2024-", "")  + ")</span>");					
 					}
 				}									
 			}		
@@ -442,9 +452,9 @@
 			var _subObj3 = _obj.channel3;
 			//alert("_subObj1_data: "+_subObj1.data);
 
-			$("#channel1num").html( "<span class=\"broadmessage\">"+ commafy(xssFilters.inHTMLData(_subObj1.data[1]))  + "</span>");
-			$("#channel2num").html( "<span class=\"broadmessage\">"+ commafy(xssFilters.inHTMLData(_subObj2.data[1]))  + "</span>");
-			$("#channel3num").html( "<span class=\"broadmessage\">"+ commafy(xssFilters.inHTMLData(_subObj3.data[1]))  + "</span>");
+			$("#channel1num").html( "<span class=\"broadmessage\">"+ commafy(xssFilters.inHTMLData(_subObj1.data[0][1]))  + "</span>");
+			$("#channel2num").html( "<span class=\"broadmessage\">"+ commafy(xssFilters.inHTMLData(_subObj2.data[0][1]))  + "</span>");
+			$("#channel3num").html( "<span class=\"broadmessage\">"+ commafy(xssFilters.inHTMLData(_subObj3.data[0][1]))  + "</span>");
 		}
 	
 	
