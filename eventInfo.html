@@ -27,7 +27,7 @@
 	<div class="I-Body">
 		<div class="row">
 			<div class="col-sm-12">	
-				<div onclick="goPortal()" style="font-size: 24px;"><i class="bi bi-chevron-left"></i> <b >巴黎奧運網路監視</b></div>
+				<div onclick="goPre()" style="font-size: 24px;"><i class="bi bi-chevron-left"></i> <b >巴黎奧運網路監視</b></div>
 					<div id="qrytime" class="item-right"><b>呈現時間:</b>&nbsp;<span id="refreshTime">讀取中...</span></div>
 				<br>		
 				<div class="card">	
@@ -216,10 +216,8 @@
 				//	alert("_haveAuth"  + _haveAuth +"   " + _result);
 				}else{
 					// 事件呈現
-				}
-			}else{
-				var events= _result.items[0].value;
-				if(events.length >0){						
+					var events= _result.items[0].value;
+					if(events.length >0){						
 						$('#noEvent').hide();
 						$('#jqEventTable').show();
 						showAtTable(events);	
@@ -227,6 +225,9 @@
 						$('#jqEventTable').hide();
 						$('#noEvent').show();
 					}				
+					
+				}
+			}else{
 				
 			}		
 		}
@@ -235,11 +236,12 @@
 		
 
 		//=======================================
-		//回首頁
+		//回上一頁
 		//=======================================
-		function goPortal(){
-			var myObj = { "cmd": "goPortal", "value": null};
-			var str = callAppCmd(JSON.stringify(myObj));
+		function goPre(){
+			//var myObj = { "cmd": "goPortal", "value": null};
+			//var str = callAppCmd(JSON.stringify(myObj));
+			history.go(-1);
 		}
 	
 	
