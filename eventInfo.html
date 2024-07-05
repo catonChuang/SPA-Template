@@ -239,7 +239,8 @@
 				}else{
 					// 事件呈現
 					var events= _result.items[0].value;
-					if(events.length >0){						
+					if(events.length >0){			
+						alert(events);
 						$('#noEvent').hide();
 						$('#jqEventTable').show();
 						showAtTable(events);	
@@ -334,7 +335,7 @@
 		}
 	
 		function customDes(cellvalue, options, rowObject){					 
-			var _des =rowObject.elementID+"發生事件<br><b>事件說明:</b><br>"+rowObject.description;
+			var _des =rowObject.description;
 			
 			return _des ;
 		}
@@ -347,7 +348,7 @@
 			
 				var theColNames = ["事件","處理狀態"];
 				var theColModel = [
-						{name:'elementID',index:'elementID',width : 40,sorttype:'string' , align:'left',formatter:customDes},
+						{name:'description',index:'description',width : 40,sorttype:'string' , align:'left',formatter:customDes},
 						{name:'description',index:'description',width : 20,sorttype:'string', align:'center' ,formatter:customStatus }
 					];				
 			
@@ -359,9 +360,9 @@
 	        	//$("#dmLoading").hide();	
 				if(isReLoad){
 						//alert(isReLoad+" reload");
-	    				drawjqTableReload($("#jqDDosTable"),pageDiv,rData);					
+	    				drawjqTableReload($("#jqEventTable"),pageDiv,rData);					
 	    		}else{
-		    		$("#jqDDosTable").jqGrid({
+		    		$("#jqEventTable").jqGrid({
 						data: rData, 
 						datatype: "local",
 						height: "auto",	
