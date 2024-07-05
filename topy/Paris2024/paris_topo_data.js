@@ -8,7 +8,7 @@ var topo={
 {"name":"愛國","x":340,"y":330,"size":"18px","color":"#fff"},
 {"name":"新加坡","x":130,"y":260,"size":"17px"},
 {"name":"東京","x":250,"y":260,"size":"17px"},
-{"name":"巴黎OBS","x":95,"y":195,"size":"18px"},
+{"name":"巴黎OBS","x":45,"y":115,"size":"18px"},
 {"name":"重南攝影棚","x":690,"y":465,"size":"18px"},
 {"name":"漢口攝影棚","x":335,"y":465,"size":"18px"},
 {"name":"270M","x":430,"y":393,"size":"13px"},
@@ -22,10 +22,10 @@ var topo={
 {"name":"1G/600M *2","x":435,"y":347,"size":"13px"},
 {"name":"750M","x":270,"y":290,"size":"13px"},
 {"name":"750M","x":250,"y":315,"size":"13px"},
-{"name":"HiNet","x":102,"y":369,"size":"16px","color":"#fff"},
-{"name":"Internet","x":94,"y":296,"size":"16px","color":"#fff"},
-{"name":"陽明山","x":225,"y":110,"size":"18px"},
-{"name":"服務大樓","x":375,"y":65,"size":"18px"},
+{"name":"HiNet","x":26,"y":242,"size":"13px","color":"#fff"},
+{"name":"Internet","x":22,"y":182,"size":"13px","color":"#fff"},
+{"name":"陽明山","x":170,"y":100,"size":"16px"},
+{"name":"服務大樓","x":255,"y":100,"size":"16px"},
 {"name":"270M*2","x":309,"y":240,"size":"13px"},
 {"name":"270M*4","x":430,"y":200,"size":"13px"}
 ],
@@ -325,7 +325,7 @@ var topo={
 	"xid": "愛國HK1","linedata":[[190,280],[190,320],[320,320]],"width": "6.3px"},		
 
 
-{ "name": "AliCloud-Internet","xid":"link11","linedata":[[120,360],[120,300]],"width": "5px","id":"AliIntLink_", "color":"black"}
+{ "name": "AliCloud-Internet","xid":"link11","linedata":[[40,180],[40,240]],"width": "5px","id":"AliIntLink_", "color":"black"}
 , {
 	"name": "仁愛服務1",
 	"site": "衛星服務大樓十樓",
@@ -428,9 +428,9 @@ var topo={
 }
 ],
 "links_dash":[
-{ "name": "PARIS","xid":"link11ss","linedata":[[210,30],[130,55],],"width": "8px"},
-{ "name": "服務大樓","xid":"link11ss","linedata":[[240,30],[280,80],],"width": "8px"},
-{ "name": "陽明山","xid":"link11ss","linedata":[[250,30],[390,80],],"width": "8px"},
+{ "name": "PARIS","xid":"link11ss","linedata":[[150,30],[110,55],],"width": "8px"},
+{ "name": "服務大樓","xid":"link11ss","linedata":[[185,25],[250,55],],"width": "8px"},
+{ "name": "陽明山","xid":"link11ss","linedata":[[170,30],[180,50],],"width": "8px"},
 ],
 "circles":[
 {"name":"MOD平台","id":"id_MOD_PLATFORM","cx":588,"cy":35,"r":12,"url":"/modDashBoard/MOD_DashBoardII.jsp?isWide=true","c_type":"MOD"},
