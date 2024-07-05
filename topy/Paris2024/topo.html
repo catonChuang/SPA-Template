@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,8 +13,11 @@
 <link href="../../bootstrapV4/css/bootstrap.min.css" rel="stylesheet" media="screen">
 <script src="../../bootstrapV4/js/bootstrap.min.js"></script>
 <script src="paris_topo_data.js"></script>
-<style type="text/css">
+<link rel="stylesheet" type="text/css" href="fonts/fonts.css" />	
+
+   <style type="text/css">
  
+
 mytt.tooltipAlarm {
 color:red;	
     position: absolute;			
@@ -158,7 +160,80 @@ var link_conn_id_map={};
     .attr("class", "tooltip2")
     				
     .style("opacity", 0);
+
+
+
+svg.append('image')        
+.attr('x', 210)
+.attr('y',0)
+
+.attr('width', 40)
+.attr('height', 40)
+.attr('xlink:href', 'sat_up.png')
+;
+
 /*
+svg.append('image')        
+.attr('x', 425)
+.attr('y', 132)
+.attr('width',25)
+.attr('height',25)
+.attr('xlink:href', 'sat.png')
+; //SAT
+*/
+/*
+svg.append('image')        
+.attr('x', 700)
+.attr('y', 140)
+
+.attr('width', 270)
+.attr('height', 164)
+.attr('xlink:href', 'CloudW2.png')
+; //hami cloud
+*/
+svg.append('image')        
+.attr('x', 690)
+.attr('y', 90)
+.attr('width', 270)
+.attr('height',260)
+.attr('xlink:href', 'CloudW2C2.png')
+;
+
+
+
+
+svg.append('image')        
+.attr('x', 770)
+.attr('y', 200)
+.attr('width', 122)
+.attr('height', 53)
+.attr('xlink:href', 'HamiVideo2W.png')
+; 
+
+ 
+               
+/*
+svg.append('image')        
+.attr('x', 20)
+.attr('y', 85)
+.attr('width', 245)
+.attr('height', 245)
+.attr('xlink:href', 'CloudW2.png')
+; //ali cloud
+
+*/
+svg.append('image')        
+.attr('x', 20)
+.attr('y', 85)
+.attr('width', 245)
+.attr('height', 245)
+.attr('xlink:href', 'CloudW2C2.png')
+; //ali cloud
+
+
+
+
+
 svg.append('image')        
 .attr('x', 73)
 .attr('y', 55)
@@ -166,15 +241,32 @@ svg.append('image')
 .attr('height',120)
 .attr('xlink:href', 'paris2024logo.png')
 ; //HZ
-*/
+
+svg.append('image')        
+.attr('x', 255)
+.attr('y', 440)
+.attr('width', 68)
+.attr('height', 27)
+.attr('xlink:href', 'elta_tv_logo.png')
+; 
+
+
+
+svg.append('image')        
+.attr('x', 447)
+.attr('y', -45)
+.attr('width', 270)
+.attr('height',225)
+.attr('xlink:href', 'CloudW2C2.png')
+;
 
 
 $(window).load(function () {
-//conn_id_Mapping(topo.links);
+conn_id_Mapping(topo.links);
 //myIV=setTimeout(circular, 500);
-//circular();
-//linkGREEN("id_AliIntLink");
-//linkGREEN("id_ParisAliLink");
+circular();
+linkGREEN("id_AliIntLink");
+linkGREEN("id_ParisAliLink");
 });
 
 
@@ -195,8 +287,189 @@ if(links[j].conn_id){
  var line = d3.line();
 
 
+ path = svg.selectAll(".path")
+.data(topo.links)
+.enter().append("path")
+.attr("d", function(d) { return line(d.linedata);})
+   .attr("stroke", "#ddd")
+    .attr("stroke-width",function(d) { return (d.width);} )
+    .attr("id",function(d) { return ("id_"+d.id);} )   
+    .attr("class","links allobj") 
+    .attr("fill", "none")
+                .on("mouseover", function(d) {		
+      var myContact="";
+              if(d.contact)
+            myContact=d.contact;          
+ if(link_contact_map["id_"+d.id])
+myContact =link_contact_map["id_"+d.id];   
+ 
+myContact=myContact.replaceAll("\\","<BR/>");         
+var myRemark="NA";
+if(d.remark) myRemark=d.remark; 
+
+ if(link_remark_map["id_"+d.id])
+myRemark =link_remark_map["id_"+d.id];                     
+            mytt.transition()		
+                .duration(200)		
+                .style("opacity", .9)
+                .attr("class",link_as_map["id_"+d.id]);
+                
+            mytt.html(
+            '<DIV class="ROW"> <div class="card CardT"><div class="card-header CardT">'+
+'<h2 class="card-title bg-white">監視設備</h2>'+
+            "●監視設備名稱："+d.sysname+"<BR/>"+
+            "●專線編號："+d.circuit+"<BR/>"+
+            link_status_map["id_"+d.id] +"●"+myRemark+"<BR/>●"+(myContact).replace(/\\n/g,)+"</div></div></div>")
+                .style("left",function(d){
+                //console.log(d3.event.pageX+":"+d3.event.pageY);
+                if(d3.event.pageX<510) return "520px"; else return "20px";
+                } )	
+                .style("top", function(d){
+               if(d3.event.pageX>520 && d3.event.pageX <620 && d3.event.pageY>150 && d3.event.pageY <190 ) //for 4條MOD
+               return "200px";
+		else               
+               return "20px";
+                });	
+            })					
+        .on("mouseout", function(d) {		
+            mytt.transition()		
+                .duration(500)		
+                .style("opacity", 0);	
+        })
+;
+
+ path = svg.selectAll(".path")
+.data(topo.links_dash)
+.enter().append("path")
+.attr("d", function(d) { return line(d.linedata);})
+   .attr("stroke", "#3198FF")
+    .attr("stroke-width",function(d) { return (d.width);} )
+    .attr("id",function(d) { return ("id_"+d.id);} )   
+    .attr("class","links allobj") 
+    .attr("fill", "none")
+.style("stroke-dasharray",("3,5"))
+;
 
 
+///蓋住線
+svg.append('image')        
+.attr('x', 300)
+.attr('y', 250)
+.attr('width',105)
+.attr('height',105)
+.attr('xlink:href', 'b_bld3.png')
+; //台北愛國
+    svg.append('svg:image')
+        .attr('x', 485)
+.attr('y', 180)
+.attr('width', 170)
+    .attr('height', 135)
+    .attr('xlink:href', 'center41.png')
+    .attr("id", "XX")
+    ; //仁愛
+svg.append('image')        
+.attr('x', 350)
+.attr('y', 370)
+.attr('width', 75)
+.attr('height',68)
+.attr('xlink:href', 'b_bld2.png')
+; //漢口
+
+ svg.append('image')        
+.attr('x', 700)
+.attr('y', 370)
+.attr('width',75 )
+.attr('height',75)
+.attr('xlink:href', 'b_bld3.png')
+; //重南
+
+svg.append('image')        
+.attr('x', 370)
+.attr('y', 65)
+.attr('width',75 )
+.attr('height',75)
+.attr('xlink:href', 'b_bld3.png')
+; //服務大樓
+svg.append('image')        
+.attr('x', 278)
+.attr('y', 75)
+.attr('width',55 )
+.attr('height',55)
+.attr('xlink:href', 'sat.png')
+; //陽明山
+svg.append('image')        
+.attr('x', 211)
+.attr('y', 235)
+.attr('xO', 11)
+.attr('yO', 300)
+.attr('width', 40)
+.attr('height',50)
+.attr('xlink:href', 'b_bld4.png')
+; //TYO
+
+svg.append('image')        
+.attr('x', 171)
+.attr('y', 235)
+.attr('xO', 58)
+.attr('yO', 300)
+.attr('width', 40)
+.attr('height',50)
+.attr('xlink:href', 'b_bld4.png')
+; //SIN
+
+
+svg.append('image')        
+.attr('x', 75)
+.attr('y', 200)
+.attr('width', 110)
+.attr('height',40)
+.attr('xlink:href', 'alicloud2.png')
+; //阿里雲
+
+svg.append('image')        
+.attr('x', 77)
+.attr('y', 320)
+.attr('width', 90)
+.attr('height', 80)
+.attr('xlink:href', 'skyCloud.png')
+; //Hinet cloud
+
+svg.append('image')        
+.attr('x', 77)
+.attr('y', 245)
+.attr('width', 90)
+.attr('height', 80)
+.attr('xlink:href', 'skyCloud.png')
+; //internet cloud
+/*
+svg.append('image')        
+.attr('x', 460)
+.attr('y', -10)
+.attr('width', 270)
+.attr('height', 164)
+.attr('xlink:href', 'CloudW2.png')
+;
+*/
+
+
+ svg.append('image')        
+.attr('x', 505)
+.attr('y', 55)
+.attr('width', 153)
+.attr('height', 52)
+.attr('xlink:href', 'ModW.png')
+; 
+  for(i=0;i<topo.CapText.length;i++){
+  var mytext=topo.CapText[i];
+  svg.append("text")
+            .attr("x", mytext.x)
+            .attr("y", mytext.y)            
+            .style("font-family",function(d) { if(mytext.fonts) return mytext.fonts; else return "Paris2024";})
+            .style("font-size", mytext.size)
+            .style('font-weight', 600)
+            .style("fill",function(d) { if(mytext.color) return mytext.color; else return "#065a7f";})
+            .text(mytext.name);
+}
 	// 在 svg 中插入 circle
 
 var circleName={};
@@ -205,7 +478,66 @@ var myCircle=topo.circles[i];
 circleName[myCircle.id]=myCircle.name;
 }
 
+var mycircle;
+mycircle=svg.selectAll(".circle")
+.data(topo.circles)
+.enter().append("circle")
+        .attr('cx',function(d) { return (d.cx);}  )
+        .attr('cy', function(d) { return (d.cy);}  )
+        .attr('r',function(d) { return (d.r+'px');} )
+        .attr('id',function(d) { return (d.id);} )
+        .attr('c_type',function(d) { return (d.c_type);} )
+        .on("click",function(d) {window.open(d.url,"_NEWWIN");})
+        .style('fill', '#ddd')
+                       .on("mouseover", function(d) {		
+            
+            mytt.transition()		
+                .duration(200)		
+                .style("opacity", .9)
+               .attr("class",link_as_map[d.id]);
+            mytt.html(cir_status_map[d.id])
+            .style("left", 0)		
+                .style("top", 0);	
+            })					
+        .on("mouseout", function(d) {		
+            mytt.transition()		
+                .duration(500)		
+                .style("opacity", 0);	
+        })
+        
+        
+;
 
+
+
+///img over circle
+mycircleimg=svg.selectAll(".circleimg")
+.data(topo.circles_image)
+.enter().append("image")
+.attr('x', function(d){return d.x;})
+.attr('y',  function(d){return d.y;})
+.attr('id',  function(d){return d.id;})
+.attr('width',  function(d){return d.width;})
+.attr('height',  function(d){return d.height;})
+.attr('NormalURL',  function(d){return d.url;})
+.attr('AlarmURL',  function(d){return d.Alarm_url;})
+.attr('xlink:href',  function(d){return d.url;})
+.on("mouseover", function(d) {		
+            
+            mytt.transition()		
+                .duration(200)		
+                .style("opacity", .9)
+               .attr("class",link_as_map[d.xid]);
+            mytt.html(cir_status_map[d.xid])
+            .style("left", 0)		
+                .style("top", 0);	
+            })					
+        .on("mouseout", function(d) {		
+            mytt.transition()		
+                .duration(500)		
+                .style("opacity", 0);	
+        })
+;
 
 </script>    
 <script>
@@ -309,7 +641,7 @@ function getData(){
 $.ajax({
            type: "POST",
             contentType: "application/json; charset=utf-8",
-            url: 'proj_alarms_data.json',
+            url: 'proj_alarms_data.jsp',
             dataType: 'json',
             async: true,
             data: "{'pid':'376'}",
@@ -570,14 +902,13 @@ function ParsingData(JData2){
  }
 
 function circular(){
-	//clearInterval(myIV);
+clearInterval(myIV);
 //allgreen();
-//getData();
+getData();
 //MODHamiGetData();
-	//myIV=setTimeout(circular, 15000);
+myIV=setTimeout(circular, 15000);
 }
   let circle = d3.select(node).select('circle');
   
  aa=d3.select('#id_MOD_PLATFORM');
 	</script>
- </html>
