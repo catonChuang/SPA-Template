@@ -98,23 +98,28 @@
 									<td><b>ch200</b>  </td>
 									<td><b>愛爾達體育1台</b>  </td>
 									 <td align="right"><b id="channel1num">--</b></td>
-									 <td align="center"><b><img id="statusch200" src="img/light2/01.png" class="statusIcon" onclick="openNext('channel','channel')"></b></td>
+									 <td align="center"><b><img id="statusch200" src="img/light2/01.png" class="statusIcon" onclick="openChannelInfo()"></b></td>
 								</tr>
 							
 								<tr>
 									<td><b>ch201</b>  </td>
 									<td><b>愛爾達體育2台</b>  </td>
 									 <td align="right"><b id="channel2num">--</b></td>
-									 <td align="center"><b><img id="statusch201" src="img/light2/01.png" class="statusIcon" onclick="openNext('channel','channel')"></b></td>
+									 <td align="center"><b><img id="statusch201" src="img/light2/01.png" class="statusIcon" onclick="openChannelInfo()"></b></td>
 								</tr>
 							
 								<tr>
 									<td><b>ch202</b>  </td>
 									<td><b>愛爾達體育3台</b>  </td>
 									 <td align="right"><b id="channel3num">--</b></td>
-									 <td align="center"><b><img id="statusch202" src="img/light2/01.png" class="statusIcon" onclick="openNext('channel','channel')"></b></td>
+									 <td align="center"><b><img id="statusch202" src="img/light2/01.png" class="statusIcon" onclick="openChannelInfo()"></b></td>
 								</tr>
-								
+								<tr>
+									<td><b>ch203</b>  </td>
+									<td><b>愛爾達體育4台</b>  </td>
+									 <td align="right"><b id="channel3num">--</b></td>
+									 <td align="center"><b><img id="statusch203" src="img/light2/01.png" class="statusIcon" onclick="openChannelInfo()"></b></td>
+								</tr>
 							  </tbody>
 							</table>
 						
@@ -387,11 +392,9 @@
 		}
 	}
 	
-		//=======================================
-		//
-		//=======================================
-		function openNext(type,target){
-			//location.href = 'indexService.html';
+	
+		function openChannelInfo(){
+		    window.location = 'channelInfo.html'; 
 		}
 	
 	

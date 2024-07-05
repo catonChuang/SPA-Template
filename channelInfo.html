@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>巴黎奧運網路監視</title>
+  	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+  	<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+  	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&display=swap">
+  	<script src="js/jquery.min.js"></script>
+	<script src="bootstrapV4/js/bootstrap.min.js"></script>	
+	<link href="bootstrapV4/css/bootstrap.min.css" rel="stylesheet">  
+	<link rel="stylesheet" href="css/bootstrap-icons/bootstrap-icons.css">	
+	<script src="xss-filters.min.js"></script>
+	<link href="argusApp.css" rel="stylesheet">  
+	<script src="js/argus.app.js"></script>
+  <style type="text/css">
+		
+  </style>
+</head>
+<body>
+	<div class="I-Body">
+		<div class="row">
+			<div class="col-sm-12">	
+				<div onclick="goPre()" style="font-size: 24px;"><i class="bi bi-chevron-left"></i> <b >巴黎奧運網路監視</b></div>
+					<div id="qrytime" class="item-right"><b>呈現時間:</b>&nbsp;<span id="refreshTime">讀取中...</span></div>
+				<br>		
+				<div class="card">	
+					<div class="card-header bgBlue">
+						<b><span id ="eName"></span>頻道狀態</b>
+					</div>		
+					<div class="card-body" style="padding: 5px;">
+						<div class="row" id="mainContent" style="font-size: 14px;height: 540px; overflow: auto;" >
+						<div class="col-sm-6">	
+									  <div class="card ">
+										<div class="card-header bgGreen">
+											<h1 class="panel-title"><b>測點A(Plane A)</b></h1>
+										</div>
+									<div class="card-body" >
+											<div id="metricContentA">
+											</div>	
+									</div>
+									</div>					
+							</div> 	
+							<div class="col-sm-6">			
+									  <div class="card ">
+										<div class="card-header bgGreen">
+											<h1 class="panel-title"><b>測點B(Plane B)</b></h1>
+										</div>
+									<div class="card-body" >
+											<div id="metricContentB">
+											</div>	
+									</div>
+									</div>					
+							</div> 	
+						
+							
+						</div >		
+					</div>	
+				</div>	
+			</div>	
+		</div>
+
+		<div class="row  customLabel">
+			<div class="col-3" >
+				<table width=100%>
+					<tr align="center" style="vertical-align: middle; height:60px " class="kindTitle">
+					<td>
+						<h3 style="padding-top: 8px;"><a href="#" class="badge badge-secondary" style="background: #4070B1;" onclick="goPage('1')">網路<br>拓樸</a></h3>
+					</td>
+					</tr>
+				</table>
+			</div>
+			<div class="col-3" >
+				<table width=100%>
+					<tr align="center" style="vertical-align: middle; height:60px " class="kindTitle">
+					<td>
+						<h3 style="padding-top: 8px;"><a href="#" class="badge badge-secondary" style="background: #4070B1;" onclick="goPage('2')">服務<br>狀態
+						</a></h3>
+					</td>
+					</tr>
+				</table>
+			</div>
+			<div class="col-3" >
+				<table width=100%>
+					<tr align="center" style="vertical-align: middle; height:60px " class="kindTitle">
+							<td>
+							<h3 style="padding-top: 8px;"><a href="#" class="badge badge-secondary" style="background: #4070B1;" onclick="goPage('3')">收視<br>指標</a></h3>
+							</td>
+					</tr>
+				</table>
+			</div>
+			<div class="col-3" >
+				<table width=100%>
+					<tr align="center" style="vertical-align: middle; height:60px " class="kindTitle">
+							<td>
+							<h3 style="padding-top: 8px;"><a href="#" class="badge badge-secondary" style="background: #4070B1;" onclick="goPage('4')">ISP<br>互連<br></a></h3>
+							</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
+<script>
+
+	var refreshSecond = 30;						// 30 秒
+	var refreshTime = refreshSecond;			
+	var isReLoad = false;
+	
+	var _empID="";
+	var _haveAuth = "false";
+	var _projectId = "303";				// 奧運收視數專案編號
+	var _name ="";
+
+	
+	// 奧運電路專案ID 376
+	// https://argus.cht.com.tw/argus_project_api/V1/argusProject/?projectId=376&category=sysStatus
+
+	//==============================
+	// 初始呼叫
+	//==============================
+	$(document).ready(function() {
+		
+		refreshTime = 1;	// 設1預設才會run
+		changeRefreshTime();
+		pageRefresh();
+	}); 
+
+
+	
+
+	function changeRefreshTime(){
+		refreshTime = refreshSecond;
+		$('#refreshTime').html(getNowTime());
+	}	
+
+	//==============================
+	// 更新時間
+	//==============================
+	function pageRefresh(){
+		refreshTime -= 1;	
+		if (refreshTime==0){
+			refreshContent();			
+		}else{			
+		}
+		cleartime = setTimeout("pageRefresh()",1000);
+	}
+
+	//==============================
+	// 更新內容
+	//==============================
+	function refreshContent(){
+		changeRefreshTime();
+		
+		if(_haveAuth=="true"){
+			getRest("pm_mod_channel_1001");
+			getRest("pm_mod_channel_1002");
+		}
+		
+	}
+	
+		//=======================================
+		//SPA API 教學
+		//=======================================		
+		//https://dev.azure.com/cht-tl-poc/_git/SPA-Template?path=%2Fdocs%2Fos-level-comm-spec.md&_a=preview
+	
+		
+		//=======================================
+		//callAppCmd 呼叫API
+		//=======================================	
+		function callAppCmd (params) {			
+			if (window.webkit != undefined) {
+				// for iOS
+				window.webkit.messageHandlers.callAppCmd.postMessage (params);
+				return undefined;
+			  } else {
+				// for Android
+				window.android.callAppCmd(params);
+			  }
+		 }
+		 
+		//=======================================
+		//appCmdCallback 呼叫API
+		//=======================================	
+		 function appCmdCallback(str){
+		//	alert("appCmdCallback: " + str);
+			var obj = JSON.parse(str);
+			
+			var _theValue = obj.value;
+			
+			if(obj.cmd=='getInitInfo'){
+				_empID =_theValue.userInfo.empID;
+				checkAuth();
+			}else if(obj.cmd=='rest'){
+				var _result = _theValue.data;
+				//=====================
+				// 權限判斷
+				//=====================
+				if(_theValue.id=='restCheckAuth'){				
+					_haveAuth =  _result.items[0].value;
+					if(_haveAuth=="true"){
+						refreshContent();
+					}else{
+						$('#messageModel').modal('show');		
+					}
+				//	alert("_haveAuth"  + _haveAuth +"   " + _result);
+				}else if(_theValue.id=='restpm_mod_channel_1001'){	
+					var _Metrics= _result.items[0].value;
+					var _content = $("#metricContentA");
+					changeMetricInfo(_Metrics,_content);
+
+				}else if(_theValue.id=='restpm_mod_channel_1002'){	
+					var _Metrics= _result.items[0].value;
+					var _content = $("#metricContentB");
+					changeMetricInfo(_Metrics,_content);
+				}else{
+					
+					
+					
+				}
+			}else{
+				
+			}		
+		}
+		
+		
+		
+
+		//=======================================
+		//回上一頁
+		//=======================================
+		function goPre(){
+			//var myObj = { "cmd": "goPortal", "value": null};
+			//var str = callAppCmd(JSON.stringify(myObj));
+			history.go(-1);
+		}
+	
+	
+		//=======================================
+		//argus api-檢查權限
+		//=======================================
+		function checkAuth(){
+			var _authCheckStr = "auth_"+_empID;
+			//https://argus.qa.cht.com.tw/argus_project_api/V1/argusProject/?projectId=0&category=auth_
+			var myObj = { "cmd": "rest","value":{"id": "restCheckAuth","restConfig":{"name":"getMetric","queryParams":{"projectId":"0","category":_authCheckStr},"relativePath":"argusProject/getMetric.jsp","method":"get"}}};
+			var str = callAppCmd(JSON.stringify(myObj));
+		}
+		
+		//=======================================
+		//argus api PM 參數
+		//=======================================
+		function getRest(_category){
+			var _id = "rest"+_category;
+			var myObj = { "cmd": "rest","value":{"id": _id,"restConfig":{"name":"getMetric","queryParams":{"projectId":_projectId,"category":_category},
+			"relativePath":"argusProject/getMetric.jsp","method":"get"}}};
+			
+			var str = callAppCmd(JSON.stringify(myObj));
+			//alert(str);
+		}
+				
+		function goPage(pIdx){
+			if(pIdx=="1"){
+				location.href = 'indexO2024.html';
+			}else if(pIdx=="2"){
+				location.href = 'indexService.html';
+			}else if(pIdx=="3"){
+				location.href = 'indexRating.html';
+			}else if(pIdx=="4"){
+				location.href = 'indexISP.html';
+			}
+		}
+		
+		
+		
+		
+		function changeMetricInfo(theMetric,theContent){
+			theContent.html("");	
+			var _tempHtml = "";
+			_tempHtml +="<table class=\"table table-striped\"><tbody>";
+			for(var i=0; i < theMetric.length;i++){
+				
+				var _name = theMetric[i].name;
+				if(_name=="time"){
+					
+				}else if(_name=="loss"  ||  _name=="encoder" ){
+					_tempHtml +="<tr>";
+					
+					_tempHtml +="<td>"+theMetric[i].cname+"</td>";
+										
+					var _theAtt= theMetric[i].atts;
+					_tempHtml +="<td>";
+					for(var j=0; j < _theAtt.length;j++){
+						var _ValueType = 0;  // 0數字; 1 up,down ; 2 normal,abnormal; 3 open,close; 4 success,fail
+												
+						var _attValue= _theAtt[j].value ;
+						_attValue = _attValue.replace(/\;/g,"<br>");
+						var _theAttContent = _attValue;					
+						var _attStatus= _theAtt[j].status;
+						
+						if(_attStatus==false){
+							_theAttContent = "<span class=\"customOrange\">"+ _attValue+"</span>";
+						}					
+						
+						if(_theAtt[j].name==""){
+							_tempHtml +=_theAttContent+"<br>";
+						}else{
+							_tempHtml += "<span class=\"declared\" >" + _theAtt[j].name+":"+_theAttContent+"</span><br>";
+						}
+					}
+					_tempHtml +="</td>";
+					_tempHtml +="</tr>";					
+				}else{				
+					
+				}
+			}
+			_tempHtml +="</tbody></table>";
+			theContent.html(_tempHtml);	
+		}
+
+	</script>
+	
+ <div class="modal hide fade" data-keyboard="false" data-backdrop="static" id="messageModel" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">    	     
+        <div class="modal-body">
+			很抱歉您沒有權限，請於電子表單申請帳號-IS32進行權限申請， 系統請選Argus->申請ARGUS帳號
+        </div> 
+		<div class="modal-footer">
+           <button type="button" class="btn btn-success" onclick="goPortal()">確定</button>
+        </div>		
+      </div>
+    </div>
+  </div>
