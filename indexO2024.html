@@ -43,10 +43,10 @@
 								<td >外雲(南二)</td>
 							</tr>	
 							<tr align="center">
-								<td ><a href="#" onclick="goPortal()"><img id="imgDDOS_HAMI" src="img/light2/00.png" class="statusIcon" ></a></td>
-								<td ><a href="#" onclick="goPortal()"><img id="imgDDOS_HAMI_DNS" src="img/light2/00.png" class="statusIcon" ></a></td>
-								<td ><a href="#" onclick="goPortal()"><img id="imgDDOS_CDN" src="img/light2/00.png" class="statusIcon" ></a></td>
-								<td ><a href="#" onclick="goPortal()"><img id="imgDDOS_CLOUD_TPS2" src="img/light2/00.png" class="statusIcon" ></a></td>
+								<td ><a href="#" onclick="openNext('fm_ddos','DDOS_HAMI')"><img id="imgDDOS_HAMI" src="img/light2/00.png" class="statusIcon" ></a></td>
+								<td ><a href="#" onclick="openNext('fm_ddos','DDOS_HAMI_DNS')"><img id="imgDDOS_HAMI_DNS" src="img/light2/00.png" class="statusIcon" ></a></td>
+								<td ><a href="#" onclick="openNext('fm_ddos','DDOS_CDN')"><img id="imgDDOS_CDN" src="img/light2/00.png" class="statusIcon" ></a></td>
+								<td ><a href="#" onclick="openNext('fm_ddos','DDOS_CLOUD_TPS2')"><img id="imgDDOS_CLOUD_TPS2" src="img/light2/00.png" class="statusIcon" ></a></td>
 							</tr>
 						</tbody></table>	
 					</div>	
@@ -107,6 +107,8 @@
 	var _haveAuth = "false";
 	var _projectId = "303";				// 奧運收視數專案編號
 	
+	// 奧運電路專案ID 376
+	// https://argus.cht.com.tw/argus_project_api/V1/argusProject/?projectId=376&category=sysStatus
 
 	//==============================
 	// 初始呼叫
@@ -273,6 +275,15 @@
 				}									
 			}						
 	}		
+	
+		//=======================================
+		//下一頁
+		//=======================================
+		function openNext(category,target){
+		    window.location = 'eventInfo.html?category='+category+"&target="+target; 
+
+			//window.location.replace('eventInfo.html?category='+category+"&target="+target);
+		}
 		
 
 	</script>

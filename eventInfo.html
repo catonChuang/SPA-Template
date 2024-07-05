@@ -15,9 +15,10 @@
 	<script src="xss-filters.min.js"></script>
 	<link href="argusApp.css" rel="stylesheet">  
 	<script src="js/argus.app.js"></script>
-	<script src="xss-filters.min.js"></script>
-	<script src="js/d3.v3.min.js" charset="utf-8"></script>	
-	<script src="js/liquidFillGauge.js" language="JavaScript"></script>
+	<link rel="stylesheet" type="text/css" href="js/jqGrid/css/ui.jqgrid.css" />
+	<script src="js/jqGrid/js/i18n/grid.locale-en.js" type="text/javascript"></script>
+	<script src="js/jqGrid/js/jquery.jqGrid.min.js" type="text/javascript"></script>
+	<link rel="stylesheet" type="text/css" href="js/jqGrid/changeLine.css" />		
   <style type="text/css">
 		
   </style>
@@ -28,17 +29,20 @@
 			<div class="col-sm-12">	
 				<div onclick="goPortal()" style="font-size: 24px;"><i class="bi bi-chevron-left"></i> <b >巴黎奧運網路監視</b></div>
 					<div id="qrytime" class="item-right"><b>呈現時間:</b>&nbsp;<span id="refreshTime">讀取中...</span></div>
-				<br>
-				
+				<br>		
 				<div class="card">	
 					<div class="card-header bgBlue">
-						<b>ISP</b>
+						<b><span id ="eName"></span>事件清單</b>
 					</div>		
 					<div class="card-body" style="padding: 5px;">
-						<div class="row" id="mainContent" style="font-size: 14px;max-height: 540px; overflow: auto;" > </div >		
+						<div class="row" id="mainContent" style="font-size: 14px;height: 540px; overflow: auto;" > 
+							<table id="jqEventTable" > </table>
+							<div class="col-sm-12">	
+								<div id="noEvent" style="font-size: large; " >	無事件</div>
+							</div>
+						</div >		
 					</div>	
 				</div>	
-				
 			</div>	
 		</div>
 
@@ -94,22 +98,46 @@
 	var _empID="";
 	var _haveAuth = "false";
 	var _projectId = "303";				// 奧運收視數專案編號
+	var _name ="";
+	var _category="";
+	var _target="";
 	
+	// 奧運電路專案ID 376
+	// https://argus.cht.com.tw/argus_project_api/V1/argusProject/?projectId=376&category=sysStatus
 
-	var _MODCur = 0;		// MOD加總紀錄，會有時間差 個頻道會不一樣
-	var _isEst = false;		// 是否推估
-	var _todayMax = 0;		// 本日最高，推估模式小於本日最高時啟用
-	var _estValue = 0;
-	
 	//==============================
 	// 初始呼叫
 	//==============================
 	$(document).ready(function() {
+	
+		_category=findGetParameter("category");
+		_target=findGetParameter("target");
+		getTitle(_category,_target);
 		
 		refreshTime = 1;	// 設1預設才會run
 		changeRefreshTime();
 		pageRefresh();
 	}); 
+
+
+	//==============================
+	// 更新標題
+	//==============================	
+	function getTitle(_category,_target){
+		if(_category=="fm_ddos"){
+			var _temp = "";
+			if(_target=="DDOS_HAMI"){
+				_temp="Hami網站";
+			}else if(_target=="DDOS_HAMI_DNS"){
+				_temp="Hami DNS服務";
+			}else if(_target=="DDOS_CDN"){
+				_temp="CDN網路";
+			}else if(_target=="DDOS_CLOUD_TPS2"){
+				_temp="外雲(南二)";
+			}			
+			$('#eName').html(_temp+"DDoS監測 ");
+		}
+	}
 
 
 	function changeRefreshTime(){
@@ -133,13 +161,13 @@
 	// 更新內容
 	//==============================
 	function refreshContent(){
-		changeRefreshTime();		
+		changeRefreshTime();
+		
 		if(_haveAuth=="true"){
-			getRest("pm_isp_curflow");
+			getRest(_category+"_"+_target);
 		}
 		
 	}
-	
 	
 		//=======================================
 		//SPA API 教學
@@ -165,7 +193,7 @@
 		//appCmdCallback 呼叫API
 		//=======================================	
 		 function appCmdCallback(str){
-			//alert("appCmdCallback: " + str);
+		//	alert("appCmdCallback: " + str);
 			var obj = JSON.parse(str);
 			
 			var _theValue = obj.value;
@@ -186,17 +214,22 @@
 						$('#messageModel').modal('show');		
 					}
 				//	alert("_haveAuth"  + _haveAuth +"   " + _result);
-				}else if(_theValue.id=='pm_isp_curflow'){	
-					settingpm_isp_curflow(_result.items[0].value.ISP);
 				}else{
-				
+					// 事件呈現
 				}
 			}else{
-			
+				var events= _result.items[0].value;
+				if(events.length >0){						
+						$('#noEvent').hide();
+						$('#jqEventTable').show();
+						showAtTable(events);	
+					}else{
+						$('#jqEventTable').hide();
+						$('#noEvent').show();
+					}				
+				
 			}		
 		}
-		
-		
 		
 		
 		
@@ -231,11 +264,7 @@
 			var str = callAppCmd(JSON.stringify(myObj));
 			//alert(str);
 		}
-		
-		
-		//https://argus.qa.cht.com.tw/argus_project_api/V1/argusProject/?projectId=55&category=pm_declaration
-		
-		
+				
 		function goPage(pIdx){
 			if(pIdx=="1"){
 				location.href = 'indexO2024.html';
@@ -248,105 +277,82 @@
 			}
 		}
 		
-	
-	
-	
+		
+		
 		//=======================================
-		//
+		// 取得參數
 		//=======================================
-		function openNext(type,target){
-			//location.href = 'indexService.html';
+		function findGetParameter(parameterName) {
+			var result = null,
+				tmp = [];
+			location.search
+				.substr(1)
+				.split("&")
+				.forEach(function (item) {
+				  tmp = item.split("=");
+				  if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+				});
+			return result;
 		}
-	
-	
 		
 		
-		//=======================================
-		//產生ISP 畫面
-		//=======================================
-		function settingpm_isp_curflow(_theData){
-			$("#mainContent").html("");	
-			_ischange = true;
-			if(_theData.length>0){	
-				for(var i=0; i <_theData.length ; i++ ){										
-					if(i>0){
-						if(i%1==0)
-							$("#mainContent").append("<br>"); 
-					}	
-					var _tempHtml = "";
-					_tempHtml ="<div class=\"col-sm-6 col-md-4 col-xl-3\">";
 		
-					var _code = xssFilters.inHTMLData(_theData[i].code);
-					var _cName = xssFilters.inHTMLData(_theData[i].cName);
-					var _idx = xssFilters.inHTMLData(_theData[i].idx);
-					var _flow = xssFilters.inHTMLData(_theData[i].flow);
-					var _bandwidth = new Number(xssFilters.inHTMLData(_theData[i].bandwidth));
-
-					_tempHtml +="<table class=\"table table-bordered\" ><tr align=\"center\" ><th class=\"cardTitle\" colspan=\"2\">"+ 
-	"<a onclick=\"showInfo('"+_code+"')\">"+_cName+"<i class=\"bi bi-info-circle\"></i></a></th></tr>";  
-
-					_tempHtml +="<tr align=\"center\" ><td colspan=\"2\"><svg id=\"fillgauge"+_idx +"\"  height=\"80px\" width=\"80px\"></svg></td></tr>";	
-					var unit ="Mbps";
-					var _cur = new Number(_flow);
-
-					if(_cur>1000){
-						_cur = _cur/1000
-						unit ="Gbps";	
-					}
-					_cur = _cur.toFixed(3);				
-					_tempHtml +="<tr align=\"center\"><td width=\"50%\">"+
-						"<span class= \"tdLarge\">"+_cur+"<br>"+unit+"</span><br>目前流量"+
-						"</td>"+	
-						"<td>"+
-						"<span class= \"tdLarge\">"+(_bandwidth/1000)+"<br>Gbps</span><br>最高容量"+	
-						"</td>"+
-						"</tr>";		
-				
-					_tempHtml +="</table>";
-					_tempHtml +="</div>" ;
-	
-				$("#mainContent").append(_tempHtml);	
-			} // end for(var i=0; i <_theData.length ; i++ ){	
-			drawRate(_theData);
+		
+		function customStatus(cellvalue, options, rowObject){					 
+			var _des ="處理中";
+			if(rowObject.closedTime==""){
+				if(cellvalue=="影響服務")
+					_des ="處理中(影響服務)";
+			}else{
+				_des = "已結束";
 			}
+			return _des ;
 		}
-		
-		//=======================================
-		//畫圖
-		//=======================================
-		function drawRate(_theData){
-				for(var i=0 ; i <_theData.length;i++){
-						var theRate = _theData[i].rate;
-						var config = liquidFillGaugeDefaultSettings();
-						config.circleThickness = 0.15;
-						var _status = _theData[i].status;
-
-						if(_status!="1"){
-							config.circleColor = "red";
-							//config.textColor = "#000000";
-							config.waveTextColor = "#FFFFFF";
-							config.waveColor = "red";
-						}else{
-							config.circleColor = "#5CB85C";
-							//config.textColor = "#000000";
-							config.waveTextColor = "#FFFFFF";
-							config.waveColor = "#5CB85C";
-						}
-
-						config.textVertPosition = 0.55;
-						config.waveAnimateTime = 1000;
-						config.waveHeight = 0.05;
-						config.waveAnimate = true;
-						config.waveRise = false;
-						config.waveHeightScaling = false;
-						config.waveOffset = 0.25;
-						config.textSize = 0.9;
-						config.waveCount = 3;
+	
+		function customDes(cellvalue, options, rowObject){					 
+			var _des =rowObject.elementID+"發生事件<br><b>事件說明:</b><br>"+rowObject.description;
 			
-					loadLiquidFillGauge("fillgauge"+_theData[i].idx, theRate,config);
-				}
+			return _des ;
 		}
-		
+	
+	
+		//=======================================
+		// 呈現事件
+		//=======================================		
+		function showAtTable(rData){			  
+			
+				var theColNames = ["事件","處理狀態"];
+				var theColModel = [
+						{name:'elementID',index:'elementID',width : 40,sorttype:'string' , align:'left',formatter:customDes},
+						{name:'description',index:'description',width : 20,sorttype:'string', align:'center' ,formatter:customStatus }
+					];				
+			
+				
+				var myRowFormatter = function(elTr, oRecord) {    
+				    return true;
+				}; 
+			 
+	        	//$("#dmLoading").hide();	
+				if(isReLoad){
+						//alert(isReLoad+" reload");
+	    				drawjqTableReload($("#jqDDosTable"),pageDiv,rData);					
+	    		}else{
+		    		$("#jqDDosTable").jqGrid({
+						data: rData, 
+						datatype: "local",
+						height: "auto",	
+						autowidth: true, // 自動欄寬           
+						colNames: theColNames,
+						colModel:theColModel,
+						rowNum:15,
+						rowList:[15,30,50],
+						//pager: pageDiv,
+						caption: ""					
+					});		
+					isReLoad = true;
+	    		}	
+		  }  	
+
 	</script>
 	
  <div class="modal hide fade" data-keyboard="false" data-backdrop="static" id="messageModel" role="dialog">
