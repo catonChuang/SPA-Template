@@ -1,33 +1,33 @@
 var topo={
 "CapText":[
-{"name":"台北仁愛","x":520,"y":240,"size":"19px","color":"white"},
-{"name":"訊號中心","x":544,"y":270,"size":"19px","color":"white"},
+{"name":"台北仁愛","x":260,"y":270,"size":"17px","color":"white"},
+{"name":"訊號中心","x":260,"y":290,"size":"17px","color":"white"},
 {"name":"MOD寬頻網路","x":520,"y":125,"size":"18px"},
 {"name":"Hami Video CDN網路","x":735,"y":272,"size":"18px"},
-{"name":"台北","x":340,"y":310,"size":"18px","color":"#fff"},
-{"name":"愛國","x":340,"y":330,"size":"18px","color":"#fff"},
-{"name":"新加坡","x":130,"y":260,"size":"17px"},
-{"name":"東京","x":250,"y":260,"size":"17px"},
+{"name":"台北","x":150,"y":245,"size":"17px","color":"#fff"},
+{"name":"愛國","x":150,"y":265,"size":"17px","color":"#fff"},
+{"name":"新加坡","x":60,"y":170,"size":"15px"},
+{"name":"東京","x":170,"y":170,"size":"15px"},
 {"name":"巴黎OBS","x":45,"y":115,"size":"18px"},
-{"name":"重南攝影棚","x":690,"y":465,"size":"18px"},
-{"name":"漢口攝影棚","x":335,"y":465,"size":"18px"},
-{"name":"270M","x":430,"y":393,"size":"13px"},
-{"name":"270M","x":430,"y":433,"size":"13px"},
-{"name":"270M","x":645,"y":393,"size":"13px"},
-{"name":"270M","x":645,"y":433,"size":"13px"},
+{"name":"重南攝影棚","x":30,"y":465,"size":"16px"},
+{"name":"漢口攝影棚","x":5,"y":370,"size":"14px"},
+{"name":"270M*2","x":140,"y":330,"size":"13px"},
+//{"name":"270M","x":430,"y":433,"size":"13px"},
+{"name":"270M*2","x":140,"y":420,"size":"13px"},
+//{"name":"270M","x":645,"y":433,"size":"13px"},
 {"name":"10G*2","x":645,"y":210,"size":"13px"},
 {"name":"50M*2","x":670,"y":290,"size":"13px"},
 {"name":"10G*4","x":623,"y":165,"size":"13px"},
-{"name":"750M*2","x":437,"y":287,"size":"13px"},
-{"name":"1G/600M *2","x":435,"y":347,"size":"13px"},
-{"name":"750M","x":270,"y":290,"size":"13px"},
-{"name":"750M","x":250,"y":315,"size":"13px"},
+{"name":"750M*2","x":205,"y":270,"size":"13px"},
+{"name":"1G/600M *2","x":50,"y":290,"size":"13px"},
+{"name":"750M","x":160,"y":200,"size":"13px"},
+{"name":"750M","x":80,"y":200,"size":"13px"},
 {"name":"HiNet","x":26,"y":242,"size":"13px","color":"#fff"},
 {"name":"Internet","x":22,"y":182,"size":"13px","color":"#fff"},
 {"name":"陽明山","x":170,"y":100,"size":"16px"},
 {"name":"服務大樓","x":255,"y":100,"size":"16px"},
-{"name":"270M*2","x":309,"y":240,"size":"13px"},
-{"name":"270M*4","x":430,"y":200,"size":"13px"}
+{"name":"270M*2","x":220,"y":220,"size":"13px"},
+{"name":"270M*4","x":320,"y":200,"size":"13px"}
 ],
 "links":[{
 	"name": "仁愛HamiNet",
@@ -115,9 +115,9 @@ var topo={
 	"facilitytype": "SDH/DWDM光傳輸電路",
 	"xid": "仁愛漢口1",
 	"linedata": [
-		[563, 290],
-		[563, 400],
-		[400, 400]
+		[55, 337],
+		[265, 337],
+		[265, 300]
 	],
 	"width": "4px"
 },{
@@ -131,9 +131,9 @@ var topo={
 	"facilitytype": "SDH/DWDM光傳輸電路",
 	"xid": "仁愛漢口2",
 	"linedata": [
-		[573, 290],
-		[573, 415],
-		[400, 415]
+		[55, 345],
+		[272, 345],
+		[272, 300]
 	],
 	"width": "4px"
 },  {
@@ -195,9 +195,9 @@ var topo={
 	"facilitytype": "SDH/DWDM光傳輸電路",
 	"xid": "仁愛愛國1",
 		"linedata": [
-		[530,250],
-		[530, 305],
-		[383, 305]
+		[190,250],
+		[190, 280],
+		[260, 280]
 	],
 	"width": "6.3px"
 }, {
@@ -212,9 +212,9 @@ var topo={
 	"xid": "仁愛愛國2",
 	
 	"linedata": [
-	[520,250],
-		[520, 295],
-		[385, 295]
+		[180,250],
+		[180, 290],
+		[260, 290]
 	],
 	"width": "6.3px"
 }, {
@@ -228,9 +228,9 @@ var topo={
 	"facilitytype": "SDH/DWDM光傳輸電路",
 	"xid": "仁愛重慶2",
 	"linedata": [
-		[593, 300],
-		[593, 400],
-		[725, 400]
+		[90, 425],
+		[278, 425],
+		[278, 300]
 	],
 	"width": "4px"
 }, {
@@ -244,9 +244,9 @@ var topo={
 	"facilitytype": "SDH/DWDM光傳輸電路",
 	"xid": "仁愛重慶1",
 	"linedata": [
-		[583, 300],
-		[583, 415],
-		[725, 415]
+		[90, 435],
+		[285, 435],
+		[285, 300]
 	],
 	"width": "4px"
 }, {
@@ -260,9 +260,9 @@ var topo={
 	"facilitytype": "ADSL/FTTX寬頻專線",
 	"xid": "卡達Internet仁愛",
 	"linedata": [
-		[540, 280],
-		[540, 355],
-		[150, 355]
+		[30, 250],
+		[30, 310],
+		[260, 310]
 	],
 	"width": "6px"
 }, {
@@ -276,9 +276,9 @@ var topo={
 	"facilitytype": "ADSL/FTTX寬頻專線",
 	"xid": "HZInternet仁愛2",
 	"linedata": [
-		[550, 280],
-		[550, 365],
-		[150, 365]
+		[40, 250],
+		[40, 300],
+		[260, 300]
 	],
 	"width": "6px"
 },
@@ -312,7 +312,7 @@ var topo={
 	"remark": "",
 	"facilitytype": "SDH/DWDM光傳輸電路",
 
-	"xid": "愛國TYO","linedata":[[230,280],[230,295],[320,295]],"width": "6.3px"},
+	"xid": "愛國TYO","linedata":[[150,180],[150,195],[150,210]],"width": "6.3px"},
 			
 {  "name": "愛國SIN4",
 	"site": "國分愛國機房-香港",
@@ -322,7 +322,7 @@ var topo={
 	"contact": "申告新媒值班窗口02-2341244502-23412447企客管控中心23445006並記錄於工作日誌",
 	"remark": "國分愛國機房-香港450M223D73319",
 	"facilitytype": "SDH/DWDM光傳輸電路",
-	"xid": "愛國HK1","linedata":[[190,280],[190,320],[320,320]],"width": "6.3px"},		
+	"xid": "愛國HK1","linedata":[[120,180],[120,195],[120,220]],"width": "6.3px"},		
 
 
 { "name": "AliCloud-Internet","xid":"link11","linedata":[[40,180],[40,240]],"width": "5px","id":"AliIntLink_", "color":"black"}
@@ -337,9 +337,9 @@ var topo={
 	"facilitytype": "SDH/DWDM光傳輸電路",
 	"xid": "仁愛服務1",
 	"linedata": [
-		[420, 115],
-	        [420, 205],
-	        [560, 205]
+		[280, 115],
+		[280, 205],
+		[280, 225]
 	],
 	"width": "4px"
 }, {
@@ -353,9 +353,9 @@ var topo={
 	"facilitytype": "SDH/DWDM光傳輸電路",
 	"xid": "仁愛服務2",
 	"linedata": [
-		[410, 115],
-	        [410, 215],
-	        [560, 215]
+		[290, 115],
+		[290, 205],
+		[290, 225]
 	],
 	"width": "4px"
 }, {
@@ -369,9 +369,9 @@ var topo={
 	"facilitytype": "SDH/DWDM光傳輸電路",
 	"xid": "仁愛服務3",
 	"linedata": [
-		[400, 105],
-	        [400, 225],
-	        [560, 225]
+		[300, 115],
+		[300, 205],
+		[300, 225]
 	],
 	"width": "4px"
 }, {
@@ -385,9 +385,9 @@ var topo={
 	"facilitytype": "SDH/DWDM光傳輸電路",
 	"xid": "仁愛服務4",
 	"linedata": [
-		[390, 105],
-	        [390, 235],
-	        [560, 235]
+		[310, 115],
+		[310, 205],
+		[310, 225]
 	],
 	"width": "4px"
 }
@@ -403,10 +403,9 @@ var topo={
 	"facilitytype": "SDH/DWDM光傳輸電路",
 	"xid": "陽明山服務1",
 	"linedata": [
-	[290, 125],
-	[290, 255],
-
-		[560, 255]
+		[200, 105],
+		[200, 245],
+		[260, 245]
 	],
 	"width": "4px"
 }, {
@@ -420,9 +419,9 @@ var topo={
 	"facilitytype": "SDH/DWDM光傳輸電路",
 	"xid": "陽明山服務2",
 	"linedata": [
-		[300, 125],
-	        [300, 245],
-	        [560, 245]
+		[210, 105],
+		[210, 235],
+		[260, 235]
 	],
 	"width": "4px"
 }
@@ -435,14 +434,14 @@ var topo={
 "circles":[
 {"name":"MOD平台","id":"id_MOD_PLATFORM","cx":588,"cy":35,"r":12,"url":"/modDashBoard/MOD_DashBoardII.jsp?isWide=true","c_type":"MOD"},
 {"name":"HAMI平台","id":"id_HAMI_PLATFORM","cx":830,"cy":180,"r":13,"url":"/GNOC/OTT/OTTzoneN.jsp","c_type":"HAMI"},
-{"name":"台北仁愛電力","id":"id_TPS22U3_POWER","cx":505,"cy":235,"r":13,"color":"green","url":"","c_type":"power"},
-{"name":"重南攝影棚電力","id":"id_TPS194_POWER","cx":675,"cy":457,"r":13,"color":"green","url":"","c_type":"power"},
-{"name":"台北愛國電力","id":"id_TPA2_POWER","cx":325,"cy":303,"r":20,"color":"green","url":"","c_type":"power"},
+{"name":"台北仁愛電力","id":"id_TPS22U3_POWER","cx":270,"cy":240,"r":13,"color":"green","url":"","c_type":"power"},
+{"name":"重南攝影棚電力","id":"id_TPS194_POWER","cx":15,"cy":457,"r":13,"color":"green","url":"","c_type":"power"},
+{"name":"台北愛國電力","id":"id_TPA2_POWER","cx":135,"cy":250,"r":13,"color":"green","url":"","c_type":"power"},
 ],
 "circles_image":[
-{"name":"","id":"id_TPS22U3_POWER_img","xid":"id_TPS22U3_POWER","x":495,"y":225,"width":20,"height":20,"url":"lighteningy.png","Alarm_url":"powerly.png"},
-{"name":"","id":"id_TPS194_POWER_img","xid":"id_TPS194_POWER","x":665,"y":447,"width":20,"height":20,"url":"lighteningy.png","Alarm_url":"powerly.png"},
-{"name":"","id":"id_TPA2_POWER_img","xid":"id_TPA2_POWER","x":315,"y":293,"width":20,"height":20,"url":"lighteningy.png","Alarm_url":"powerly.png"}
+{"name":"","id":"id_TPS22U3_POWER_img","xid":"id_TPS22U3_POWER","x":260,"y":230,"width":18,"height":18,"url":"lighteningy.png","Alarm_url":"powerly.png"},
+{"name":"","id":"id_TPS194_POWER_img","xid":"id_TPS194_POWER","x":6,"y":447,"width":18,"height":18,"url":"lighteningy.png","Alarm_url":"powerly.png"},
+{"name":"","id":"id_TPA2_POWER_img","xid":"id_TPA2_POWER","x":125,"y":240,"width":18,"height":18,"url":"lighteningy.png","Alarm_url":"powerly.png"}
 ],
 "links_bk":[
 { "name": "Paris-AliCloud","xid":"link13","linedata":[[163,217],[60,217],[60,150]],"width": "5px","id":"ParisAliLink"},
