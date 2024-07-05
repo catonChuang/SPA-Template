@@ -81,9 +81,9 @@
 								<td >Hami DNS服務</td>
 							</tr>						
 							<tr align="center">
-								<td ><a href="#" onclick="openNext('Qoe','QOE_HamiVideo')"><img id="imgHami_WEB" src="img/light2/00.png" class="statusIcon" ></a></td>
-								<td ><a href="#" onclick="openNext('Qoe','QOE_ELTA')"><img id="imgELTA_WEB" src="img/light2/00.png" class="statusIcon" ></a></td>
-								<td ><a href="#" onclick="openNext('Qoe','QOE_HamiDNS')"><img id="imgHami_DNS" src="img/light2/00.png" class="statusIcon" ></a></td>
+								<td ><a href="#" onclick="openNext('fm_qoe','QOE_HamiVideo')"><img id="imgHami_WEB" src="img/light2/00.png" class="statusIcon" ></a></td>
+								<td ><a href="#" onclick="openNext('fm_qoe','QOE_ELTA')"><img id="imgELTA_WEB" src="img/light2/00.png" class="statusIcon" ></a></td>
+								<td ><a href="#" onclick="openNext('fm_qoe','QOE_HamiDNS')"><img id="imgHami_DNS" src="img/light2/00.png" class="statusIcon" ></a></td>
 							</tr>
 							</tbody></table>
 					</div>	
@@ -414,14 +414,6 @@
 	}
 	
 		//=======================================
-		//
-		//=======================================
-		function openNext(type,target){
-			//location.href = 'indexService.html';
-		}
-	
-	
-		//=======================================
 		// CDN 指標
 		//=======================================
 		function settingpm_cdn(_objCdn){
@@ -520,6 +512,13 @@
 						}
 						 $('#eRAMList').html(eramDiv);
 	}
+		
+		//=======================================
+		//下一頁
+		//=======================================
+		function openNext(category,target){
+		    window.location = 'eventInfo.html?category='+category+"&target="+target; 
+		}	
 		
 	</script>
 	

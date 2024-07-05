@@ -136,6 +136,28 @@
 				_temp="外雲(南二)";
 			}			
 			$('#eName').html(_temp+"DDoS監測 ");
+		}else if(_category=="fm_qoe"){
+			var _temp = "";
+			if(_target=="QOE_HamiVideo"){
+				_temp="Hami網站";
+			}else if(_target=="QOE_ELTA"){
+				_temp="ELTA網站";
+			}else if(_target=="QOE_HamiDNS"){
+				_temp="Hami DNS服務";
+			}			
+			$('#eName').html(_temp+"QoE監測 ");
+		}else if(_category=="fm_declaration"){
+			var _temp = "";
+			if(_target=="mod_large"){
+				_temp="MOD用戶大量申告事件";
+			}else if(_target=="mod_30"){
+				_temp="MOD累計30分鐘用戶申告數";
+			}else if(_target=="hami_large"){
+				_temp="Hami DNS服務";
+			}else if(_target=="hami_30"){
+				_temp="Hami DNS服務";
+			}			
+			$('#eName').html(_temp);
 		}
 	}
 
