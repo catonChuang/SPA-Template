@@ -1,33 +1,34 @@
 var topo={
 "CapText":[
-{"name":"台北仁愛","x":260,"y":270,"size":"17px","color":"white"},
-{"name":"訊號中心","x":260,"y":290,"size":"17px","color":"white"},
-{"name":"MOD寬頻網路","x":520,"y":125,"size":"18px"},
-{"name":"Hami Video CDN網路","x":735,"y":272,"size":"18px"},
+{"name":"台北仁愛","x":260,"y":255,"size":"17px","color":"white"},
+{"name":"訊號中心","x":260,"y":275,"size":"17px","color":"white"},
+{"name":"MOD寬頻網路","x":24,"y":452,"size":"16px"},
+{"name":"Hami Video","x":174,"y":448,"size":"14px"},
+{"name":"CDN網路","x":179,"y":460,"size":"14px"},
 {"name":"台北","x":150,"y":245,"size":"17px","color":"#fff"},
 {"name":"愛國","x":150,"y":265,"size":"17px","color":"#fff"},
 {"name":"新加坡","x":60,"y":170,"size":"15px"},
 {"name":"東京","x":170,"y":170,"size":"15px"},
 {"name":"巴黎OBS","x":45,"y":115,"size":"18px"},
-{"name":"重南攝影棚","x":30,"y":465,"size":"16px"},
-{"name":"漢口攝影棚","x":5,"y":370,"size":"14px"},
-{"name":"270M*2","x":140,"y":330,"size":"13px"},
+{"name":"重南攝影棚","x":295,"y":465,"size":"15px"},
+{"name":"漢口攝影棚","x":295,"y":170,"size":"14px"},
+{"name":"270M*2","x":295,"y":207,"size":"13px"}, //漢口
 //{"name":"270M","x":430,"y":433,"size":"13px"},
-{"name":"270M*2","x":140,"y":420,"size":"13px"},
+{"name":"270M*2","x":290,"y":395,"size":"13px"},//重南
 //{"name":"270M","x":645,"y":433,"size":"13px"},
 {"name":"10G*2","x":645,"y":210,"size":"13px"},
 {"name":"50M*2","x":670,"y":290,"size":"13px"},
-{"name":"10G*4","x":623,"y":165,"size":"13px"},
-{"name":"750M*2","x":205,"y":270,"size":"13px"},
-{"name":"1G/600M *2","x":50,"y":290,"size":"13px"},
+{"name":"10G*4","x":100,"y":365,"size":"13px"},
+{"name":"750M*2","x":205,"y":250,"size":"13px"},
+{"name":"1G/600M *2","x":48,"y":270,"size":"13px"},
 {"name":"750M","x":160,"y":200,"size":"13px"},
 {"name":"750M","x":80,"y":200,"size":"13px"},
 {"name":"HiNet","x":26,"y":242,"size":"13px","color":"#fff"},
 {"name":"Internet","x":22,"y":182,"size":"13px","color":"#fff"},
 {"name":"陽明山","x":170,"y":100,"size":"16px"},
-{"name":"服務大樓","x":255,"y":100,"size":"16px"},
-{"name":"270M*2","x":220,"y":220,"size":"13px"},
-{"name":"270M*4","x":320,"y":200,"size":"13px"}
+{"name":"服務大樓","x":235,"y":100,"size":"16px"},
+{"name":"270M*2","x":212,"y":210,"size":"13px"},
+{"name":"270M*4","x":285,"y":120,"size":"13px"}
 ],
 "links":[{
 	"name": "仁愛HamiNet",
@@ -55,10 +56,12 @@ var topo={
 	"facilitytype": "寬頻傳輸電路",
 	"xid": "仁愛MODNet",
 	"linedata": [
-		[540, 210],
-		[540, 130]
+		[260, 300],
+		[260, 315],
+		[60, 315],
+		[60, 375]
 	],
-	"width": "9px"
+	"width": "8px"
 }, {
 	"name": "仁愛MODNet",
 	"site": "仁愛訊號中心-IP骨幹中心",
@@ -70,10 +73,12 @@ var topo={
 	"facilitytype": "寬頻傳輸電路",
 	"xid": "仁愛MODNet",
 	"linedata": [
-		[586, 230],
-		[586, 130]
+		[270, 300],
+		[270, 325],
+		[70, 325],
+		[70, 375]
 	],
-	"width": "9px"
+	"width": "8px"
 }, {
 	"name": "仁愛HamiNet",
 	"site": "仁愛訊號中心-Hami Video",
@@ -85,8 +90,8 @@ var topo={
 	"facilitytype": "ADSL/FTTX寬頻專線",
 	"xid": "仁愛HamiNet",
 	"linedata": [
-		[580, 270],
-		[730, 270]
+		[290, 300],
+		[290, 340]
 	],
 	"width": "4px"
 }, {
@@ -100,10 +105,12 @@ var topo={
 	"facilitytype": "寬頻傳輸電路",
 	"xid": "仁愛MODNet",
 	"linedata": [
-		[563, 215],
-		[563, 130]
+		[280, 300],
+		[280, 335],
+		[80, 335],
+		[80, 375]
 	],
-	"width": "9px"
+	"width": "8px"
 }, {
 	"name": "仁愛漢口1",
 	"site": "仁愛訊號中心-漢口攝影棚",
@@ -115,9 +122,9 @@ var topo={
 	"facilitytype": "SDH/DWDM光傳輸電路",
 	"xid": "仁愛漢口1",
 	"linedata": [
-		[55, 337],
-		[265, 337],
-		[265, 300]
+		[345, 200],
+		[345, 240],
+		[315, 240]
 	],
 	"width": "4px"
 },{
@@ -131,9 +138,9 @@ var topo={
 	"facilitytype": "SDH/DWDM光傳輸電路",
 	"xid": "仁愛漢口2",
 	"linedata": [
-		[55, 345],
-		[272, 345],
-		[272, 300]
+		[352, 200],
+		[352, 247],
+		[322, 247]
 	],
 	"width": "4px"
 },  {
@@ -147,8 +154,10 @@ var topo={
 	"facilitytype": "寬頻傳輸電路",
 	"xid": "仁愛MODNet",
 	"linedata": [
-		[610, 230],
-		[610, 130]
+		[290, 300],
+		[290, 345],
+		[90, 345],
+		[90, 375]
 	],
 	"width": "8px"
 }, {
@@ -162,10 +171,12 @@ var topo={
 	"facilitytype": "寬頻傳輸電路",
 	"xid": "仁愛HamiNet",
 	"linedata": [
-		[530, 235],
-		[770, 235]
+		[300, 300],
+		[300, 355],
+		[190, 355],
+		[190, 375]
 	],
-	"width": "9px"
+	"width": "8px"
 }, {
 	"name": "仁愛Hami",
 	"site": "仁愛訊號中心-Hami Video",
@@ -177,10 +188,12 @@ var topo={
 	"facilitytype": "寬頻傳輸電路",
 	"xid": "仁愛Hami",
 	"linedata": [
-		[530, 220],
-		[770, 220]
+		[310, 300],
+		[310, 365],
+		[200, 365],
+		[200, 375]
 	],
-	"width": "9px"
+	"width": "8px"
 }, 
  
 
@@ -196,10 +209,10 @@ var topo={
 	"xid": "仁愛愛國1",
 		"linedata": [
 		[190,250],
-		[190, 280],
-		[260, 280]
+		[190, 260],
+		[260, 260]
 	],
-	"width": "6.3px"
+	"width": "6px"
 }, {
 	"name": "仁愛愛國2",
 	"site": "國分愛國機房-仁愛訊號中心",
@@ -213,10 +226,10 @@ var topo={
 	
 	"linedata": [
 		[180,250],
-		[180, 290],
-		[260, 290]
+		[180, 270],
+		[260, 270]
 	],
-	"width": "6.3px"
+	"width": "6px"
 }, {
 	"name": "仁愛重慶2",
 	"site": "仁愛訊號中心-重南攝影棚",
@@ -228,9 +241,9 @@ var topo={
 	"facilitytype": "SDH/DWDM光傳輸電路",
 	"xid": "仁愛重慶2",
 	"linedata": [
-		[90, 425],
-		[278, 425],
-		[278, 300]
+		[330, 270],
+		[350, 270],
+		[350, 410]
 	],
 	"width": "4px"
 }, {
@@ -244,9 +257,9 @@ var topo={
 	"facilitytype": "SDH/DWDM光傳輸電路",
 	"xid": "仁愛重慶1",
 	"linedata": [
-		[90, 435],
-		[285, 435],
-		[285, 300]
+		[320, 280],
+		[342, 280],
+		[342, 410]
 	],
 	"width": "4px"
 }, {
@@ -261,10 +274,10 @@ var topo={
 	"xid": "卡達Internet仁愛",
 	"linedata": [
 		[30, 250],
-		[30, 310],
-		[260, 310]
+		[30, 295],
+		[260, 295]
 	],
-	"width": "6px"
+	"width": "5.5px"
 }, {
 	"name": "Internet仁愛2",
 	"site": "多視角備援",
@@ -277,10 +290,10 @@ var topo={
 	"xid": "HZInternet仁愛2",
 	"linedata": [
 		[40, 250],
-		[40, 300],
-		[260, 300]
+		[40, 285],
+		[260, 285]
 	],
-	"width": "6px"
+	"width": "5.5px"
 },
 
 
@@ -337,9 +350,9 @@ var topo={
 	"facilitytype": "SDH/DWDM光傳輸電路",
 	"xid": "仁愛服務1",
 	"linedata": [
-		[280, 115],
-		[280, 205],
-		[280, 225]
+		[265, 105],
+		[265, 185],
+		[265, 225]
 	],
 	"width": "4px"
 }, {
@@ -353,9 +366,9 @@ var topo={
 	"facilitytype": "SDH/DWDM光傳輸電路",
 	"xid": "仁愛服務2",
 	"linedata": [
-		[290, 115],
-		[290, 205],
-		[290, 225]
+		[271, 105],
+		[271, 185],
+		[271, 225]
 	],
 	"width": "4px"
 }, {
@@ -369,9 +382,9 @@ var topo={
 	"facilitytype": "SDH/DWDM光傳輸電路",
 	"xid": "仁愛服務3",
 	"linedata": [
-		[300, 115],
-		[300, 205],
-		[300, 225]
+		[277, 105],
+		[277, 185],
+		[277, 225]
 	],
 	"width": "4px"
 }, {
@@ -385,9 +398,9 @@ var topo={
 	"facilitytype": "SDH/DWDM光傳輸電路",
 	"xid": "仁愛服務4",
 	"linedata": [
-		[310, 115],
-		[310, 205],
-		[310, 225]
+		[283, 105],
+		[283, 185],
+		[283, 225]
 	],
 	"width": "4px"
 }
@@ -404,8 +417,8 @@ var topo={
 	"xid": "陽明山服務1",
 	"linedata": [
 		[200, 105],
-		[200, 245],
-		[260, 245]
+		[200, 232],
+		[260, 232]
 	],
 	"width": "4px"
 }, {
@@ -420,8 +433,8 @@ var topo={
 	"xid": "陽明山服務2",
 	"linedata": [
 		[210, 105],
-		[210, 235],
-		[260, 235]
+		[210, 225],
+		[260, 225]
 	],
 	"width": "4px"
 }
@@ -432,15 +445,15 @@ var topo={
 { "name": "陽明山","xid":"link11ss","linedata":[[170,30],[180,50],],"width": "8px"},
 ],
 "circles":[
-{"name":"MOD平台","id":"id_MOD_PLATFORM","cx":588,"cy":35,"r":12,"url":"/modDashBoard/MOD_DashBoardII.jsp?isWide=true","c_type":"MOD"},
-{"name":"HAMI平台","id":"id_HAMI_PLATFORM","cx":830,"cy":180,"r":13,"url":"/GNOC/OTT/OTTzoneN.jsp","c_type":"HAMI"},
-{"name":"台北仁愛電力","id":"id_TPS22U3_POWER","cx":270,"cy":240,"r":13,"color":"green","url":"","c_type":"power"},
-{"name":"重南攝影棚電力","id":"id_TPS194_POWER","cx":15,"cy":457,"r":13,"color":"green","url":"","c_type":"power"},
+{"name":"MOD平台","id":"id_MOD_PLATFORM","cx":75,"cy":390,"r":12,"url":"/modDashBoard/MOD_DashBoardII.jsp?isWide=true","c_type":"MOD"},
+{"name":"HAMI平台","id":"id_HAMI_PLATFORM","cx":205,"cy":390,"r":12,"url":"/GNOC/OTT/OTTzoneN.jsp","c_type":"HAMI"},
+{"name":"台北仁愛電力","id":"id_TPS22U3_POWER","cx":270,"cy":225,"r":13,"color":"green","url":"","c_type":"power"},
+{"name":"重南攝影棚電力","id":"id_TPS194_POWER","cx":283,"cy":457,"r":13,"color":"green","url":"","c_type":"power"},
 {"name":"台北愛國電力","id":"id_TPA2_POWER","cx":135,"cy":250,"r":13,"color":"green","url":"","c_type":"power"},
 ],
 "circles_image":[
-{"name":"","id":"id_TPS22U3_POWER_img","xid":"id_TPS22U3_POWER","x":260,"y":230,"width":18,"height":18,"url":"lighteningy.png","Alarm_url":"powerly.png"},
-{"name":"","id":"id_TPS194_POWER_img","xid":"id_TPS194_POWER","x":6,"y":447,"width":18,"height":18,"url":"lighteningy.png","Alarm_url":"powerly.png"},
+{"name":"","id":"id_TPS22U3_POWER_img","xid":"id_TPS22U3_POWER","x":260,"y":215,"width":18,"height":18,"url":"lighteningy.png","Alarm_url":"powerly.png"},
+{"name":"","id":"id_TPS194_POWER_img","xid":"id_TPS194_POWER","x":274,"y":447,"width":18,"height":18,"url":"lighteningy.png","Alarm_url":"powerly.png"},
 {"name":"","id":"id_TPA2_POWER_img","xid":"id_TPA2_POWER","x":125,"y":240,"width":18,"height":18,"url":"lighteningy.png","Alarm_url":"powerly.png"}
 ],
 "links_bk":[
