@@ -12,6 +12,8 @@
 	<script src="bootstrapV4/js/bootstrap.min.js"></script>	
 	<link href="bootstrapV4/css/bootstrap.min.css" rel="stylesheet">  
 	<link rel="stylesheet" href="css/bootstrap-icons/bootstrap-icons.css">	
+	<script src="js/jquery-ui.min.js"></script>	
+	<link rel="stylesheet" type="text/css" href="js/filker/jquery-ui.min.css"/>
 	<script src="xss-filters.min.js"></script>
 	<link href="argusApp.css" rel="stylesheet">  
 	<script src="js/argus.app.js"></script>
@@ -109,7 +111,8 @@
 	// 初始呼叫
 	//==============================
 	$(document).ready(function() {
-	
+		resizeTable();
+		
 		_category=findGetParameter("category");
 		_target=findGetParameter("target");
 		getTitle(_category,_target);
@@ -117,6 +120,7 @@
 		refreshTime = 1;	// 設1預設才會run
 		changeRefreshTime();
 		pageRefresh();
+				
 	}); 
 
 
@@ -377,6 +381,12 @@
 					isReLoad = true;
 	    		}	
 		  }  	
+		  
+		  
+		  
+	function resizeTable(){
+		$("#jqEventTable").jqGrid('setGridWidth', parseInt($('#mainContent').width()) - 20);    
+	}
 
 	</script>
 	
