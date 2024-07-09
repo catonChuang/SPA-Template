@@ -258,13 +258,89 @@ svg.append('image')
 ;
 //MOD
 
+
+	var _empID="";
+	var _haveAuth = "false";
+	// 奧運電路專案ID 376
+	// https://argus.cht.com.tw/argus_project_api/V1/argusProject/?projectId=376&category=sysStatus
+	var _projectId = "376";				// 奧運電路專案編號
+
 $(window).load(function () {
-conn_id_Mapping(topo.links);
-//myIV=setTimeout(circular, 500);
-circular();
-linkGREEN("id_AliIntLink");
-linkGREEN("id_ParisAliLink");
+	conn_id_Mapping(topo.links);
+	myIV=setTimeout(circular, 500);
+	circular();
+	linkGREEN("id_AliIntLink");
+	linkGREEN("id_ParisAliLink");
 });
+
+		//=======================================
+		//SPA API 教學
+		//=======================================		
+		//https://dev.azure.com/cht-tl-poc/_git/SPA-Template?path=%2Fdocs%2Fos-level-comm-spec.md&_a=preview
+	
+		
+		//=======================================
+		//callAppCmd 呼叫API
+		//=======================================	
+		function callAppCmd (params) {			
+			if (window.webkit != undefined) {
+				// for iOS
+				window.webkit.messageHandlers.callAppCmd.postMessage (params);
+				return undefined;
+			  } else {
+				// for Android
+				window.android.callAppCmd(params);
+			  }
+		 }
+		 
+		//=======================================
+		//appCmdCallback 呼叫API
+		//=======================================	
+		 function appCmdCallback(str){
+		//	alert("appCmdCallback: " + str);
+			var obj = JSON.parse(str);
+			
+			var _theValue = obj.value;
+			
+			if(obj.cmd=='getInitInfo'){
+				_empID =_theValue.userInfo.empID;
+				checkAuth();
+			}else if(obj.cmd=='rest'){
+				var _result = _theValue.data;
+				//=====================
+				// 權限判斷
+				//=====================
+				if(_theValue.id=='restCheckAuth'){				
+					_haveAuth =  _result.items[0].value;
+					if(_haveAuth=="true"){
+						refreshContent();
+					}else{
+					//	$('#messageModel').modal('show');		
+					}
+				//	alert("_haveAuth"  + _haveAuth +"   " + _result);
+				}else if(_theValue.id=='restglobalStatus'){	
+					MODHamiParsingData(_result.items[0].value);
+				}else if(_theValue.id=='restproj_alarms_data'){	
+					ParsingData(_result.items[0].value);
+				}else{
+				
+				}
+			}else{
+			
+			}		
+		}
+		
+		//=======================================
+		//argus api PM 參數
+		//=======================================
+		function getRest(_category){
+			var _id = "rest"+_category;
+			var myObj = { "cmd": "rest","value":{"id": _id,"restConfig":{"name":"getMetric","queryParams":{"projectId":_projectId,"category":_category},
+			"relativePath":"argusProject/getMetric.jsp","method":"get"}}};
+			
+			var str = callAppCmd(JSON.stringify(myObj));
+			//alert(str);
+		}
 
 
 function conn_id_Mapping(links){
@@ -631,57 +707,12 @@ var uuu=svg.selectAll("#"+mycir);
 uuu.style("fill",mycolor)
 ;
 	}		
-function getData(){
+	
+	
+	
 
- var url = "";
- var data = {type:1};
-$.ajax({
-           type: "POST",
-            contentType: "application/json; charset=utf-8",
-            url: 'proj_alarms_data.jsp',
-            dataType: 'json',
-            async: true,
-            data: "{'pid':'376'}",
-            timeout:20000,
-           
-  success:function(JData){
-  //allgreen();
-  ParsingData(JData);
- 
- 
-  },
-  error: function(xhr, status, error) {
-         console.log(error);
-         $( "#errorMsg" ).html(error);
-      }
- });
- };
- 
-function MODHamiGetData(){
 
- var url = "";
- var data = {type:1};
-$.ajax({
-           type: "POST",
-            contentType: "application/json; charset=utf-8",
-           // url: 'mod_hami_alarms_data.jsp',
-           url: '/modDashBoard/AudienceAna/games/globalStatus.jsp',
-            dataType: 'json',
-            async: true,
-            data: "{}",
-            timeout:20000,
-  success:function(JData){
- 
- MODHamiParsingData(JData);
- 
- 
-  },
-  error: function(xhr, status, error) {
-         console.log(error);
-         $( "#errorMsg" ).html(error);
-      }
- });
- }; 
+
  
 function allgreen(){
 //alert(mylink);
@@ -899,11 +930,11 @@ function ParsingData(JData2){
  }
 
 function circular(){
-clearInterval(myIV);
-allgreen();
-getData();
-//MODHamiGetData();
-myIV=setTimeout(circular, 15000);
+	clearInterval(myIV);
+	allgreen();
+	getRest("proj_alarms_data");
+	getRest("globalStatus");
+	myIV=setTimeout(circular, 15000);
 }
   let circle = d3.select(node).select('circle');
   
