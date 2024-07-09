@@ -377,7 +377,10 @@ if(links[j].conn_id){
     .attr("id",function(d) { return ("id_"+d.id);} )   
     .attr("class","links allobj") 
     .attr("fill", "none")
-                .on("mouseover", function(d) {		
+	.on("click",function(d) { 
+		top.location.href="../../sysList.html";
+		})
+	.on("mouseover", function(d) {		
       var myContact="";
               if(d.contact)
             myContact=d.contact;          
@@ -568,7 +571,7 @@ mycircle=svg.selectAll(".circle")
         .attr('r',function(d) { return (d.r+'px');} )
         .attr('id',function(d) { return (d.id);} )
         .attr('c_type',function(d) { return (d.c_type);} )
-        .on("click",function(d) {window.open(d.url,"_NEWWIN");})
+        .on("click",function(d) { top.location.href=d.url; })
         .style('fill', '#ddd')
                        .on("mouseover", function(d) {		
             

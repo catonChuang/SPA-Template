@@ -32,12 +32,11 @@
 				<br>		
 				<div class="card">	
 					<div class="card-header bgBlue">
-						<b><span id ="eName"></span>事件清單</b>
+						<b><span id ="eName"></span>電路清單</b>
 					</div>		
 					<div class="card-body" style="padding: 2px;">
 						<div id="mainContent" style="padding: 2px;font-size: 14px;height: 540px; overflow-y: auto;overflow-x: hidden;" > 
 							<table id="jqEventTable" > </table>
-							<div id="noEvent" style="font-size: large; " >	無事件</div>
 						</div >		
 					</div>	
 				</div>	
@@ -97,8 +96,7 @@
 	var _haveAuth = "false";
 	var _projectId = "303";				// 奧運收視數專案編號
 	var _name ="";
-	var _category="";
-	var _target="";
+
 	
 	// 奧運電路專案ID 376
 	// https://argus.cht.com.tw/argus_project_api/V1/argusProject/?projectId=376&category=sysStatus
@@ -107,10 +105,6 @@
 	// 初始呼叫
 	//==============================
 	$(document).ready(function() {
-	
-		_category=findGetParameter("category");
-		_target=findGetParameter("target");
-		getTitle(_category,_target);
 		
 		refreshTime = 1;	// 設1預設才會run
 		changeRefreshTime();
@@ -118,61 +112,7 @@
 	}); 
 
 
-	//==============================
-	// 更新標題
-	//==============================	
-	function getTitle(_category,_target){
-		if(_category=="fm_ddos"){
-			var _temp = "";
-			if(_target=="DDOS_HAMI"){
-				_temp="Hami網站";
-			}else if(_target=="DDOS_HAMI_DNS"){
-				_temp="Hami DNS服務";
-			}else if(_target=="DDOS_CDN"){
-				_temp="CDN網路";
-			}else if(_target=="DDOS_CLOUD_TPS2"){
-				_temp="外雲(南二)";
-			}			
-			$('#eName').html(_temp+"DDoS監測 ");
-		}else if(_category=="fm_qoe"){
-			var _temp = "";
-			if(_target=="QOE_HamiVideo"){
-				_temp="Hami網站";
-			}else if(_target=="QOE_ELTA"){
-				_temp="ELTA網站";
-			}else if(_target=="QOE_HamiDNS"){
-				_temp="Hami DNS服務";
-			}			
-			$('#eName').html(_temp+"QoE監測 ");
-		}else if(_category=="fm_declaration"){
-			var _temp = "";
-			if(_target=="mod_large"){
-				_temp="MOD用戶大量申告事件";
-			}else if(_target=="mod_30"){
-				_temp="MOD累計30分鐘用戶申告數";
-			}else if(_target=="hami_large"){
-				_temp="Hami DNS服務";
-			}else if(_target=="hami_30"){
-				_temp="Hami DNS服務";
-			}			
-			$('#eName').html(_temp);
-		}else if(_category=="fm_mod_platform"){			
-			$('#eName').html("MOD平台監測 ");
-		}else if(_category=="fm_hami"){			
-			$('#eName').html("Hami平台監測 ");
-		}else if(_category=="fm_power"){
-			var _temp = "";
-			if(_target=="TPS22U3"){
-				_temp="台北仁愛";
-			}else if(_target=="TPS194"){
-				_temp="重南攝影棚";
-			}else if(_target=="TPA2"){
-				_temp="台北愛國";
-			}		
-			$('#eName').html(_temp+"電力監測 ");
-		}
-	}
-
+	
 
 	function changeRefreshTime(){
 		refreshTime = refreshSecond;
@@ -198,7 +138,7 @@
 		changeRefreshTime();
 		
 		if(_haveAuth=="true"){
-			getRest(_category+"_"+_target);
+			getRest("sysStatus");
 		}
 		
 	}
@@ -252,13 +192,10 @@
 					// 事件呈現
 					var events= _result.items[0].value;
 					if(events.length >0){			
-						//alert(events);
-						$('#noEvent').hide();
 						$('#jqEventTable').show();
 						showAtTable(events);	
 					}else{
-						$('#jqEventTable').hide();
-						$('#noEvent').show();
+						//$('#jqEventTable').hide();
 					}				
 					
 				}
@@ -353,17 +290,48 @@
 		}
 	
 	
+		function customerState(cellvalue, options, rowObject){	
+			var theV = "01";
+			
+			if(cellvalue=="1"){
+				 theV = "01";
+			}else if(cellvalue=="2"){
+				 theV = "02";
+			}else if(cellvalue=="3"){
+				 theV = "03";
+			}else if(cellvalue=="5"){
+				 theV = "05";
+			}else if(cellvalue=="52"){
+				 theV = "05";
+			}else if(cellvalue=="none"){
+				 theV = "00";
+			}
+			
+			var _imgStr ="<img class=\"statusIconNote\" src='img/light2/"+theV +".png' >";
+			 if(cellvalue=="52"){
+				 _imgStr += "<br><span style=\"font-size:small\">處理中</span>";
+			}
+			
+			return _imgStr;
+		}
+	
+		function customSYS(cellvalue, options, rowObject){	
+				return "<b>"+rowObject.sysname+
+									"</b><br>"+rowObject.note +
+									"&nbsp;&nbsp;</div>" ;			
+		}
+	
 		//=======================================
 		// 呈現事件
 		//=======================================		
 		function showAtTable(rData){			  
 			
-				var theColNames = ["事件","處理狀態"];
-				var theColModel = [
-						{name:'description',index:'description',width : 40,sorttype:'string' , align:'left',formatter:customDes},
-						{name:'description',index:'description',width : 20,sorttype:'string', align:'center' ,formatter:customStatus }
-					];				
-			
+				theColNames = ["","狀態","電路"];
+				theColModel = [		
+						{name:'no',index:'no',width : 15,sorttype:'number' , align:'center'},	
+						{name:'status',index:'status',width : 20,sorttype:'string', align:'center',formatter:customerState },			
+						{name:'sysname',index:'sysname',width : 100,sorttype:'string' , align:'left',formatter:customSYS}
+					];	
 				
 				var myRowFormatter = function(elTr, oRecord) {    
 				    return true;
