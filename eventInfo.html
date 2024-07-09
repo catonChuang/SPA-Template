@@ -36,12 +36,10 @@
 					<div class="card-header bgBlue">
 						<b><span id ="eName"></span>事件清單</b>
 					</div>		
-					<div class="card-body" style="padding: 5px;">
-						<div class="row" id="mainContent" style="font-size: 14px;height: 540px; overflow: auto;" > 
-							<table id="jqEventTable" > </table>
-							<div class="col-sm-12">	
+					<div class="card-body" style="padding: 2px;">
+						<div id="mainContent" style="padding: 3px;font-size: 14px;height: 540px; overflow-y: auto;overflow-x: hidden;" > 
+							<table id="jqEventTable"  > </table>
 								<div id="noEvent" style="font-size: large; " >	無事件</div>
-							</div>
 						</div >		
 					</div>	
 				</div>	
@@ -92,6 +90,7 @@
 </html>
 
 <script>
+	
 
 	var refreshSecond = 30;						// 30 秒
 	var refreshTime = refreshSecond;			
@@ -111,7 +110,8 @@
 	// 初始呼叫
 	//==============================
 	$(document).ready(function() {
-		resizeTable();
+		
+	
 		
 		_category=findGetParameter("category");
 		_target=findGetParameter("target");
@@ -243,11 +243,12 @@
 				}else{
 					// 事件呈現
 					var events= _result.items[0].value;
-					if(events.length >0){			
+					if(events.length >0){								
 						alert(events);
 						$('#noEvent').hide();
 						$('#jqEventTable').show();
 						showAtTable(events);	
+						resizeTable();
 					}else{
 						$('#jqEventTable').hide();
 						$('#noEvent').show();
@@ -385,7 +386,7 @@
 		  
 		  
 	function resizeTable(){
-		$("#jqEventTable").jqGrid('setGridWidth', parseInt($('#colMain').width()) - 50);    
+		$("#jqEventTable").jqGrid('setGridWidth', parseInt($('#colMain').width()) - 90);    
 	}
 
 	</script>
