@@ -12,8 +12,6 @@
 	<script src="bootstrapV4/js/bootstrap.min.js"></script>	
 	<link href="bootstrapV4/css/bootstrap.min.css" rel="stylesheet">  
 	<link rel="stylesheet" href="css/bootstrap-icons/bootstrap-icons.css">	
-	<script src="js/jquery-ui.min.js"></script>	
-	<link rel="stylesheet" type="text/css" href="js/filker/jquery-ui.min.css"/>
 	<script src="xss-filters.min.js"></script>
 	<link href="argusApp.css" rel="stylesheet">  
 	<script src="js/argus.app.js"></script>
@@ -26,7 +24,7 @@
   </style>
 </head>
 <body>
-	<div id="colMain" class="I-Body">
+	<div class="I-Body">
 		<div class="row">
 			<div class="col-sm-12">	
 				<div onclick="goPre()" style="font-size: 24px;"><i class="bi bi-chevron-left"></i> <b >巴黎奧運網路監視</b></div>
@@ -36,10 +34,12 @@
 					<div class="card-header bgBlue">
 						<b><span id ="eName"></span>事件清單</b>
 					</div>		
-					<div class="card-body" style="padding: 2px;">
-						<div id="mainContent" style="padding: 3px;font-size: 14px;height: 540px; overflow-y: auto;overflow-x: hidden;" > 
-							<table id="jqEventTable"  > </table>
+					<div class="card-body" style="padding: 5px;">
+						<div class="row" id="mainContent" style="font-size: 14px;height: 540px; overflow: auto;" > 
+							<table id="jqEventTable" > </table>
+							<div class="col-sm-12">	
 								<div id="noEvent" style="font-size: large; " >	無事件</div>
+							</div>
 						</div >		
 					</div>	
 				</div>	
@@ -90,7 +90,6 @@
 </html>
 
 <script>
-	
 
 	var refreshSecond = 30;						// 30 秒
 	var refreshTime = refreshSecond;			
@@ -110,9 +109,7 @@
 	// 初始呼叫
 	//==============================
 	$(document).ready(function() {
-		
 	
-		
 		_category=findGetParameter("category");
 		_target=findGetParameter("target");
 		getTitle(_category,_target);
@@ -120,7 +117,6 @@
 		refreshTime = 1;	// 設1預設才會run
 		changeRefreshTime();
 		pageRefresh();
-				
 	}); 
 
 
@@ -247,12 +243,11 @@
 				}else{
 					// 事件呈現
 					var events= _result.items[0].value;
-					if(events.length >0){								
+					if(events.length >0){			
 						alert(events);
 						$('#noEvent').hide();
 						$('#jqEventTable').show();
 						showAtTable(events);	
-						resizeTable();
 					}else{
 						$('#jqEventTable').hide();
 						$('#noEvent').show();
@@ -386,12 +381,6 @@
 					isReLoad = true;
 	    		}	
 		  }  	
-		  
-		  
-		  
-	function resizeTable(){
-		$("#jqEventTable").jqGrid('setGridWidth', parseInt($('#colMain').width()) - 90);    
-	}
 
 	</script>
 	
