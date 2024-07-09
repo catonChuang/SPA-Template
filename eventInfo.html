@@ -158,10 +158,20 @@
 				_temp="Hami DNS服務";
 			}			
 			$('#eName').html(_temp);
-		}else if(_category=="fm_mod_platform"){					
+		}else if(_category=="fm_mod_platform"){			
 			$('#eName').html("MOD平台監測 ");
-		}else if(_category=="fm_hami"){
+		}else if(_category=="fm_hami"){			
 			$('#eName').html("Hami平台監測 ");
+		}else if(_category=="fm_power"){
+			var _temp = "";
+			if(_target=="TPS22U3"){
+				_temp="台北仁愛";
+			}else if(_target=="TPS194"){
+				_temp="重南攝影棚";
+			}else if(_target=="TPA2"){
+				_temp="台北愛國";
+			}		
+			$('#eName').html(_temp+"電力監測 ");
 		}
 	}
 
