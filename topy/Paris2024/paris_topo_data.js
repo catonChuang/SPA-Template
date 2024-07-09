@@ -451,8 +451,8 @@ var topo={
 { "name": "陽明山","xid":"link11ss","linedata":[[170,30],[180,50],],"width": "8px"},
 ],
 "circles":[
-{"name":"MOD平台","id":"id_MOD_PLATFORM","cx":75,"cy":410,"r":12,"url":"/modDashBoard/MOD_DashBoardII.jsp?isWide=true","c_type":"MOD"},
-{"name":"HAMI平台","id":"id_HAMI_PLATFORM","cx":205,"cy":410,"r":12,"url":"/GNOC/OTT/OTTzoneN.jsp","c_type":"HAMI"},
+{"name":"MOD平台","id":"id_MOD_PLATFORM","cx":75,"cy":410,"r":12,"url":"../../eventInfo.html?category=fm_mod_platform&target=","c_type":"MOD"},
+{"name":"HAMI平台","id":"id_HAMI_PLATFORM","cx":205,"cy":410,"r":12,"url":"../../eventInfo.html?category=fm_hami&target=","c_type":"HAMI"},
 {"name":"台北仁愛電力","id":"id_TPS22U3_POWER","cx":270,"cy":225,"r":13,"color":"green","url":"","c_type":"power"},
 {"name":"重南攝影棚電力","id":"id_TPS194_POWER","cx":283,"cy":477,"r":13,"color":"green","url":"","c_type":"power"},
 {"name":"台北愛國電力","id":"id_TPA2_POWER","cx":135,"cy":250,"r":13,"color":"green","url":"","c_type":"power"},

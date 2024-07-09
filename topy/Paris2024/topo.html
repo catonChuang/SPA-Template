@@ -341,6 +341,14 @@ $(window).load(function () {
 			var str = callAppCmd(JSON.stringify(myObj));
 			//alert(str);
 		}
+		
+		
+		//=======================================
+		//事件頁面
+		//=======================================
+		function openNext(category,target){
+		    window.location = 'eventInfo.html?category='+category+"&target="+target; 
+		}
 
 
 function conn_id_Mapping(links){
