@@ -65,5 +65,28 @@
 	}
 	
 	
+		//=======================================
+		// 燈號改變-4 ISP
+		//=======================================
+		function checkISPStatus(events){
+			var _statusIsp = 1;
+			if(events.length >0){			
+				for(var i=0; i<events.length; i++){
+					var _as= events[i].Alarmseverity;
+					if(_as=="Critical"){
+						_statusIsp =5;
+					}
+				}
+			}
+			$("#btn4").removeClass();
+			
+			if(_statusIsp == 5){			
+				$("#btn4").addClass("badge badge-danger");
+			}else{
+				$("#btn4").addClass("badge badge-secondary btnNormal");
+			}
+		}
+	
+	
 	
 		

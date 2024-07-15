@@ -938,6 +938,9 @@ function ParsingData(JData2){
 				}else if(_theValue.id=='restproj_alarms_data'){	
 					//alert("X2 " +JSON.stringify(_result));
 					ParsingData(_result.items[0].value);
+				}else if(_theValue.id=='restfm_isp'){	
+					var _events = _result.items[0].value;
+					checkISPStatus(_events);  
 				}else{
 					//alert("X3 " +JSON.stringify(_result));
 				}

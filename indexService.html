@@ -129,7 +129,7 @@
 				<table width=100%>
 					<tr align="center" style="vertical-align: middle; height:60px " class="kindTitle">
 					<td>
-						<h3 style="padding-top: 8px;"><a href="#" class="badge badge-secondary" style="background: #4070B1;" onclick="goPage('1')">網路<br>拓樸</a></h3>
+						<h3 style="padding-top: 8px;"><a id="btn1" href="#" class="badge badge-secondary btnNormal"  onclick="goPage('1')">網路<br>拓樸</a></h3>
 					</td>
 					</tr>
 				</table>
@@ -138,7 +138,7 @@
 				<table width=100%>
 					<tr align="center" style="vertical-align: middle; height:60px " class="kindTitle">
 					<td>
-						<h3 style="padding-top: 8px;"><a href="#" class="badge badge-secondary" style="background: #4070B1;" onclick="goPage('2')">服務<br>狀態
+						<h3 style="padding-top: 8px;"><a id="btn2" href="#" class="badge badge-secondary btnNormal"  onclick="goPage('2')">服務<br>狀態
 						</a></h3>
 					</td>
 					</tr>
@@ -148,7 +148,7 @@
 				<table width=100%>
 					<tr align="center" style="vertical-align: middle; height:60px " class="kindTitle">
 							<td>
-							<h3 style="padding-top: 8px;"><a href="#" class="badge badge-secondary" style="background: #4070B1;" onclick="goPage('3')">收視<br>指標</a></h3>
+							<h3 style="padding-top: 8px;"><a id="btn3" href="#" class="badge badge-secondary btnNormal"  onclick="goPage('3')">收視<br>指標</a></h3>
 							</td>
 					</tr>
 				</table>
@@ -157,7 +157,7 @@
 				<table width=100%>
 					<tr align="center" style="vertical-align: middle; height:60px " class="kindTitle">
 							<td>
-							<h3 style="padding-top: 8px;"><a href="#" class="badge badge-secondary" style="background: #4070B1;" onclick="goPage('4')">ISP<br>互連<br></a></h3>
+							<h3 style="padding-top: 8px;"><a id="btn4" href="#" class="badge badge-secondary btnNormal"  onclick="goPage('4')">ISP<br>互連<br></a></h3>
 							</td>
 					</tr>
 				</table>
@@ -217,6 +217,8 @@
 			getRest("pm_qoe"); 
 			getRest("pm_declaration"); 
 			getRest("fm_eram"); 
+			
+			getRest("fm_isp");		// ISP 燈號
 		}
 		
 	}
@@ -282,6 +284,9 @@
 				}else if(_theValue.id=='restfm_eram'){	
 					//alert("eram appCmdCallback: " + str);
 					settingEram(_result.items[0].value);
+				}else if(_theValue.id=='restfm_isp'){	
+					var _events = _result.items[0].value;
+					checkISPStatus(_events);  
 				}else{
 				
 				}
@@ -516,6 +521,7 @@
 			}
 			 $('#eRAMList').html(eramDiv);
 	}
+	
 		
 		//=======================================
 		//下一頁
@@ -523,6 +529,8 @@
 		function openNext(category,target){
 		    window.location = 'eventInfo.html?category='+category+"&target="+target; 
 		}	
+		
+		
 		
 	
 		
