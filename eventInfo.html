@@ -267,7 +267,7 @@
 								//alert(events);
 								$('#noEvent').hide();
 								$('#jqEventTable').show();
-								alert(events[0].Description);
+								//alert(events[0].Description);
 								showAtTable(events,"fm_declaration");	
 							}else{
 								$('#jqEventTable').hide();
@@ -406,9 +406,10 @@
 					];		
 
 				if(ca=="fm_declaration"){
+						
 						if(_target=="mod_large" || _target=="hami_large"){
-						}else if(_target=="mod_30" || _target=="hami_30"){
-							alert("mod_30");
+						}else if(_target=="mod_30" || _target=="hami_30"){							
+							theColNames = ["申告內容","處理狀態"];
 							theColModel = [
 								{name:'Description',index:'Description',width : 40,sorttype:'string' , align:'left'},
 								{name:'Description',index:'Description',width : 20,sorttype:'string', align:'center' ,formatter:customStatus2 }
