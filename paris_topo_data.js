@@ -11,11 +11,9 @@ var topo={
 {"name":"東京","x":170,"y":170,"size":"15px"},
 {"name":"巴黎OBS","x":45,"y":115,"size":"18px"},
 {"name":"重南攝影棚","x":295,"y":485,"size":"14px"},
+{"name":"270M*2","x":290,"y":415,"size":"13px"},
 {"name":"漢口攝影棚","x":295,"y":170,"size":"14px"},
-{"name":"270M*2","x":295,"y":207,"size":"13px"}, //漢口
-//{"name":"270M","x":430,"y":433,"size":"13px"},
-{"name":"270M*2","x":290,"y":415,"size":"13px"},//重南
-//{"name":"270M","x":645,"y":433,"size":"13px"},
+{"name":"270M*2","x":295,"y":207,"size":"13px"},
 {"name":"10G*2","x":145,"y":390,"size":"13px"},
 {"name":"50M*2","x":220,"y":395,"size":"13px"},
 {"name":"10G*4","x":100,"y":365,"size":"13px"},
@@ -28,7 +26,10 @@ var topo={
 {"name":"陽明山","x":170,"y":100,"size":"16px"},
 {"name":"服務大樓","x":235,"y":100,"size":"16px"},
 {"name":"270M*2","x":212,"y":210,"size":"13px"},
-{"name":"270M*4","x":285,"y":120,"size":"13px"}
+{"name":"270M*4","x":285,"y":120,"size":"13px"},
+{"name":"台中公館","x":295,"y":25,"size":"14px","color":"#fff"},
+{"name":"備援訊號","x":295,"y":45,"size":"14px","color":"#fff"},
+{"name":"中心","x":310,"y":65,"size":"14px","color":"#fff"}
 ],
 "links":[{
 	"name": "仁愛HamiNet",
@@ -44,8 +45,7 @@ var topo={
 		[320, 300],
 		[320, 375],
 		[210, 375],
-		[210, 395]
-		
+		[210, 395]		
 	],
 	"width": "4px"
 }, {
@@ -446,21 +446,22 @@ var topo={
 }
 ],
 "links_dash":[
-{ "name": "PARIS","xid":"link11ss","linedata":[[150,30],[110,55],],"width": "8px"},
-{ "name": "服務大樓","xid":"link11ss","linedata":[[185,25],[250,55],],"width": "8px"},
-{ "name": "陽明山","xid":"link11ss","linedata":[[170,30],[180,50],],"width": "8px"},
+{ "name": "PARIS","xid":"link11ss","linedata":[[150,30],[110,55]],"width": "8px"},
+{ "name": "服務大樓","xid":"link11ss","linedata":[[185,25],[250,55]],"width": "8px"},
+{ "name": "陽明山","xid":"link11ss","linedata":[[170,30],[180,50]],"width": "8px"}
 ],
 "circles":[
-{"name":"MOD平台","id":"id_MOD_PLATFORM","cx":75,"cy":410,"r":12,"url":"../../eventInfo.html?category=fm_mod_platform&target=","c_type":"MOD"},
-{"name":"HAMI平台","id":"id_HAMI_PLATFORM","cx":205,"cy":410,"r":12,"url":"../../eventInfo.html?category=fm_hami&target=","c_type":"HAMI"},
+{"name":"MOD平台","id":"id_MOD_PLATFORM","cx":75,"cy":410,"r":12,"url":"eventInfo.html?category=fm_mod_platform&target=","c_type":"MOD"},
+{"name":"HAMI平台","id":"id_HAMI_PLATFORM","cx":205,"cy":410,"r":12,"url":"eventInfo.html?category=fm_hami&target=","c_type":"HAMI"},
 {"name":"台北仁愛電力","id":"id_TPS22U3_POWER","cx":270,"cy":225,"r":13,"color":"green","url":"","c_type":"power"},
 {"name":"重南攝影棚電力","id":"id_TPS194_POWER","cx":283,"cy":477,"r":13,"color":"green","url":"","c_type":"power"},
 {"name":"台北愛國電力","id":"id_TPA2_POWER","cx":135,"cy":250,"r":13,"color":"green","url":"","c_type":"power"},
+{"name":"台中公館","id":"id_TCCK_BACKUP","cx":283,"cy":14,"r":13,"color":"green","url":"topo_backup.html","c_type":"backup"}
 ],
 "circles_image":[
-{"name":"","id":"id_TPS22U3_POWER_img","xid":"id_TPS22U3_POWER","x":260,"y":215,"width":18,"height":18,"url":"lighteningy.png","Alarm_url":"powerly.png"},
-{"name":"","id":"id_TPS194_POWER_img","xid":"id_TPS194_POWER","x":274,"y":467,"width":18,"height":18,"url":"lighteningy.png","Alarm_url":"powerly.png"},
-{"name":"","id":"id_TPA2_POWER_img","xid":"id_TPA2_POWER","x":125,"y":240,"width":18,"height":18,"url":"lighteningy.png","Alarm_url":"powerly.png"}
+{"name":"","id":"id_TPS22U3_POWER_img","xid":"id_TPS22U3_POWER","x":260,"y":215,"width":18,"height":18,"url":"topy/Paris2024/lighteningy.png","Alarm_url":"topy/Paris2024/powerly.png"},
+{"name":"","id":"id_TPS194_POWER_img","xid":"id_TPS194_POWER","x":274,"y":467,"width":18,"height":18,"url":"topy/Paris2024/lighteningy.png","Alarm_url":"topy/Paris2024/powerly.png"},
+{"name":"","id":"id_TPA2_POWER_img","xid":"id_TPA2_POWER","x":125,"y":240,"width":18,"height":18,"url":"topy/Paris2024/lighteningy.png","Alarm_url":"topy/Paris2024/powerly.png"}
 ],
 "links_bk":[
 { "name": "Paris-AliCloud","xid":"link13","linedata":[[163,217],[60,217],[60,150]],"width": "5px","id":"ParisAliLink"},
@@ -537,7 +538,6 @@ var topo={
 	"remark": "國分愛國機房-香港450M223D73319",
 	"facilitytype": "SDH/DWDM光傳輸電路",
 	"xid": "愛國HK1","linedata":[[240,270],[240,310],[360,310],[360,290]],"width": "6.3px"}
-	
 	
 ]
   }

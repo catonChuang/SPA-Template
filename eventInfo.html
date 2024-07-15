@@ -94,7 +94,7 @@
 	var refreshTime = refreshSecond;			
 	var isReLoad = false;
 	
-	var _empID="";
+	var _empNo="";
 	var _haveAuth = "false";
 	var _projectId = "303";				// 奧運收視數專案編號
 	var _name ="";
@@ -234,7 +234,7 @@
 			var _theValue = obj.value;
 			
 			if(obj.cmd=='getInitInfo'){
-				_empID =_theValue.userInfo.empID;
+				_empNo =_theValue.userInfo.empNo;
 				checkAuth();
 			}else if(obj.cmd=='rest'){
 				var _result = _theValue.data;
@@ -250,17 +250,39 @@
 					}
 				//	alert("_haveAuth"  + _haveAuth +"   " + _result);
 				}else{
-					// 事件呈現
-					var events= _result.items[0].value;
-					if(events.length >0){			
-						//alert(events);
-						$('#noEvent').hide();
-						$('#jqEventTable').show();
-						showAtTable(events);	
+				
+					if(_category=="fm_declaration"){
+						if(_target=="mod_large" || _target=="hami_large"){
+						}else if( _target=="mod_30"|| _target=="hami_30"){
+							// 事件呈現
+							//alert(" 3 " +JSON.stringify(_result));
+							var events= _result.items[0].value.Detail;
+							//alert(" 3-2 " +JSON.stringify(_result.items[0]));
+							if(events.length >0){			
+								//alert(events);
+								$('#noEvent').hide();
+							//	$('#jqEventTable').show();
+							//	showAtTable(events,"ca");	
+							}else{
+								$('#jqEventTable').hide();
+								$('#noEvent').show();
+							}	
+						}
 					}else{
-						$('#jqEventTable').hide();
-						$('#noEvent').show();
-					}				
+						//alert(" 4 " +JSON.stringify(_result));
+						// 事件呈現
+						var events= _result.items[0].value;
+						//alert(" 4-2 " +JSON.stringify(_result.items[0]));
+						if(events.length >0){			
+							//alert(events);
+							$('#noEvent').hide();
+							$('#jqEventTable').show();
+							showAtTable(events,"");	
+						}else{
+							$('#jqEventTable').hide();
+							$('#noEvent').show();
+						}	
+					}						
 					
 				}
 			}else{
@@ -285,7 +307,7 @@
 		//argus api-檢查權限
 		//=======================================
 		function checkAuth(){
-			var _authCheckStr = "auth_"+_empID;
+			var _authCheckStr = "auth_"+_empNo;
 			//https://argus.qa.cht.com.tw/argus_project_api/V1/argusProject/?projectId=0&category=auth_
 			var myObj = { "cmd": "rest","value":{"id": "restCheckAuth","restConfig":{"name":"getMetric","queryParams":{"projectId":"0","category":_authCheckStr},"relativePath":"argusProject/getMetric.jsp","method":"get"}}};
 			var str = callAppCmd(JSON.stringify(myObj));
@@ -346,6 +368,18 @@
 			}
 			return _des ;
 		}
+		
+		function customStatus2(cellvalue, options, rowObject){					 
+			var _des ="";
+			if(rowObject.EndTime=="未結束"){
+					_des ="處理中";
+			}else{
+				_des = "已處理";
+			}
+			return _des ;
+		}
+	
+	
 	
 		function customDes(cellvalue, options, rowObject){					 
 			var _des =rowObject.description;
@@ -357,13 +391,24 @@
 		//=======================================
 		// 呈現事件
 		//=======================================		
-		function showAtTable(rData){			  
+		function showAtTable(rData,ca){			  
 			
 				var theColNames = ["事件","處理狀態"];
 				var theColModel = [
 						{name:'description',index:'description',width : 40,sorttype:'string' , align:'left',formatter:customDes},
 						{name:'description',index:'description',width : 20,sorttype:'string', align:'center' ,formatter:customStatus }
-					];				
+					];		
+
+				if(ca=="fm_declaration"){
+						if(_target=="mod_large"){
+						}else if(_target=="mod_30"){
+						}else if(_target=="hami_large" || _target=="hami_30"){
+							theColModel = [
+								{name:'Description',index:'Description',width : 40,sorttype:'string' , align:'left'},
+								{name:'Description',index:'Description',width : 20,sorttype:'string', align:'center' ,formatter:customStatus2 }
+							];	
+						}
+					}					
 			
 				
 				var myRowFormatter = function(elTr, oRecord) {    

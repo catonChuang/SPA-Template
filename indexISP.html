@@ -15,7 +15,6 @@
 	<script src="xss-filters.min.js"></script>
 	<link href="argusApp.css" rel="stylesheet">  
 	<script src="js/argus.app.js"></script>
-	<script src="xss-filters.min.js"></script>
 	<script src="js/d3.v3.min.js" charset="utf-8"></script>	
 	<script src="js/liquidFillGauge.js" language="JavaScript"></script>
   <style type="text/css">
@@ -35,7 +34,7 @@
 						<b>ISP</b>
 					</div>		
 					<div class="card-body" style="padding: 5px;">
-						<div class="row" id="mainContent" style="font-size: 14px;max-height: 540px; overflow: auto;" > </div >		
+						<div class="row" id="mainContent" style="font-size: 14px;height: 540px; overflow: auto;" > </div >		
 					</div>	
 				</div>	
 				
@@ -91,15 +90,11 @@
 	var refreshTime = refreshSecond;			
 	var isReLoad = false;
 	
-	var _empID="";
+	var _empNo="";
 	var _haveAuth = "false";
 	var _projectId = "303";				// 奧運收視數專案編號
 	
 
-	var _MODCur = 0;		// MOD加總紀錄，會有時間差 個頻道會不一樣
-	var _isEst = false;		// 是否推估
-	var _todayMax = 0;		// 本日最高，推估模式小於本日最高時啟用
-	var _estValue = 0;
 	
 	//==============================
 	// 初始呼叫
@@ -133,6 +128,7 @@
 	// 更新內容
 	//==============================
 	function refreshContent(){
+		//alert(_haveAuth);
 		changeRefreshTime();		
 		if(_haveAuth=="true"){
 			getRest("pm_isp_curflow");
@@ -171,7 +167,7 @@
 			var _theValue = obj.value;
 			
 			if(obj.cmd=='getInitInfo'){
-				_empID =_theValue.userInfo.empID;
+				_empNo =_theValue.userInfo.empNo;
 				checkAuth();
 			}else if(obj.cmd=='rest'){
 				var _result = _theValue.data;
@@ -186,10 +182,11 @@
 						$('#messageModel').modal('show');		
 					}
 				//	alert("_haveAuth"  + _haveAuth +"   " + _result);
-				}else if(_theValue.id=='pm_isp_curflow'){	
+				}else if(_theValue.id=='restpm_isp_curflow'){	
+					//alert("1"+_result.items[0].value.ISP);
 					settingpm_isp_curflow(_result.items[0].value.ISP);
-				}else{
-				
+				}else{	
+					//alert("2"+JSON.stringify(_theValue.data));
 				}
 			}else{
 			
@@ -214,7 +211,7 @@
 		//argus api-檢查權限
 		//=======================================
 		function checkAuth(){
-			var _authCheckStr = "auth_"+_empID;
+			var _authCheckStr = "auth_"+_empNo;
 			//https://argus.qa.cht.com.tw/argus_project_api/V1/argusProject/?projectId=0&category=auth_
 			var myObj = { "cmd": "rest","value":{"id": "restCheckAuth","restConfig":{"name":"getMetric","queryParams":{"projectId":"0","category":_authCheckStr},"relativePath":"argusProject/getMetric.jsp","method":"get"}}};
 			var str = callAppCmd(JSON.stringify(myObj));
@@ -267,7 +264,9 @@
 		function settingpm_isp_curflow(_theData){
 			$("#mainContent").html("");	
 			_ischange = true;
+
 			if(_theData.length>0){	
+
 				for(var i=0; i <_theData.length ; i++ ){										
 					if(i>0){
 						if(i%1==0)
@@ -276,11 +275,17 @@
 					var _tempHtml = "";
 					_tempHtml ="<div class=\"col-sm-6 col-md-4 col-xl-3\">";
 		
-					var _code = xssFilters.inHTMLData(_theData[i].code);
-					var _cName = xssFilters.inHTMLData(_theData[i].cName);
-					var _idx = xssFilters.inHTMLData(_theData[i].idx);
-					var _flow = xssFilters.inHTMLData(_theData[i].flow);
-					var _bandwidth = new Number(xssFilters.inHTMLData(_theData[i].bandwidth));
+					//var _code = xssFilters.inHTMLData(_theData[i].code);
+					//var _cName = xssFilters.inHTMLData(_theData[i].cName);
+					//var _idx = xssFilters.inHTMLData(_theData[i].idx);
+					//var _flow = xssFilters.inHTMLData(_theData[i].flow);
+					//var _bandwidth = new Number(xssFilters.inHTMLData(_theData[i].bandwidth));
+					
+					var _code = _theData[i].code;
+					var _cName = _theData[i].cName;
+					var _idx = _theData[i].idx;
+					var _flow = _theData[i].flow;
+					var _bandwidth = new Number(_theData[i].bandwidth);
 
 					_tempHtml +="<table class=\"table table-bordered\" ><tr align=\"center\" ><th class=\"cardTitle\" colspan=\"2\">"+ 
 	"<a onclick=\"showInfo('"+_code+"')\">"+_cName+"<i class=\"bi bi-info-circle\"></i></a></th></tr>";  
@@ -304,7 +309,8 @@
 				
 					_tempHtml +="</table>";
 					_tempHtml +="</div>" ;
-	
+
+
 				$("#mainContent").append(_tempHtml);	
 			} // end for(var i=0; i <_theData.length ; i++ ){	
 			drawRate(_theData);

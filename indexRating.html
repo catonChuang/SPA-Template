@@ -114,12 +114,12 @@
 									 <td align="right"><b id="channel3num">--</b></td>
 									 <td align="center"><b><img id="statusch202" src="img/light2/01.png" class="statusIcon" onclick="openChannelInfo()"></b></td>
 								</tr>
-								<!--<tr>
+								<tr>
 									<td><b>ch203</b>  </td>
 									<td><b>愛爾達體育4台</b>  </td>
-									 <td align="right"><b id="channel3num">--</b></td>
+									 <td align="right"><b id="channel4num">--</b></td>
 									 <td align="center"><b><img id="statusch203" src="img/light2/01.png" class="statusIcon" onclick="openChannelInfo()"></b></td>
-								</tr>-->
+								</tr>
 							  </tbody>
 							</table>
 						
@@ -180,7 +180,7 @@
 	var refreshTime = refreshSecond;			
 	var isReLoad = false;
 	
-	var _empID="";
+	var _empNo="";
 	var _haveAuth = "false";
 	var _projectId = "303";				// 奧運收視數專案編號
 	
@@ -265,7 +265,7 @@
 			var _theValue = obj.value;
 			
 			if(obj.cmd=='getInitInfo'){
-				_empID =_theValue.userInfo.empID;
+				_empNo =_theValue.userInfo.empNo;
 				checkAuth();
 			}else if(obj.cmd=='rest'){
 				var _result = _theValue.data;
@@ -311,7 +311,7 @@
 		//argus api-檢查權限
 		//=======================================
 		function checkAuth(){
-			var _authCheckStr = "auth_"+_empID;
+			var _authCheckStr = "auth_"+_empNo;
 			//https://argus.qa.cht.com.tw/argus_project_api/V1/argusProject/?projectId=0&category=auth_
 			var myObj = { "cmd": "rest","value":{"id": "restCheckAuth","restConfig":{"name":"getMetric","queryParams":{"projectId":"0","category":_authCheckStr},"relativePath":"argusProject/getMetric.jsp","method":"get"}}};
 			var str = callAppCmd(JSON.stringify(myObj));
@@ -453,11 +453,14 @@
 			var _subObj1 = _obj.channel1;
 			var _subObj2 = _obj.channel2;
 			var _subObj3 = _obj.channel3;
+			var _subObj4 = _obj.channel4;
+
 			//alert("_subObj1_data: "+_subObj1.data);
 
 			$("#channel1num").html( "<span class=\"broadmessage\">"+ commafy(xssFilters.inHTMLData(_subObj1.data[0][1]))  + "</span>");
 			$("#channel2num").html( "<span class=\"broadmessage\">"+ commafy(xssFilters.inHTMLData(_subObj2.data[0][1]))  + "</span>");
 			$("#channel3num").html( "<span class=\"broadmessage\">"+ commafy(xssFilters.inHTMLData(_subObj3.data[0][1]))  + "</span>");
+			$("#channel4num").html( "<span class=\"broadmessage\">"+ commafy(xssFilters.inHTMLData(_subObj4.data[0][1]))  + "</span>");
 		}
 	
 	

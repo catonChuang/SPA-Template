@@ -62,7 +62,7 @@
 							</tr>
 									<tr>
 								<td><div class="conTitle" >目前畫質</div></td>
-								<td colspan=2><span id="curResolution"></span></td>
+								<td colspan=2 align="right"><span id="curResolution"></span></td>
 							</tr>							
 							</tbody>
 						</table>
@@ -114,7 +114,11 @@
 						<b>障礙/改接公告</b>
 					</div>		
 					<div class="card-body" style="padding: 5px;height: 140px; margin: 0 auto; overflow:auto;">
-							<div id="eRAMList" ></div>
+						<table style="width:100% "><tbody>		
+							<tr align="left">								
+								<td ><div id="eRAMList" ></div></td>
+							</tr>						
+						</tbody></table>
 					</div>						
 				</div> 	
 			</div>	
@@ -169,7 +173,7 @@
 	var refreshTime = refreshSecond;			
 	var isReLoad = false;
 	
-	var _empID="";
+	var _empNo="";
 	var _haveAuth = "false";
 	var _projectId = "303";				// 奧運收視數專案編號
 	
@@ -251,7 +255,7 @@
 			var _theValue = obj.value;
 			
 			if(obj.cmd=='getInitInfo'){
-				_empID =_theValue.userInfo.empID;
+				_empNo =_theValue.userInfo.empNo;
 				checkAuth();
 			}else if(obj.cmd=='rest'){
 				var _result = _theValue.data;
@@ -304,7 +308,7 @@
 		//argus api-檢查權限
 		//=======================================
 		function checkAuth(){
-			var _authCheckStr = "auth_"+_empID;
+			var _authCheckStr = "auth_"+_empNo;
 			//https://argus.qa.cht.com.tw/argus_project_api/V1/argusProject/?projectId=0&category=auth_
 			var myObj = { "cmd": "rest","value":{"id": "restCheckAuth","restConfig":{"name":"getMetric","queryParams":{"projectId":"0","category":_authCheckStr},"relativePath":"argusProject/getMetric.jsp","method":"get"}}};
 			var str = callAppCmd(JSON.stringify(myObj));
@@ -485,32 +489,32 @@
 		function settingEram(_theDatas){
 			var eramDiv ="";
 			if(_theDatas.length>0){
-							for(var i=0; i < _theDatas.length; i++){
-								var _tempObj = _theDatas[i];
-								var alarmDescription = _tempObj.alarmDescription.replace("MOD局端設備維運障礙","");	
-								alarmDescription =xssFilters.inHTMLData(alarmDescription);
-								var alarmDescriptions = alarmDescription.split("應變措施");		
+				for(var i=0; i < _theDatas.length; i++){
+					var _tempObj = _theDatas[i];
+					var alarmDescription = _tempObj.description.replace("MOD局端設備維運障礙","");	
+						alarmDescription =xssFilters.inHTMLData(alarmDescription);
+					var alarmDescriptions = alarmDescription.split("應變措施");		
 								
-								var sn = xssFilters.inHTMLData(_tempObj.sn);
-								sn = sn.replace("F", "");
-								if(sn==""){
-									eramDiv = eramDiv + "●" + alarmDescription + "<br>";	
-								}else{
-									var indexALL = alarmDescription.indexOf("全區障礙");
-									var indexRegion = alarmDescription.indexOf("區域障礙");					
-									if(indexALL<0 && indexRegion<0){	
-										eramDiv = eramDiv + "●" + alarmDescriptions[0]  + "</a><br>";	
-									}else{
-										var _rMessage  = alarmDescriptions[0].replace("全區障礙推論,原因:","");
-										_rMessage  = _rMessage.replace("區域障礙推論,原因:","");
-										var _realTimeMessage = _realTimeMessage + "●" + _rMessage+ "</span>";		
-									}					
-								}
-							}
+					var sn = xssFilters.inHTMLData(_tempObj.eventID);
+						sn = sn.replace("F", "");
+						if(sn==""){
+							eramDiv = eramDiv + "●" + alarmDescription + "<br>";	
 						}else{
-							 eramDiv="無障礙改接公告";
+							var indexALL = alarmDescription.indexOf("全區障礙");
+							var indexRegion = alarmDescription.indexOf("區域障礙");					
+							if(indexALL<0 && indexRegion<0){	
+								eramDiv = eramDiv + "●" + alarmDescriptions[0]  + "</a><br>";	
+							}else{
+								var _rMessage  = alarmDescriptions[0].replace("全區障礙推論,原因:","");
+									_rMessage  = _rMessage.replace("區域障礙推論,原因:","");
+								var _realTimeMessage = _realTimeMessage + "●" + _rMessage+ "</span>";		
+							}					
 						}
-						 $('#eRAMList').html(eramDiv);
+					}
+			}else{
+					eramDiv="無障礙改接公告";
+			}
+			 $('#eRAMList').html(eramDiv);
 	}
 		
 		//=======================================

@@ -113,7 +113,7 @@
 	var refreshTime = refreshSecond;			
 	var isReLoad = false;
 	
-	var _empID="";
+	var _empNo="";
 	var _haveAuth = "false";
 	var _projectId = "303";				// 奧運收視數專案編號
 	var _name ="";
@@ -195,7 +195,7 @@
 			var _theValue = obj.value;
 			
 			if(obj.cmd=='getInitInfo'){
-				_empID =_theValue.userInfo.empID;
+				_empNo =_theValue.userInfo.empNo;
 				checkAuth();
 			}else if(obj.cmd=='rest'){
 				var _result = _theValue.data;
@@ -246,7 +246,7 @@
 		//argus api-檢查權限
 		//=======================================
 		function checkAuth(){
-			var _authCheckStr = "auth_"+_empID;
+			var _authCheckStr = "auth_"+_empNo;
 			//https://argus.qa.cht.com.tw/argus_project_api/V1/argusProject/?projectId=0&category=auth_
 			var myObj = { "cmd": "rest","value":{"id": "restCheckAuth","restConfig":{"name":"getMetric","queryParams":{"projectId":"0","category":_authCheckStr},"relativePath":"argusProject/getMetric.jsp","method":"get"}}};
 			var str = callAppCmd(JSON.stringify(myObj));
