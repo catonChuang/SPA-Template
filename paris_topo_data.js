@@ -453,9 +453,9 @@ var topo={
 "circles":[
 {"name":"MOD平台","id":"id_MOD_PLATFORM","cx":75,"cy":410,"r":12,"url":"eventInfo.html?category=fm_mod_platform&target=","c_type":"MOD"},
 {"name":"HAMI平台","id":"id_HAMI_PLATFORM","cx":205,"cy":410,"r":12,"url":"eventInfo.html?category=fm_hami&target=","c_type":"HAMI"},
-{"name":"台北仁愛電力","id":"id_TPS22U3_POWER","cx":270,"cy":225,"r":13,"color":"green","url":"","c_type":"power"},
-{"name":"重南攝影棚電力","id":"id_TPS194_POWER","cx":283,"cy":477,"r":13,"color":"green","url":"","c_type":"power"},
-{"name":"台北愛國電力","id":"id_TPA2_POWER","cx":135,"cy":250,"r":13,"color":"green","url":"","c_type":"power"},
+{"name":"台北仁愛電力","id":"id_TPS22U3_POWER","cx":270,"cy":225,"r":13,"color":"green","url":"eventInfo.html?category=fm_power&target=TPS22U3","c_type":"power"},
+{"name":"重南攝影棚電力","id":"id_TPS194_POWER","cx":283,"cy":477,"r":13,"color":"green","url":"eventInfo.html?category=fm_power&target=TPS194","c_type":"power"},
+{"name":"台北愛國電力","id":"id_TPA2_POWER","cx":135,"cy":250,"r":13,"color":"green","url":"eventInfo.html?category=fm_power&target=TPA2","c_type":"power"},
 {"name":"台中公館","id":"id_TCCK_BACKUP","cx":283,"cy":14,"r":13,"color":"green","url":"topo_backup.html","c_type":"backup"}
 ],
 "circles_image":[
