@@ -405,9 +405,8 @@
 					];		
 
 				if(ca=="fm_declaration"){
-						if(_target=="mod_large"){
-						}else if(_target=="mod_30"){
-						}else if(_target=="hami_large" || _target=="hami_30"){
+						if(_target=="mod_large" || _target=="hami_large"){
+						}else if(_target=="mod_30" || _target=="hami_30"){
 							theColModel = [
 								{name:'Description',index:'Description',width : 40,sorttype:'string' , align:'left'},
 								{name:'Description',index:'Description',width : 20,sorttype:'string', align:'center' ,formatter:customStatus2 }

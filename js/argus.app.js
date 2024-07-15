@@ -65,6 +65,21 @@
 	}
 	
 	
+	
+		//=======================================
+		// 燈號改變-1 網路
+		//=======================================
+		function changeNetworkStatus(_status){
+			
+			$("#btn1").removeClass();
+			
+			if(_status == 5){			
+				$("#btn1").addClass("badge badge-danger");
+			}else{
+				$("#btn1").addClass("badge badge-secondary btnNormal");
+			}
+		}
+		
 		//=======================================
 		// 燈號改變-4 ISP
 		//=======================================
