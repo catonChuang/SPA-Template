@@ -459,9 +459,9 @@ var topo={
 {"name":"台中公館","id":"id_TCCK_BACKUP","cx":283,"cy":14,"r":13,"color":"green","url":"topo_backup.html","c_type":"backup"}
 ],
 "circles_image":[
-{"name":"","id":"id_TPS22U3_POWER_img","xid":"id_TPS22U3_POWER","x":260,"y":215,"width":18,"height":18,"url":"topy/Paris2024/lighteningy.png","Alarm_url":"topy/Paris2024/powerly.png"},
-{"name":"","id":"id_TPS194_POWER_img","xid":"id_TPS194_POWER","x":274,"y":467,"width":18,"height":18,"url":"topy/Paris2024/lighteningy.png","Alarm_url":"topy/Paris2024/powerly.png"},
-{"name":"","id":"id_TPA2_POWER_img","xid":"id_TPA2_POWER","x":125,"y":240,"width":18,"height":18,"url":"topy/Paris2024/lighteningy.png","Alarm_url":"topy/Paris2024/powerly.png"}
+{"name":"","id":"id_TPS22U3_POWER_img","xid":"id_TPS22U3_POWER","x":260,"y":215,"width":18,"height":18,"url":"topy/Paris2024/lighteningy.png","Alarm_url":"topy/Paris2024/powerly.png","linkurl":"eventInfo.html?category=fm_power&target=TPS22U3"},
+{"name":"","id":"id_TPS194_POWER_img","xid":"id_TPS194_POWER","x":274,"y":467,"width":18,"height":18,"url":"topy/Paris2024/lighteningy.png","Alarm_url":"topy/Paris2024/powerly.png","linkurl":"eventInfo.html?category=fm_power&target=TPS194"},
+{"name":"","id":"id_TPA2_POWER_img","xid":"id_TPA2_POWER","x":125,"y":240,"width":18,"height":18,"url":"topy/Paris2024/lighteningy.png","Alarm_url":"topy/Paris2024/powerly.png","linkurl":"eventInfo.html?category=fm_power&target=TPA2"}
 ],
 "links_bk":[
 { "name": "Paris-AliCloud","xid":"link13","linedata":[[163,217],[60,217],[60,150]],"width": "5px","id":"ParisAliLink"},
