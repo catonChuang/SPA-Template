@@ -21,9 +21,14 @@ body {
 	  width: 20px;
   }
   
-
-
   .item-right{
     float: right;
     margin-left: 0.5em;
   }
+  
+  .btnNormal{
+	  background: #4070B1;
+  }
+
+  
+  
