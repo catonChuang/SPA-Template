@@ -200,6 +200,8 @@
 		
 		if(_haveAuth=="true"){
 			getRest(_category+"_"+_target);
+			
+			getRest("fm_isp");		// ISP 燈號
 		}
 		
 	}
@@ -264,8 +266,8 @@
 							if(events.length >0){			
 								//alert(events);
 								$('#noEvent').hide();
-							//	$('#jqEventTable').show();
-							//	showAtTable(events,"ca");	
+								$('#jqEventTable').show();
+								showAtTable(events,"fm_declaration");	
 							}else{
 								$('#jqEventTable').hide();
 								$('#noEvent').show();

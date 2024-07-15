@@ -287,6 +287,9 @@
 				}else if(_theValue.id=='restpm_mod_channel_ratings'){	
 						//alert("restpm_ddos " );
 					settingpm_mod_channel_ratings(_result.items[0].value);
+				}else if(_theValue.id=='restfm_isp'){	
+					var _events = _result.items[0].value;
+					checkISPStatus(_events);  
 				}else{
 				
 				}
