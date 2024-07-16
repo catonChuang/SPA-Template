@@ -155,7 +155,7 @@
 		function checkMODDeclarmStatus(data){			
 			var _status = "1";	
 			if(data.length>0){									
-				for(var i = 0 ; i < data.length; i ++){				TicketId			
+				for(var i = 0 ; i < data.length; i ++){							
 					var _TicketId = xssFilters.inHTMLData(data[i].TicketId);	
 					var _EndTime = xssFilters.inHTMLData(data[i].EndTime);
 					if(_EndTime==""){
