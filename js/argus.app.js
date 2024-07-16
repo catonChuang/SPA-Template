@@ -80,6 +80,23 @@
 			}
 		}
 		
+		
+		
+		
+		//=======================================
+		// 燈號改變-1 網路狀態
+		//=======================================
+		function changeNetworkStatus(_status){
+			
+			$("#btn1").removeClass();
+			
+			if(_status == 5){			
+				$("#btn1").addClass("badge badge-danger");
+			}else{
+				$("#btn1").addClass("badge badge-secondary btnNormal");
+			}
+		}
+		
 		//=======================================
 		// 燈號改變-2 服務狀態
 		//=======================================
@@ -169,3 +186,39 @@
 			return _status;
 		}
 		
+		
+		//=======================================
+		// 取得MOD Hami 平台燈號
+		//=======================================
+		function checkMODHamiPStatus(data){			
+			var _status = "1";	
+			if(data.length>0){									
+				for(var i = 0 ; i < data.length; i ++){							
+					var _status = xssFilters.inHTMLData(data[i].status);	
+					if(_status==5){
+							_status = "5";
+							break;
+					}
+				}									
+			}	
+			return _status;
+		}
+		
+		
+		
+		//=======================================
+		// 取得DDOS燈號
+		//=======================================
+		function checkDDOSStatus(data){			
+			var _status = "1";	
+			if(data.length>0){									
+				for(var i = 0 ; i < data.length; i ++){							
+					var ajaxStatus = xssFilters.inHTMLData(data[i].value);		
+					if(ajaxStatus=="5"){
+						_status = "5";
+						break;
+					}
+				}									
+			}	
+			return _status;
+		}
