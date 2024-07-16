@@ -979,7 +979,10 @@
 			myIV=setTimeout(circular, 500);
 			
 			getRest("pm_ddos");		
-			getRest("fm_isp");		// ISP 燈號
+			getRest("fm_isp");		// 4 ISP 燈號
+			
+			
+			getRest("pm_cdn");		// 2 服務狀態 燈號
 			
 		}
 		
@@ -1043,6 +1046,27 @@
 				}else if(_theValue.id=='restfm_isp'){	
 					var _events = _result.items[0].value;
 					checkISPStatus(_events);  
+				}else if(_theValue.id=='restpm_cdn'){	  		// 2 服務狀態 燈號 2-1
+					var _objCdn = _result.items[0].value;
+				//	alert("data: " + _objCdn);
+					var _status = checkCDNStatus(_objCdn);
+					if(_status=="5"){
+						changeServiceStatus(_status);
+					}else{
+						getRest("pm_qoe");  
+					}
+				}else if(_theValue.id=='restpm_qoe'){	 		// 2 服務狀態 燈號 2-2
+					
+					var _status = checkQOEStatus(_result.items);
+					if(_status=="5"){
+						changeServiceStatus(_status);
+					}else{
+						getRest("fm_declaration_mod_large");  
+					}
+				}else if(_theValue.id=='restfm_declaration_mod_large'){	 // 2 服務狀態 燈號 2-3
+					
+					var _status = checkMODDeclarmStatus(_result.items[0].value);
+					changeServiceStatus(_status);
 				}else{
 					//alert("X3 " +JSON.stringify(_result));
 				}

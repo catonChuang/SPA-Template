@@ -81,6 +81,20 @@
 		}
 		
 		//=======================================
+		// 燈號改變-2 服務狀態
+		//=======================================
+		function changeServiceStatus(_status){
+			
+			$("#btn2").removeClass();
+			
+			if(_status == 5){			
+				$("#btn2").addClass("badge badge-danger");
+			}else{
+				$("#btn2").addClass("badge badge-secondary btnNormal");
+			}
+		}
+		
+		//=======================================
 		// 燈號改變-4 ISP
 		//=======================================
 		function checkISPStatus(events){
@@ -101,7 +115,57 @@
 				$("#btn4").addClass("badge badge-secondary btnNormal");
 			}
 		}
+		
+		
+		
 	
 	
-	
+		//=======================================
+		// 取得CDN燈號
+		//=======================================
+		function checkCDNStatus(_objCdn){			
+			var _status = xssFilters.inHTMLData(_objCdn.status);	
+			return _status;
+		}
+		
+		
+		
+		//=======================================
+		// 取得Qoe燈號
+		//=======================================
+		function checkQOEStatus(data){			
+			var _status = "1";	
+			if(data.length>0){									
+				for(var i = 0 ; i < data.length; i ++){							
+					var ajaxStatus = xssFilters.inHTMLData(data[i].value);		
+					if(ajaxStatus=="5"){
+						_status = "5";
+						break;
+					}
+				}									
+			}	
+			return _status;
+		}
+		
+		
+		
+		//=======================================
+		// 取得MOD 大批告警燈號
+		//=======================================
+		function checkMODDeclarmStatus(data){			
+			var _status = "1";	
+			if(data.length>0){									
+				for(var i = 0 ; i < data.length; i ++){				TicketId			
+					var _TicketId = xssFilters.inHTMLData(data[i].TicketId);	
+					var _EndTime = xssFilters.inHTMLData(data[i].EndTime);
+					if(_EndTime==""){
+						if(_TicketId.indexOf("MOD_Declaration_ALL")>-1){
+							_status = "5";
+							break;
+						}
+					}
+				}									
+			}	
+			return _status;
+		}
 		
