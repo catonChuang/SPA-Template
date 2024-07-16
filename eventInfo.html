@@ -258,6 +258,20 @@
 				
 					if(_category=="fm_declaration"){
 						if(_target=="mod_large" || _target=="hami_large"){
+							var events= _result.items[0].value;
+							//alert(" 3-2 " +JSON.stringify(_result.items[0]));
+							if(events.length >0){			
+								//alert(events);
+								$('#noEvent').hide();
+								$('#jqEventTable').show();
+								//alert(events[0].Description);
+								showAtTable(events,"fm_declaration");	
+							}else{
+								$('#jqEventTable').hide();
+								$('#noEvent').show();
+							}	
+						
+						
 						}else if( _target=="mod_30"|| _target=="hami_30"){
 							// 事件呈現
 							//alert(" 3 " +JSON.stringify(_result));
@@ -408,6 +422,11 @@
 				if(ca=="fm_declaration"){
 						
 						if(_target=="mod_large" || _target=="hami_large"){
+							theColNames = ["事件","處理狀態"];
+							theColModel = [
+								{name:'Description',index:'Description',width : 40,sorttype:'string' , align:'left'},
+								{name:'Description',index:'Description',width : 20,sorttype:'string', align:'center' ,formatter:customStatus2 }
+							];	
 						}else if(_target=="mod_30" || _target=="hami_30"){							
 							theColNames = ["申告內容","處理狀態"];
 							theColModel = [
@@ -449,7 +468,9 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">    	     
         <div class="modal-body">
-			很抱歉您沒有權限，請於電子表單申請帳號-IS32進行權限申請， 系統請選Argus->申請ARGUS帳號
+			
+此功能僅開放巴黎奧運專案使用，如需使用請洽網分綜合企劃處 王博巨 核對權限
+
         </div> 
 		<div class="modal-footer">
            <button type="button" class="btn btn-success" onclick="goPortal()">確定</button>
