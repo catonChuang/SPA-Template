@@ -851,9 +851,7 @@ function ParsingData(JData2){
 		linkGREEN("id_AliIntLink");
 		linkGREEN("id_ParisAliLink");
 		
-		getRest("globalStatus");	// 1 網路狀態 燈號
-		getRest("pm_cdn");		// 2 服務狀態 燈號
-		getRest("fm_isp");		// 4 ISP 燈號
+
 	}); 
 	
 	
@@ -883,8 +881,10 @@ function ParsingData(JData2){
 		
 		if(_haveAuth=="true"){
 			getRest("pm_ddos");
+			
+			getRest("pm_cdn");		// 2 服務狀態 燈號
+			getRest("fm_isp");		// 4 ISP 燈號
 		}
-		
 	}
 	
 		//=======================================
