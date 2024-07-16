@@ -851,7 +851,7 @@ function ParsingData(JData2){
 		linkGREEN("id_AliIntLink");
 		linkGREEN("id_ParisAliLink");
 		
-		
+		getRest("globalStatus");	// 1 網路狀態 燈號
 		getRest("pm_cdn");		// 2 服務狀態 燈號
 		getRest("fm_isp");		// 4 ISP 燈號
 	}); 
@@ -945,6 +945,16 @@ function ParsingData(JData2){
 				}else if(_theValue.id=='restfm_isp'){	
 					var _events = _result.items[0].value;
 					checkISPStatus(_events);  
+				}else if(_theValue.id=='restglobalStatus'){		// 1 網路狀態 燈號 1-1 
+					var _status = checkMODHamiPStatus(_result.items[0].value.data);
+					if(_status=="5"){
+						changeNetworkStatus(_status);
+					}else{
+						getRest("pm_ddos");  
+					}
+				}else if(_theValue.id=='restpm_ddos'){		// 1 網路狀態 燈號 1-2 
+					var _status = checkQOEStatus(_result.items);					
+					changeNetworkStatus(_status);					
 				}else if(_theValue.id=='restpm_cdn'){	  		// 2 服務狀態 燈號 2-1
 					var _objCdn = _result.items[0].value;
 				//	alert("data: " + _objCdn);
