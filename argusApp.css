@@ -29,6 +29,9 @@ body {
   .btnNormal{
 	  background: #4070B1;
   }
-
+  
+  .btnMinor{
+	  background: #FFFF00;
+  }
   
   
